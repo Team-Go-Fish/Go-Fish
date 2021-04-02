@@ -6,6 +6,9 @@
 # testing
 /coverage
 
+# API authentication
+/server/config.js
+
 # production
 /build
 
