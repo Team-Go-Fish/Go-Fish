@@ -1,0 +1,7 @@
+const WatchList = ({ props }) => {
+  return (
+    <p>Hello World</>
+    <p>Watch List</p>
+};
+
+export default WatchList;

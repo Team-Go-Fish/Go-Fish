@@ -1,0 +1,21 @@
+# version: 2.1
+
+# jobs:
+#   lint_and_test:
+#     docker:
+#       - image: cimg/ruby:2.7.1-node
+
+#     steps:
+#       - checkout
+#       - run: npm install --save
+#       - run npm run lint
+#       - run: npm run test
+#       - store_test_results:
+#         path: coverage
+#       - store_artifacts:
+#         path: coverage
+
+# workflows:
+#   lint_and_test:
+#     jobs:
+#       - lint_and_test
