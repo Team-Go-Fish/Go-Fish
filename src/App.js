@@ -1,23 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+const App = () = {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="login-container">
+      // do login / signup shit
+      </div>
+    
+    <div className="button-panel">
+     // notification
+     //. gofish
+     // friends
+    </div>
+    
+    <div className="search-bar">
+    
+    </div>
+    
+    <div className="movie-list">
+    </div>
+    
+    <div className="watch-list">
     </div>
   );
 }
