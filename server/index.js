@@ -1,15 +1,26 @@
-// initialize server (express)
+const express = require('express');
+const cors = require('cors');
+const app = express();
 
-//  cors
+app.use(cors());
+app.use(express.json());
 
-//  express.json
+//  serve build folder when it is time for production environment
+// app.use(express.static(__dirname + '/../build'));
 
-//  require database index.js to connect to DB on server running
+// const database = require('../database/index.js');
+const controller = require('./controller.js');
 
-//  serve up 'build' folder to client
+const PORT = '3005';
 
-//  specify PORT
+// route(s)
+// app.get('/blahblahblah', controller.getStuffBlahBlah);
+app.get('/movies/:userId', controller.getMyMovies);
 
-//  routes(s)
-
-//  fire up server, console log success or failure
+app.listen(PORT, (err, result) => {
+  if (err) {
+    console.log('there was an error starting the server!');
+  } else {
+    console.log(`Server listening on port ${PORT}!`);
+  }
+});

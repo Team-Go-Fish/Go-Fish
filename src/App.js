@@ -3,20 +3,18 @@ import './App.css';
 import ButtonPanel from './Button-Panel/Button-Panel.js'
 
 
-const App = () = {
+const App = () => {
   return (
     <div className="App">
 
       <div className="login-container">
-      // do login / signup shit
+      {/* // do login / signup shit */}
       </div>
 
       <div className="button-panel">
-       // notification
+       {/* // notification
        //. gofish
-       // friends
-       <Button-Panel />
-
+       // friends */}
       </div>
 
       <div className="search-bar">
