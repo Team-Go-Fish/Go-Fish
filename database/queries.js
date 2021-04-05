@@ -6,4 +6,7 @@
 // -- inner join friendships f2 on f1.userID = f2.friendID and f1.friendID = f2.userID;
 
 //get movies you and friend have in common
-//SELECT * FROM "users-movies" u JOIN movies m ON u.movie_id = m.id WHERE user_id = 1 OR user_id = 2
+module.exports.getCommonMovies = `SELECT * FROM movies m JOIN (SELECT A.user_id AS user1, B.user_id AS user2, A.movie_id FROM users_movies A, users_movies B WHERE A.user_id = $1 AND B.user_id = $2 AND A.movie_id = B.movie_id) common_movies ON m.movieId = common_movies.movie_id;`
+
+//get my movie list
+module.exports.getMyMovies = `SELECT * FROM movies m, user-movies u WHERE m.id = u.movieID AND u.userID = $1;`
