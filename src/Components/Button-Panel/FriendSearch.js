@@ -20,7 +20,7 @@ const FriendSearch = ( props ) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const url = 'http://localhost:3000/rsvps'
-    axios.post(url, formBody)
+    axios.post(url)
       .then((doc) => {
         console.log(doc);
       })
@@ -46,12 +46,6 @@ const FriendSearch = ( props ) => {
 
         <button onClick={handleSubmit}>Add Friend</button>
 
-        {isFormSubmitted
-        ?
-          <InsertConfirmation rsvp={formBody} />
-        :
-          null
-        }
       </form>
 
     </div>
