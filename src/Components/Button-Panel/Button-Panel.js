@@ -13,4 +13,4 @@ const ButtonPanel = ({ props }) => {
   );
 };
 
-export default ButtonPanel
+export default ButtonPanel;

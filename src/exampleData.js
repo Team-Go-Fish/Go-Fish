@@ -548,3 +548,8 @@ const users = [
     password: "hash",
   }
 ];
+
+module.exports = {
+    users,
+    search
+}
