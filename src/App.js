@@ -1,10 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 
 const App = () => {
   return (
     <div className="App">
-
+      <h1>GOFISH</h1>
       <div className="login-container">
       {/* // do login / signup shit */}
       </div>
