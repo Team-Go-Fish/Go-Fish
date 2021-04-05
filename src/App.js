@@ -1,6 +1,8 @@
+import { useState, useEffect } from 'react';
 import './App.css';
 import ButtonPanel from './Components/Button-Panel/ButtonPanel.js'
 
+import ListsAndSearch from './Components/ListsAndSearch/ListsAndSearch.js';
 
 const App = () => {
   return (
@@ -17,17 +19,9 @@ const App = () => {
         <ButtonPanel />
       </div>
 
-      <div className="search-bar">
-      </div>
-
-     <div className="lists">
-        <div className="movie-list">
-        </div>
-
-        <div className="watch-list">
+     <div className="lists-and-search">
+       <ListsAndSearch />
      </div>
-
-    </div>
   </div>
   );
 }
