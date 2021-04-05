@@ -1,5 +1,5 @@
 import './App.css';
-import ButtonPanel from './Button-Panel/Button-Panel.js'
+import ButtonPanel from './Components/Button-Panel/ButtonPanel.js'
 
 
 const App = () => {
@@ -11,9 +11,10 @@ const App = () => {
       </div>
 
       <div className="button-panel">
-       {/* // notification
-       //. gofish
-       // friends */}
+        {/* // notification
+        //. gofish
+        // friends */}
+        <ButtonPanel />
       </div>
 
       <div className="search-bar">
