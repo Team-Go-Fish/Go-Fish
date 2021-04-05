@@ -14,7 +14,7 @@ const controller = require('./controller.js');
 const PORT = '3005';
 
 // route(s)
-// app.get('/blahblahblah', controller.getStuffBlahBlah);
+app.get('/movies', controller.getPopularMovies);
 app.get('/movies/:userId', controller.getMyMovies);
 
 app.listen(PORT, (err, result) => {
