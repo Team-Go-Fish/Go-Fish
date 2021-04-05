@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import SearchBar from './Search.js';
 import MovieList from './MovieList.js';
-//  import watchList
+import WatchList from './WatchList.js';
 
 const ListsAndSearch = ({ props }) => {
   const [movies, setMovies] = useState([]);
@@ -24,6 +24,7 @@ const ListsAndSearch = ({ props }) => {
       <MovieList
         movies={movies}
       />
+      <WatchList />
     </>
   );
 };
