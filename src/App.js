@@ -1,18 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
 
-const App = () = {
+const App = () => {
   return (
     <div className="App">
-     
+
       <div className="login-container">
-      // do login / signup shit
+      {/* // do login / signup shit */}
       </div>
-    
+
       <div className="button-panel">
-       // notification
+       {/* // notification
        //. gofish
-       // friends
+       // friends */}
       </div>
 
       <div className="search-bar">
@@ -24,7 +24,7 @@ const App = () = {
 
         <div className="watch-list">
      </div>
-     
+
     </div>
   </div>
   );
