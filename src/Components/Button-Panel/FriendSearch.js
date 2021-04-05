@@ -6,7 +6,7 @@ const FriendSearch = ( props ) => {
 
   return (
     <div>
-      <AddFriend />
+{/* <AddFriend /> */}
 
     </div>
   )

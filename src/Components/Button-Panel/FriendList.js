@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import FriendEntry from './FriendEntry.js';
 
-const FriendList = ( props ) => {
+const FriendList = ({ users }) => {
   // state
-  const user = props.user;
 
   // methods
-
   return (
     <div>
-
-    {/* Map over friends */}
-    <FriendEntry />
-
+      {users.map((user, index) => (
+          <FriendEntry user={user} key={index} />
+      ))}
     </div>
   )
 };
