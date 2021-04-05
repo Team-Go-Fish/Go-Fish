@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import FriendList from './'
+import FriendList from './FriendList';
 
 const Friends = ( props ) => {
   // state
@@ -10,9 +10,9 @@ const Friends = ( props ) => {
 
   return (
     <div>
-
+{/* 
       <FriendList />
-      <FriendSearch />
+      <FriendSearch /> */}
 
     </div>
   )

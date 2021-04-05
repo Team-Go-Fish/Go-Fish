@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import Friends from './Friends.js'
+import Friends from './Friends';
 
 const ButtonPanel = ({ props }) => {
   return (
-    //Notifications
-    //Go Fish
-    <Friends />
+    <div>
+
+      {/* //Notifications
+      //Go Fish */}
+      <Friends />
+
+    </div>
   );
 };
 

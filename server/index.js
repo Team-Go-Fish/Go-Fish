@@ -16,6 +16,7 @@ const PORT = '3005';
 // route(s)
 // app.get('/blahblahblah', controller.getStuffBlahBlah);
 app.get('/movies/:userId', controller.getMyMovies);
+app.get('/friends/:userId', controller.getMyFriends);
 
 app.listen(PORT, (err, result) => {
   if (err) {

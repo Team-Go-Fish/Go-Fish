@@ -11,7 +11,7 @@ const FriendList = ( props ) => {
     <div>
 
     {/* Map over friends */}
-    <FriendEntry />
+    {/* <FriendEntry /> */}
 
     </div>
   )

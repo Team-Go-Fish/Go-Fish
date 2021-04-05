@@ -6,7 +6,47 @@
 // -- inner join friendships f2 on f1.userID = f2.friendID and f1.friendID = f2.userID;
 
 //get movies you and friend have in common
-module.exports.getCommonMovies = `SELECT * FROM movies m JOIN (SELECT A.user_id AS user1, B.user_id AS user2, A.movie_id FROM users_movies A, users_movies B WHERE A.user_id = $1 AND B.user_id = $2 AND A.movie_id = B.movie_id) common_movies ON m.movieId = common_movies.movie_id;`
+module.exports.getCommonMovies = `
+  SELECT *
+  FROM movies m
+  JOIN (
+    SELECT A.user_id AS user1, B.user_id AS user2, A.movie_id
+    FROM users_movies A, users_movies B
+    WHERE A.user_id = $1 AND B.user_id = $2 AND A.movie_id = B.movie_id
+  ) common_movies
+  ON m.movieId = common_movies.movie_id;
+`;
 
 //get my movie list
-module.exports.getMyMovies = `SELECT * FROM movies m, user-movies u WHERE m.id = u.movieID AND u.userID = $1;`
+module.exports.getMyMovies = `
+  SELECT *
+  FROM movies m, user-movies u
+  WHERE m.id = u.movieID AND u.userID = $1;
+`;
+
+module.exports.getMyFriends = (userID) => {
+  return `
+    SELECT *
+    FROM users u
+    INNER JOIN friendships f
+      ON u.id = f.friendID
+    WHERE f.userID = ${userID}
+  ;`
+};
+
+// SELECT
+//       ARRAY_AGG (
+//         friendID
+//         ORDER BY f.userID
+//       ) friends
+//     FROM friendships f
+//     WHERE f.userID = ${userID}
+
+// SELECT *
+//     FROM users u
+//     JOIN (
+//       SELECT f.userID AS userID, f.friendID AS friendID
+//       FROM friendships f
+//       WHERE f.userID = ${userID}
+//     ) friends
+//     ON u.id = ${userID}

@@ -9,3 +9,13 @@ module.exports.getMyMovies = (req, res) => {
     res.status(500).send(err);
   })
 };
+
+module.exports.getMyFriends = (req, res) => {
+  db.getMyFriends(req.params.userId)
+    .then(friends => {
+      res.status(200).send(friends.rows);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+};

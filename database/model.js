@@ -1,3 +1,4 @@
+const pool = require('./index');
 const queries = require('./queries.js');
 
 // //  methods for getting data from database (using queries from queries.js)
@@ -26,3 +27,13 @@ module.exports.getMyMovies = async (userId) => {
     return error;
   }
 };
+
+module.exports.getMyFriends = async (userId) => {
+  try {
+    let friends = await pool.query(queries.getMyFriends(userId));
+    return friends;
+  } catch (error) {
+    return error;
+  }
+};
+
