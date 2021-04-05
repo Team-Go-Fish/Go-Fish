@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './App.css';
+import './App.scss';
 import ButtonPanel from './Components/Button-Panel/ButtonPanel.js'
 
 import ListsAndSearch from './Components/ListsAndSearch/ListsAndSearch.js';
