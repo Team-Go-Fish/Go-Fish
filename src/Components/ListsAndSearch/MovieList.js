@@ -28,7 +28,7 @@ const MovieList = ({ movies }) => {
                   <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
                     <Card.Body>
-                      <Card.Header>{movie.original_title}</Card.Header>
+                      <Card.Header>{movie.title}</Card.Header>
                       <Card.Text>
                         {movie.vote_average}
                        </Card.Text>
