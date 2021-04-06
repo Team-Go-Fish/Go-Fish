@@ -1,6 +1,7 @@
 import React from 'react';
+import axios from 'axios';
 
-const GoFishWithFriends = (props) => {
+const GoFishWithFriends = ({ selected }) => {
 
   const openModal = () => {
     console.log('Open modal');

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 
-const FriendEntry = ({ user })=> {
-  const [selected, setSelected] = useState('');
+const FriendEntry = ({ user, setSelected})=> {
 
-  const handleChange = (key, event) => {
-    setSelected(user.username);
+  const handleChange = (event) => {
+    setSelected(user.id);
   };
 
     return (
