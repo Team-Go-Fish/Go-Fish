@@ -1,5 +1,4 @@
 // initialize pool/client connection to postgres database
-
 const { Pool, Client } = require('pg');
 
 const pool = new Pool({
