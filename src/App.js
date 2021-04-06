@@ -13,9 +13,6 @@ const App = () => {
       </div>
 
       <div className="button-panel">
-        {/* // notification
-        //. gofish
-        // friends */}
         <ButtonPanel />
       </div>
 

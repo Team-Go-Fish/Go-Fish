@@ -6,6 +6,7 @@ import GoFishWithFriends from './GoFishWithFriends.js'
 
 const Friends = ( {users} ) => {
   // state
+  const [selected, setSelected] = useState('');
 
   // methods
 
