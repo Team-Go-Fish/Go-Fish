@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import Glide from "@glidejs/glide";
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import Description from './Description';
+import axios from 'axios';
 
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
@@ -10,7 +10,14 @@ import "slick-carousel/slick/slick-theme.css";
 const MovieList = ({ movies }) => {
 
   const [modalShow, setModalShow] = useState(false);
+  const [movieInfo, setMovieInfo] = useState({})
 
+  const getInfo = (e) => {
+    axios.get(`http://www.omdbapi.com/?apikey=4bcf0035&t=${e.target.value}`)
+    .then((res) => setMovieInfo(res.data))
+    .then(() => setModalShow(true))
+    .catch((err) => console.log(err))
+  }
 
   const settings = {
     dots: false,
@@ -25,7 +32,7 @@ const MovieList = ({ movies }) => {
     <>
       <Container>
         <Row>
-          <Col>
+          <Col size="xs">
 
             <Slider {...settings}>
               {
@@ -38,22 +45,13 @@ const MovieList = ({ movies }) => {
                         <Card.Text>
                           {movie.vote_average}
                         </Card.Text>
-                        {/* {
-                          movie.overview.length > 200 ?
-                            <Card.Text style={{ textAlign: 'left', wordWrap: 'break-word', overflowWrap: 'break-word' }}>
-                              {movie.overview.slice(0, 150)}...
-                            </Card.Text>
-                            : <Card.Text>
-                              {movie.overview}
-                            </Card.Text>
-                        } */}
-                        <Button onClick={() => setModalShow(true)}>Info</Button>
+                        <Button variant="outline-info" value={movie.title} id={movie.id} onClick={(e) => getInfo(e)}>Info</Button>
                         <Description
                           show={modalShow}
                           onHide={() => setModalShow(false)}
-                          movie={movie}
+                          movie={movieInfo}
                         /> {' '}
-                        <Button>Add to My List</Button>
+                        <Button variant="outline-info">Add to My List</Button>
                         {/* <Button variant="primary">Add to my list</Button> */}
                       </Card.Body>
                     </Card>
