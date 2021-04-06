@@ -13,12 +13,22 @@ module.exports.getPopularMovies = async (req, res) => {
   }
 };
 
-module.exports.getMyMovies = (req, res) => {
-  db.getMyMovies(req.params.userId)
-  .then(movies => {
-    res.status(200).send(movies.data);
-  })
-  .catch(err => {
-    res.status(500).send(err);
-  })
+module.exports.getMyMovies = async (req, res) => {
+  try {
+    let movies = await db.getMyMovies(req.params.userId);
+    res.status(200).send(movies.rows);
+  }
+  catch (error) {
+    res.status(500).send(error);
+  }
 };
+
+module.exports.addMovieToUser = async (req, res) => {
+  try {
+    let result = await db.addMovieToUserList(req.params.userId, req.body);
+    res.status(200).send(result);
+  }
+  catch (error) {
+    res.status(500).send(error);
+  }
+}
