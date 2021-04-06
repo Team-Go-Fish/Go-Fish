@@ -7,6 +7,9 @@ import LogoutButton from './Components/Login-Signup/Logout-Button';
 import Profile from './Components/Login-Signup/Profile';
 
 const App = () => {
+  const [user, setUser] = useState({});
+
+  console.log('user:', user);
 
   return (
     <div className="App">
@@ -14,7 +17,7 @@ const App = () => {
         <h1>GOFISH</h1>
         <LoginButton />
         <LogoutButton />
-        <Profile />
+        <Profile setUser={setUser} />
       </div>
       <div className="button-panel">
         {/* // notification
