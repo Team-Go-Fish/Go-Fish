@@ -8,15 +8,16 @@ app.use(express.json());
 //  serve build folder when it is time for production environment
 // app.use(express.static(__dirname + '/../build'));
 
-// const database = require('../database/index.js');
+//const database = require('../database/index.js');
 const controller = require('./controller.js');
 
 const PORT = '3005';
 
 // route(s)
 app.get('/movies', controller.getPopularMovies);
-app.get('/movies/search/:input', controller.searchMovies);
+app.get('/search/:input', controller.searchMovies);
 app.get('/movies/:userId', controller.getMyMovies);
+app.post('/movies/:userId', controller.addMovieToUser);
 
 app.listen(PORT, (err, result) => {
   if (err) {
