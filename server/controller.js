@@ -15,6 +15,7 @@ module.exports.getPopularMovies = async (req, res) => {
 
 module.exports.searchMovies = async (req, res) => {
   console.log('I am in the search controller');
+  console.log(req.params.input);
   try {
     const searchedMovies = await helper.searchMovies(req.params.input);
     res.status(200).send(searchedMovies);

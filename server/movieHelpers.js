@@ -42,6 +42,4 @@ exports.searchMovies = async (input) => {
   catch (error) {
     console.log(error);
   }
-
-
 };
