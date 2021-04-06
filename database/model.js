@@ -49,3 +49,13 @@ module.exports.addMovieToUserList = async (userId, movieObj) => {
     return error;
   }
 };
+
+module.exports.removeMovieFromUserList = async (userId, movieId) => {
+  try {
+    let result = await pool.query(queries.deleteUserMovie, [userId, movieId]);
+    return result.rows[0];
+  }
+  catch (error) {
+    return error;
+  }
+};
