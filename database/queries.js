@@ -22,3 +22,6 @@ module.exports.findUserMovie = `SELECT * FROM users_movies u WHERE u.movieID = $
 
 //add a movie to a user's list
 module.exports.addMovieToUser = `INSERT INTO users_movies (userID, movieID) VALUES ($1, $2) RETURNING id`;
+
+//remove a movie from a user's list
+module.exports.deleteUserMovie = `DELETE FROM users_movies WHERE userID = $1 AND movieID = $2 RETURNING users_movies.id`;

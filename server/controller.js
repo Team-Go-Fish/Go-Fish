@@ -26,6 +26,16 @@ module.exports.getMyMovies = async (req, res) => {
 module.exports.addMovieToUser = async (req, res) => {
   try {
     let result = await db.addMovieToUserList(req.params.userId, req.body);
+    res.status(201).send(result);
+  }
+  catch (error) {
+    res.status(500).send(error);
+  }
+}
+
+module.exports.removeMovieFromUser = async (req, res) => {
+  try {
+    let result = db.removeMovieFromUserList(req.params.userId, req.query.movieId);
     res.status(200).send(result);
   }
   catch (error) {
