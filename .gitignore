@@ -7,7 +7,7 @@
 /coverage
 
 # API authentication
-/server/config.js
+config.js
 
 # production
 /build
