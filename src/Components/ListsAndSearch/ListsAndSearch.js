@@ -24,7 +24,7 @@ const ListsAndSearch = ({ props }) => {
       <MovieList
         movies={movies}
       />
-      {/* <WatchList /> */}
+      <WatchList />
     </>
   );
 };
