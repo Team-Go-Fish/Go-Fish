@@ -5,7 +5,7 @@ import Search from './Search.js';
 import MovieList from './MovieList.js';
 import WatchList from './WatchList.js';
 
-const ListsAndSearch = ({ myMovies, user }) => {
+const ListsAndSearch = ({ myMovies, user, getMyMovies }) => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -23,6 +23,8 @@ const ListsAndSearch = ({ myMovies, user }) => {
       <Search setMovies={setMovies}/>
       <MovieList
         movies={movies}
+        user={user}
+        getMyMovies={getMyMovies}
       />
       <WatchList
         myMovies={myMovies}
