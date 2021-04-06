@@ -28,7 +28,7 @@ const WatchList = ({ myMovies }) => {
           <Col>
 
         <Slider {...settings}>
-          {
+          {/* {!!movies &&
             movies.map((movie) => {
               return (
                 <Card style={{ width: '18rem' }}>
@@ -46,7 +46,7 @@ const WatchList = ({ myMovies }) => {
                 </Card>
               )
             })
-          }
+          } */}
 
         </Slider>
           </Col>

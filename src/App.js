@@ -52,9 +52,9 @@ const App = () => {
       </div>
 
      <div className="lists-and-search">
-       <ListsAndSearch
+       {/* <ListsAndSearch
         props={myMovies}
-       />
+       /> */}
      </div>
   </div>
   );
