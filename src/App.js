@@ -9,8 +9,6 @@ import Profile from './Components/Login-Signup/Profile';
 const App = () => {
   const [user, setUser] = useState({});
 
-  console.log('user:', user);
-
   return (
     <div className="App">
       <div className="login-container">
