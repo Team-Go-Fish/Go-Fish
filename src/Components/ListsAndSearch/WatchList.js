@@ -1,47 +1,61 @@
-import { useEffect } from 'react';
-import Glide from "@glidejs/glide";
+import { useState, useEffect } from 'react';
+//import Glide from "@glidejs/glide";
+import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 
-const sliderConfiguration = {
-  gap: 20,
-  perView: 2,
-  startAt: 0,
-  type: "slider"
-};
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-const WatchList = ({ props }) => {
-    const slider = new Glide('.glide', sliderConfiguration);
+const WatchList = ({ myMovies, user }) => {
+    // const slider = new Glide('.glide', sliderConfiguration);
 
-    useEffect(() => {
-      return () => slider.mount();
-    }, [slider])
+    // useEffect(() => {
+    //   return () => slider.mount();
+    // }, [slider])
+    const settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 2,
+      spacing: 2
+    };
 
     return (
       <>
-        {" "}
-        <div className='glide'>
-          <div className='glide__track' data-glide-el='track'>
-            <ul className='glide__slides'>
-              <li className='glide__slide slider'>1</li>
-              <li className='glide__slide slider'>2</li>
-              <li className='glide__slide slider'>3</li>
-              <li className='glide__slide slider'>4</li>
-            </ul>
-          </div>
-          <div className='glide__arrows' data-glide-el='controls'>
-            <button
-              className='glide__arrow glide__arrow--prev'
-              data-glide-dir='<'
-            >
-              prev
-            </button>
-            <button
-              className='glide__arrow glide__arrow--next'
-              data-glide-dir='>'
-            >
-              next
-            </button>
-          </div>
-        </div>
+      {(user) && (
+        <>
+        <Container>
+          <Row>
+            <Col>
+
+          <Slider {...settings}>
+            {
+              myMovies.map((movie) => {
+                return (
+                  <Card style={{ width: '18rem' }}>
+                    <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
+                    <Card.Body>
+                      <Card.Header>{movie.title}</Card.Header>
+                      <Card.Text>
+                        {movie.vote_average}
+                      </Card.Text>
+                      <Card.Text>
+                        {movie.overview}
+                      </Card.Text>
+                      <Button variant="primary">Add to my list</Button>
+                    </Card.Body>
+                  </Card>
+                )
+              })
+            }
+
+          </Slider>
+            </Col>
+          </Row>
+        </Container>
+        </>
+      )}
       </>
     );
 };
