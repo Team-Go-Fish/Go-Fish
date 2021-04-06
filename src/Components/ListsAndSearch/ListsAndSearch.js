@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import SearchBar from './Search.js';
+import Search from './Search.js';
 import MovieList from './MovieList.js';
 import WatchList from './WatchList.js';
 
@@ -20,7 +20,7 @@ const ListsAndSearch = ({ props }) => {
 
   return (
     <>
-      <SearchBar />
+      <Search setMovies={setMovies}/>
       <MovieList
         movies={movies}
       />
