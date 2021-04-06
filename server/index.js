@@ -15,6 +15,7 @@ const PORT = '3005';
 
 // route(s)
 app.get('/movies', controller.getPopularMovies);
+app.get('/search/:input', controller.searchMovies);
 app.get('/movies/:userId', controller.getMyMovies);
 app.post('/movies/:userId', controller.addMovieToUser);
 

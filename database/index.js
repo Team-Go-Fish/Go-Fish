@@ -1,5 +1,4 @@
 // initialize pool/client connection to postgres database
-
 const { Pool, Client } = require('pg');
 
 const pool = new Pool({
@@ -23,4 +22,4 @@ pool.connect((err, client, release) => {
   })
 })
 
-module.exports = { pool };
+module.exports = pool;

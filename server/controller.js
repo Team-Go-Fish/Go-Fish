@@ -1,5 +1,5 @@
 const db = require('../database/model.js');
-const helper = require('./movieHelper.js');
+const helper = require('./movieHelpers.js');
 
 module.exports.getPopularMovies = async (req, res) => {
   console.log('I am in the popular movies controller');
@@ -32,3 +32,16 @@ module.exports.addMovieToUser = async (req, res) => {
     res.status(500).send(error);
   }
 }
+
+module.exports.searchMovies = async (req, res) => {
+  console.log('I am in the search controller');
+  console.log(req.params.input);
+  try {
+    const searchedMovies = await helper.searchMovies(req.params.input);
+    res.status(200).send(searchedMovies);
+  }
+  catch (error) {
+    console.log(error);
+    res.status(500);
+  }
+};
