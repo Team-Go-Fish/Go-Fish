@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import axios from 'axios';
 
 class FriendEntry extends React.Component {
   constructor(props) {
@@ -11,7 +10,6 @@ class FriendEntry extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  // methods
   handleChange(key, event) {
     if (this.state.checked === true) {
       this.setState({checked: false});
