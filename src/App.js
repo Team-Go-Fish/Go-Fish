@@ -4,10 +4,13 @@ import ButtonPanel from './Components/Button-Panel/ButtonPanel.js';
 import axios from 'axios';
 
 import ListsAndSearch from './Components/ListsAndSearch/ListsAndSearch.js';
+import LoginButton from './Components/Login-Signup/Login-Button';
+import LogoutButton from './Components/Login-Signup/Logout-Button';
+import Profile from './Components/Login-Signup/Profile';
 
 const App = () => {
   // state initialization
-  const [user, setUser] = useState(0);
+  const [user, setUser] = useState(null);
   const [myMovies, setMyMovies] = useState([]);
   const [friends, setFriends] = useState([]);
 
@@ -34,16 +37,16 @@ const App = () => {
     setUser(user);
   }
 
-
-
   return (
     <div className="App">
-      <h1>GOFISH</h1>
       <div className="login-container">
+        <h1>GOFISH</h1>
+        <LoginButton />
+        <LogoutButton />
+        <Profile setUser={setUser} />
       {/* // do login / signup shit */}
       onChange={(user) => handleUserChange(user)}
       </div>
-
       <div className="button-panel">
         {/* // notification
         //. gofish
@@ -52,9 +55,10 @@ const App = () => {
       </div>
 
      <div className="lists-and-search">
-       {/* <ListsAndSearch
-        props={myMovies}
-       /> */}
+       <ListsAndSearch
+        myMovies={myMovies}
+        user={user}
+       />
      </div>
   </div>
   );
