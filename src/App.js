@@ -7,7 +7,7 @@ import ListsAndSearch from './Components/ListsAndSearch/ListsAndSearch.js';
 
 const App = () => {
   // state initialization
-  const [user, setUser] = useState(0);
+  const [user, setUser] = useState(null);
   const [myMovies, setMyMovies] = useState([]);
   const [friends, setFriends] = useState([]);
 
@@ -34,8 +34,6 @@ const App = () => {
     setUser(user);
   }
 
-
-
   return (
     <div className="App">
       <h1>GOFISH</h1>
@@ -50,7 +48,8 @@ const App = () => {
 
      <div className="lists-and-search">
        <ListsAndSearch
-        props={myMovies}
+        myMovies={myMovies}
+        user={user}
        />
      </div>
   </div>
