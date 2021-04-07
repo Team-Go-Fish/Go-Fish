@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
+import SearchField from 'react-search-field';
 import exampleData from '../../exampleData';
 
-const FriendSearch = ( props ) => {
+const FriendSearch = ( {friends, user} ) => {
   // state
-  const friendList = props.friends;
   const allUsers = exampleData.users;
-  const currentUser = props.user;
   const [searchList, setSearchList] = useState([]);
   const [friendToSearch, setFriendToSearch] = useState('');
   const [friendToAdd, setFriendToAdd] = useState('');
+  const [input, setInput] = useState('');
 
   // methods
   const handleChange = (e) => {
@@ -28,20 +28,31 @@ const FriendSearch = ( props ) => {
       setFriendToAdd(tValue);
     }
   };
-  const handleSearch = (query) => {
-    const q = query.toLowerCase();
-    if (q === '') {
-      setSearchList(allUsers);
-    } else {
-      let result = allUsers.filter(friend =>
-        friend.username.toLowerCase().includes(q)
-      );
-      setSearchList(result);
+  // const handleSearch = (query) => {
+  //   const q = query.toLowerCase();
+  //   if (q === '') {
+  //     setSearchList(allUsers);
+  //   } else {
+  //     let result = allUsers.filter(friend =>
+  //       friend.username.toLowerCase().includes(q)
+  //     );
+  //     setSearchList(result);
+  //   }
+  // };
+  const handleSearch = () => {
+    if (input.length >= 1) {
+      axios.get(`http://localhost:3005/search/${input}`)
+      .then((response) => setSearchList(response.data))
+      .catch((error) => console.log(error));
+    } else if(input.length === 0) {
+      axios.get('http://localhost:3005/movies')
+      .then((response) => setSearchList(response.data))
+      .catch((error) => console.log(error))
     }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userID = currentUser.id;
+    const userID = user.id;
     const url = `http://localhost:3005/friends/add/${userID}`;
     const body = {
       username: friendToAdd
@@ -57,19 +68,29 @@ const FriendSearch = ( props ) => {
 
   useEffect(() => {
     setSearchList(allUsers);
-  }, [friendList]);
+  }, [friends]);
+  useEffect(() => {
+    handleSearch();
+  }, [friendToSearch]);
 
   return (
     <div>
       <Container>
         <Row className="justify-content-md-center">
           <Col md="auto">
-          <form className="form">
+          {/* <form className="form">
             <label className="form">
               Search User
               <input className="form" type="text" name="friendToSearch" value={friendToSearch} onChange={handleChange}></input>
             </label>
-          </form>
+          </form> */}
+          <SearchField
+            className="friend-search"
+            placeholder="Search for username"
+            value={input}
+            onChange={(value) => setFriendToSearch(value)}
+            onClick={() => setFriendToSearch()}
+            />
           </Col>
           <Col md="auto">
             <select onChange={handleChange} name="friendToAdd">

@@ -7,8 +7,6 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button'
 
 const Friends = ({ user, friends, myMovies }) => {
-  const currentUser = user; // TODO remove default used during testing
-  // currentUser.id = 1;
   const [lgShow, setLgShow] = useState(false);
   const [selected, setSelected] = useState('');
   // const [friendList, setFriendList] = useState([]);
@@ -45,7 +43,7 @@ const Friends = ({ user, friends, myMovies }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FriendSearch friends={friends} user={currentUser} />
+          <FriendSearch friends={friends} user={user} />
           <FriendList friends={friends} setSelected={setSelected}/>
           <GoFishWithFriends selected={selected} myMovies={myMovies}/>
         </Modal.Body>
