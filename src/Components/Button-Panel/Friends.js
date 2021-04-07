@@ -45,15 +45,12 @@ const Friends = ({ users, myMovies }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <FriendSearch friends={friendList} users={users} user={currentUser} />
           <FriendList users={users} setSelected={setSelected}/>
           <GoFishWithFriends selected={selected} myMovies={myMovies}/>
-          <FriendSearch friends={friendList} users={users} user={currentUser} />
         </Modal.Body>
       </Modal>
     </>
-
-      {/* <FriendSearch /> */}
-    </div>
   )
 };
 
