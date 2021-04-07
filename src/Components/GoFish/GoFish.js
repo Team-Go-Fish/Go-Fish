@@ -33,7 +33,7 @@ const GoFish = ({ popular }) => {
       alt=""
       onClick={() => clickHandler()}
     ></img>
-    {modal && (<Description show={modal} onHide={toggleModal} movie={movie} />)}
+    {modal && (<Description show={modal} onHide={toggleModal} movie={movie} id="goFish"/>)}
     </div>
   );
 };

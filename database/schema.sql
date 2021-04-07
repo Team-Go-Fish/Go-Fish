@@ -47,3 +47,23 @@ CREATE TABLE users_movies
   FOREIGN KEY (userID) REFERENCES users(id),
   FOREIGN KEY (movieID) REFERENCES movies(id)
 );
+
+-- SAMPLE DATA FOR TESTING
+INSERT INTO users (username, firstName, lastName, email, phone, password)
+VALUES
+  ('skywalker', 'Luke', 'Skywalker', 'luke@starwars.com', '1234567890', 'hash'),
+  ('princess', 'Princess', 'Leia', 'leia@starwars.com', '1234567890', 'hash'),
+  ('solo', 'Han', 'Solo', 'solo@starwars.com', '1234567890', 'hash'),
+  ('vader', 'Darth', 'Vader', 'vader@starwars.com', '1234567890', 'hash'),
+  ('r2d2', 'R2', 'D2', 'r2d2@starwars.com', '1234567890', 'hash'),
+  ('chewie', 'Chewbacca', 'Chewbacca', 'chewie@starwars.com', '1234567890', 'hash'),
+  ('yoda', 'Yoda', 'Yoda', 'yoda@starwars.com', '1234567890', 'hash'),
+  ('trooper', 'Storm', 'Trooper', 'trooper@starwars.com', '1234567890', 'hash'),
+  ('bountyhunter', 'Boba', 'Fett', 'bountyhunter@starwars.com', '1234567890', 'hash')
+;
+INSERT INTO friendships (userID, friendID)
+VALUES
+  (1, 2),
+  (1, 3),
+  (2, 3)
+;

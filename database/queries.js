@@ -5,6 +5,7 @@
 // -- from friendships f1
 // -- inner join friendships f2 on f1.userID = f2.friendID and f1.friendID = f2.userID;
 
+
 //get movies two users have in common
 module.exports.getCommonMovies = `SELECT * FROM movies m JOIN (SELECT A.userID AS user1, B.userID AS user2, A.movieID FROM users_movies A, users_movies B WHERE A.userID = $1 AND B.userID = $2 AND A.movieID = B.movieID) common_movies ON m.id = common_movies.movieID`;
 
@@ -25,3 +26,31 @@ module.exports.addMovieToUser = `INSERT INTO users_movies (userID, movieID) VALU
 
 //remove a movie from a user's list
 module.exports.deleteUserMovie = `DELETE FROM users_movies WHERE userID = $1 AND movieID = $2 RETURNING users_movies.id`;
+
+// friends
+module.exports.getMyFriends = (userID) => {
+  return `
+    SELECT *
+    FROM users u
+    INNER JOIN friendships f
+      ON u.id = f.friendID
+    WHERE f.userID = ${userID}
+  ;`
+};
+
+module.exports.addNewFriend = (userID, friendID) => {
+  return `
+    INSERT INTO friendships (userID, friendID)
+    VALUES (${userID}, ${friendID})
+    ON CONFLICT (userID, friendID)
+    DO NOTHING
+  ;`
+};
+
+module.exports.getUserIDByUserName = (username) => {
+  return `
+    SELECT id
+    FROM users
+    WHERE username = '${username}'
+  ;`
+}

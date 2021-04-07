@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import FriendEntry from './FriendEntry.js';
 
-const FriendList = ({ users, setSelected }) => {
+const FriendList = ({ friends, setSelected }) => {
   // state
 
   // methods
   return (
     <div>
-      {users.map((user, index) => (
+      {friends.map((user, index) => (
           <FriendEntry user={user} key={index} setSelected={setSelected}/>
       ))}
     </div>
