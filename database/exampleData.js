@@ -1,4 +1,4 @@
-const search = [
+module.exports.search = [
   {
       "Title": "Star Wars: Episode IV - A New Hope",
       "Year": "1977",
@@ -71,7 +71,7 @@ const search = [
   }
 ];
 
-const movies = [
+module.exports.movies = [
   {
     "Title": "Star Wars: Episode IV - A New Hope",
     "Year": "1977",
@@ -474,9 +474,8 @@ const movies = [
 }
 ];
 
-const users = [
+module.exports.users = [
   {
-    id: 1,
     username: "skywalker",
     firstName: "Luke",
     lastName: "Skywalker",
@@ -485,7 +484,6 @@ const users = [
     password: "hash",
   },
   {
-    id: 2,
     username: "princess",
     firstName: "Princess",
     lastName: "Leia",
@@ -494,7 +492,6 @@ const users = [
     password: "hash",
   },
   {
-    id: 3,
     username: "solo",
     firstName: "Han",
     lastName: "Solo",
@@ -503,7 +500,6 @@ const users = [
     password: "hash",
   },
   {
-    id: 4,
     username: "vader",
     firstName: "Darth",
     lastName: "Vader",
@@ -512,7 +508,6 @@ const users = [
     password: "hash",
   },
   {
-    id: 5,
     username: "r2d2",
     firstName: "R2",
     lastName: "D2",
@@ -521,7 +516,6 @@ const users = [
     password: "hash",
   },
   {
-    id: 6,
     username: "chewie",
     firstName: "Chewbacca",
     lastName: "Chewbacca",
@@ -530,7 +524,6 @@ const users = [
     password: "hash",
   },
   {
-    id: 7,
     username: "yoda",
     firstName: "Yoda",
     lastName: "Yoda",
@@ -539,7 +532,6 @@ const users = [
     password: "hash",
   },
   {
-    id: 8,
     username: "trooper",
     firstName: "Storm",
     lastName: "Trooper",
@@ -548,7 +540,6 @@ const users = [
     password: "hash",
   },
   {
-    id: 9,
     username: "bountyhunter",
     firstName: "Boba",
     lastName: "Fett",
@@ -557,8 +548,3 @@ const users = [
     password: "hash",
   }
 ];
-
-module.exports = {
-    users,
-    search
-}

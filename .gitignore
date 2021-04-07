@@ -7,7 +7,8 @@
 /coverage
 
 # API authentication
-/server/config.js
+config.js
+/database/config.js
 
 # production
 /build
@@ -20,3 +21,8 @@
 .env.production.local
 
 npm-debug.log*
+
+package-lock.json
+
+# keys
+/database/config.js

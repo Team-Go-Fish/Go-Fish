@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import SearchBar from './Search.js';
+import Search from './Search.js';
 import MovieList from './MovieList.js';
 import WatchList from './WatchList.js';
 
-const ListsAndSearch = ({ props }) => {
+const ListsAndSearch = ({ myMovies, user, getMyMovies, setPopular }) => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -14,17 +14,28 @@ const ListsAndSearch = ({ props }) => {
 
   const getPopularMovies = () => {
     axios.get('http://localhost:3005/movies')
-      .then((response => setMovies(response.data)))
+      .then((response => {
+        //  remove after demo
+        const noTom = response.data.filter(({ title }) => !title.includes("Tom"));
+        //  remove after demo
+        setPopular(noTom);
+        setMovies(noTom);
+        }))
       .catch((error) => console.log(error));
   };
 
   return (
     <>
-      <SearchBar />
+      <Search setMovies={setMovies}/>
       <MovieList
         movies={movies}
+        user={user}
+        getMyMovies={getMyMovies}
       />
-      <WatchList />
+      <WatchList
+        myMovies={myMovies}
+        user={user}
+      />
     </>
   );
 };

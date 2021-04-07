@@ -4,7 +4,7 @@ DROP DATABASE IF EXISTS fish;
 
 CREATE DATABASE fish;
 \c fish;
-
+drop table if exists users;
 CREATE TABLE users
 (
     id serial NOT NULL,
@@ -12,11 +12,11 @@ CREATE TABLE users
     firstName text,
     lastName text,
     email text,
-    phone integer,
+    phone text,
     password text,
     PRIMARY KEY (id)
 );
-
+drop table if exists friendships;
 CREATE TABLE friendships
 (
     id serial NOT NULL,
@@ -26,24 +26,23 @@ CREATE TABLE friendships
     FOREIGN KEY (userID) REFERENCES users(id),
     FOREIGN KEY (friendID) REFERENCES users(id)
 );
-
+drop table if exists movies;
 CREATE TABLE movies
 (
   id serial NOT NULL,
+  movieDBiD integer,
   title text,
-  genre text,
-  runtime text,
   poster text,
   rating decimal,
   movie_description text,
   PRIMARY KEY (id)
 );
-
-CREATE TABLE user_movies
+drop table if exists users_movies;
+CREATE TABLE users_movies
 (
   id serial NOT NULL,
-  userID integer NOT NULL,
-  movieID integer NOT NULL,
+  userID integer,
+  movieID integer,
   PRIMARY KEY (id),
   FOREIGN KEY (userID) REFERENCES users(id),
   FOREIGN KEY (movieID) REFERENCES movies(id)
