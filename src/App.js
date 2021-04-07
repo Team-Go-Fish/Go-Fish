@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import './App.scss';
 import ButtonPanel from './Components/Button-Panel/ButtonPanel.js';
 import axios from 'axios';
-
 import ListsAndSearch from './Components/ListsAndSearch/ListsAndSearch.js';
 
 const App = () => {
@@ -39,11 +38,14 @@ const App = () => {
       <h1>GOFISH</h1>
       <div className="login-container">
       {/* // do login / signup shit */}
-      onChange={(user) => handleUserChange(user)}
+      {/* onChange={(user) => handleUserChange(user)} */}
       </div>
 
       <div className="button-panel">
-        <ButtonPanel />
+        <ButtonPanel
+          myMovies={myMovies}
+          // friends={friends}
+        />
       </div>
 
      <div className="lists-and-search">
