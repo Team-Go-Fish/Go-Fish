@@ -11,6 +11,7 @@ const Friends = ({ users, myMovies }) => {
   // methods
 
   return (
+      <div>
     <>
       <Button onClick={() => setLgShow(true)}>Friends</Button>
       <Modal
@@ -30,6 +31,9 @@ const Friends = ({ users, myMovies }) => {
         </Modal.Body>
       </Modal>
     </>
+
+      {/* <FriendSearch /> */}
+    </div>
   )
 };
 

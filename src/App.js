@@ -3,6 +3,7 @@ import './App.scss';
 import ButtonPanel from './Components/Button-Panel/ButtonPanel.js';
 import axios from 'axios';
 import ListsAndSearch from './Components/ListsAndSearch/ListsAndSearch.js';
+import GoFish from './Components/GoFish/GoFish.js';
 import LoginButton from './Components/Login-Signup/Login-Button';
 import LogoutButton from './Components/Login-Signup/Logout-Button';
 import Profile from './Components/Login-Signup/Profile';
@@ -12,6 +13,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [myMovies, setMyMovies] = useState([]);
   const [friends, setFriends] = useState([]);
+  const [popular, setPopular] = useState([]);
 
   // on user state change, run axios requests below
   useEffect(() => {
@@ -46,6 +48,9 @@ const App = () => {
       {/* // do login / signup shit */}
       {/* onChange={(user) => handleUserChange(user)} */}
       </div>
+
+      <GoFish popular={popular}/>
+
       <div className="button-panel">
         <ButtonPanel
           myMovies={myMovies}
@@ -57,6 +62,8 @@ const App = () => {
        <ListsAndSearch
         myMovies={myMovies}
         user={user}
+        getMyMovies={getMyMovies}
+        setPopular={setPopular}
        />
      </div>
   </div>
