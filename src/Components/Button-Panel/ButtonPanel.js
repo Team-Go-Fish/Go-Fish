@@ -1,12 +1,25 @@
 import React, { useState } from 'react';
 import Friends from './Friends.js';
-import users from '../../exampleData.js';
+// import users from '../../exampleData.js';
+import Notifications from './Notifications.js';
+import { Row, Col, Container } from 'react-bootstrap';
 
-const ButtonPanel = ({user, myMovies, friends}) => {
+const ButtonPanel = ({ user, friends, myMovies }) => {
 
   return (
     //Notifications
-    <Friends user={user} friends={friends} myMovies={myMovies}/>
+    <>
+      <Container>
+        <Row>
+          <Col>
+            <Notifications></Notifications>
+          </Col>
+          <Col>
+            <Friends user={user} friends={friends} myMovies={myMovies}/>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 
