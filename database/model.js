@@ -36,7 +36,7 @@ module.exports.addMovieToUserList = async (userId, movieObj) => {
       let userMovie = await pool.query(queries.addMovieToUser, [userId, newMovie.rows[0].id]);
       return userMovie.rows[0];
     } else {
-      let existsUserMovie = await pool.query(queries.findUserMovie, [movie.rows[0].id]);
+      let existsUserMovie = await pool.query(queries.findUserMovie, [userId, movie.rows[0].id]);
       if (!existsUserMovie.rows.length) {
         let userMovie = await pool.query(queries.addMovieToUser, [userId, movie.rows[0].id]);
         return userMovie.rows[0];
