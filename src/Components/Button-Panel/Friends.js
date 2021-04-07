@@ -3,7 +3,8 @@ import axios from 'axios';
 import FriendList from './FriendList.js';
 import GoFishWithFriends from './GoFishWithFriends.js';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import FriendSearch from './FriendSearch.js';
 
 const Friends = ({ users, myMovies }) => {
   const currentUser = users[0]; // TODO remove default used during testing

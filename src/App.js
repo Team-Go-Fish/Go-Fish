@@ -54,7 +54,7 @@ const App = () => {
       <div className="button-panel">
         <ButtonPanel
           myMovies={myMovies}
-          // friends={friends}
+          friends={friends}
         />
       </div>
 
