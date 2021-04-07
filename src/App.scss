@@ -13,6 +13,16 @@
   pointer-events: none;
 }
 
+.go-fish {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  max-width: 33vh;
+  cursor: pointer;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
