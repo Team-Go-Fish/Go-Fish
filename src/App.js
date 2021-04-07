@@ -7,10 +7,11 @@ import GoFish from './Components/GoFish/GoFish.js';
 import LoginButton from './Components/Login-Signup/Login-Button';
 import LogoutButton from './Components/Login-Signup/Logout-Button';
 import Profile from './Components/Login-Signup/Profile';
+import { Row, Col, Container } from 'react-bootstrap';
 
 const App = () => {
   // state initialization
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(1);
   const [myMovies, setMyMovies] = useState([]);
   const [friends, setFriends] = useState([]);
   const [popular, setPopular] = useState([]);
@@ -38,35 +39,57 @@ const App = () => {
     setUser(user);
   }
 
+  const rowStyleRight = {
+    className: 'justify-content-md-right',
+  }
+
   return (
-    <div className="App">
-      <div className="login-container">
-        <h1>GOFISH</h1>
-        <LoginButton />
-        <LogoutButton />
-        <Profile setUser={setUser} />
-      {/* // do login / signup shit */}
-      {/* onChange={(user) => handleUserChange(user)} */}
+    <Container>
+      <div className="App">
+      <h4>Go Fish</h4>
+        {/* <Row>
+          <Col style={rowStyleRight}>
+            <div className="login-container">
+              <h1>GOFISH</h1>
+              <LoginButton />
+              <LogoutButton />
+              <Profile setUser={setUser} />
+            </div>
+          </Col>
+        </Row> */}
+        <Row>
+          <Col>
+            <div className="button-panel">
+              <ButtonPanel
+                myMovies={myMovies}
+                friends={friends}
+                user={user}
+              />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <GoFish popular={popular} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="lists-and-search">
+              <ListsAndSearch
+                myMovies={myMovies}
+                user={user}
+                getMyMovies={getMyMovies}
+                setPopular={setPopular}
+              />
+            </div>
+          </Col>
+        </Row>
       </div>
+    </Container>
 
-      <GoFish popular={popular}/>
 
-      <div className="button-panel">
-        <ButtonPanel
-          myMovies={myMovies}
-          friends={friends}
-        />
-      </div>
 
-     <div className="lists-and-search">
-       <ListsAndSearch
-        myMovies={myMovies}
-        user={user}
-        getMyMovies={getMyMovies}
-        setPopular={setPopular}
-       />
-     </div>
-  </div>
   );
 }
 

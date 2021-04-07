@@ -6,33 +6,31 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import FriendSearch from './FriendSearch.js';
 
-const Friends = ({ users, myMovies }) => {
-  const currentUser = users[0]; // TODO remove default used during testing
-  currentUser.id = 1;
+const Friends = ({ user, friends, myMovies }) => {
   const [lgShow, setLgShow] = useState(false);
   const [selected, setSelected] = useState('');
-  const [friendList, setFriendList] = useState([]);
+  // const [friendList, setFriendList] = useState([]);
 
-  // methods
-  const getFriendList = (userID) => {
-    const url = `http://localhost:3005/friends/${userID}`;
-    axios.get(url)
-      .then((res) => {
-        setFriendList(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+  // // methods
+  // const getFriendList = (userID) => {
+  //   const url = `http://localhost:3005/friends/${userID}`;
+  //   axios.get(url)
+  //     .then((res) => {
+  //       setFriendList(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // };
 
-  // effects
-  useEffect(() => {
-    getFriendList(currentUser.id);
-  }, [currentUser]);
+  // // effects
+  // useEffect(() => {
+  //   getFriendList(currentUser.id);
+  // }, [currentUser]);
 
   return (
     <>
-      <Button onClick={() => setLgShow(true)}>Friends</Button>
+      <Button variant="outline-info" onClick={() => setLgShow(true)}>Friends</Button>
       <Modal
         size="lg"
         show={lgShow}
@@ -45,8 +43,8 @@ const Friends = ({ users, myMovies }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FriendSearch friends={friendList} users={users} user={currentUser} />
-          <FriendList users={users} setSelected={setSelected}/>
+          <FriendSearch friends={friends} user={user} />
+          <FriendList friends={friends} setSelected={setSelected}/>
           <GoFishWithFriends selected={selected} myMovies={myMovies}/>
         </Modal.Body>
       </Modal>

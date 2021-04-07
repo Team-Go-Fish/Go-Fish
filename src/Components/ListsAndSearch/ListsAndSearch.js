@@ -35,6 +35,8 @@ const ListsAndSearch = ({ myMovies, user, getMyMovies, setPopular }) => {
       <WatchList
         myMovies={myMovies}
         user={user}
+        movies={movies}
+        getMyMovies={getMyMovies}
       />
     </>
   );
