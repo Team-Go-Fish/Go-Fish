@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import Friends from './Friends.js';
 import users from '../../exampleData.js';
 
-const ButtonPanel = ({myMovies}) => {
+const ButtonPanel = ({myMovies, friends}) => {
 
   return (
     //Notifications
-    <Friends users={users.users} myMovies={myMovies}/>
+    <Friends friends={friends} myMovies={myMovies}/>
   );
 };
 

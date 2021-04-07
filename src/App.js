@@ -10,7 +10,7 @@ import Profile from './Components/Login-Signup/Profile';
 
 const App = () => {
   // state initialization
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(1);
   const [myMovies, setMyMovies] = useState([]);
   const [friends, setFriends] = useState([]);
   const [popular, setPopular] = useState([]);
@@ -54,7 +54,8 @@ const App = () => {
       <div className="button-panel">
         <ButtonPanel
           myMovies={myMovies}
-          // friends={friends}
+          friends={friends}
+          user={user}
         />
       </div>
 

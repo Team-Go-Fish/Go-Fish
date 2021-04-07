@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
+import exampleData from '../../exampleData';
 
 const FriendSearch = ( props ) => {
   // state
   const friendList = props.friends;
-  const allUsers = props.users;
+  const allUsers = exampleData.users;
   const currentUser = props.user;
   const [searchList, setSearchList] = useState([]);
   const [friendToSearch, setFriendToSearch] = useState('');
@@ -41,7 +42,7 @@ const FriendSearch = ( props ) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const userID = currentUser.id;
-    const url = `http://localhost:3005/friends/add/${userID}`
+    const url = `http://localhost:3005/friends/add/${userID}`;
     const body = {
       username: friendToAdd
     };
