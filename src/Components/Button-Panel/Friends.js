@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import FriendList from './FriendList.js';
-import FriendSearch from './FriendSearch.js';
 import GoFishWithFriends from './GoFishWithFriends.js';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button'
@@ -12,7 +11,6 @@ const Friends = ({ users, myMovies }) => {
   // methods
 
   return (
-      // <div>
     <>
       <Button onClick={() => setLgShow(true)}>Friends</Button>
       <Modal
@@ -32,9 +30,6 @@ const Friends = ({ users, myMovies }) => {
         </Modal.Body>
       </Modal>
     </>
-
-    //   <FriendSearch />
-    // </div> */}
   )
 };
 

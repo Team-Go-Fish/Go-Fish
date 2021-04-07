@@ -4,10 +4,6 @@ import axios from 'axios';
 const GoFishWithFriends = ({ selected, myMovies }) => {
   const [friendMovies, setFriendMovies] = useState([]);
 
-  const openModal = () => {
-    console.log('Open modal');
-  }
-
   let match = '';
   const findMatches = (friendMovies, myMovies) => {
     for (var i = 0; i < myMovies.length; i ++) {
@@ -20,7 +16,7 @@ const GoFishWithFriends = ({ selected, myMovies }) => {
   }
 
   const getFriendMovies = (selected) => {
-    axios.get(`http://localhost:3005/movies/${selected}`)
+    axios.get(`/movies/${selected}`)
       .then((response => setFriendMovies(response.data)))
       .then(findMatches(friendMovies, myMovies))
       .catch((error) => console.log(error));

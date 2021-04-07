@@ -28,6 +28,16 @@ module.exports.getMyMovies = async (userId) => {
   }
 };
 
+module.exports.getMyFriends = async (userId) => {
+  try {
+    let friends = await pool.query(queries.getMyFriends, [userId]);
+    return friends;
+  }
+  catch (error) {
+    return error;
+  }
+};
+
 module.exports.addMovieToUserList = async (userId, movieObj) => {
   try {
     let movie = await pool.query(queries.findOneMovie, [movieObj.id]);

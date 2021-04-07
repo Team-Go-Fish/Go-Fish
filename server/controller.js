@@ -23,6 +23,16 @@ module.exports.getMyMovies = async (req, res) => {
   }
 };
 
+module.exports.getMyFriends = async (req, res) => {
+  try {
+    let friends = await db.getMyFriends(req.params.userId);
+    res.status(200).send(friends.rows);
+  }
+  catch (error) {
+    res.status(500).send(error);
+  }
+}
+
 module.exports.addMovieToUser = async (req, res) => {
   try {
     let result = await db.addMovieToUserList(req.params.userId, req.body);
