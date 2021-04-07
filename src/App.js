@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import './App.scss';
 import ButtonPanel from './Components/Button-Panel/ButtonPanel.js';
 import axios from 'axios';
-
 import ListsAndSearch from './Components/ListsAndSearch/ListsAndSearch.js';
+import GoFish from './Components/GoFish/GoFish.js';
 import LoginButton from './Components/Login-Signup/Login-Button';
 import LogoutButton from './Components/Login-Signup/Logout-Button';
 import Profile from './Components/Login-Signup/Profile';
@@ -13,6 +13,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [myMovies, setMyMovies] = useState([]);
   const [friends, setFriends] = useState([]);
+  const [popular, setPopular] = useState([]);
 
   // on user state change, run axios requests below
   useEffect(() => {
@@ -45,19 +46,24 @@ const App = () => {
         <LogoutButton />
         <Profile setUser={setUser} />
       {/* // do login / signup shit */}
-      onChange={(user) => handleUserChange(user)}
+      {/* onChange={(user) => handleUserChange(user)} */}
       </div>
+
+      <GoFish popular={popular}/>
+
       <div className="button-panel">
-        {/* // notification
-        //. gofish
-        // friends */}
-        <ButtonPanel />
+        <ButtonPanel
+          myMovies={myMovies}
+          // friends={friends}
+        />
       </div>
 
      <div className="lists-and-search">
        <ListsAndSearch
         myMovies={myMovies}
         user={user}
+        getMyMovies={getMyMovies}
+        setPopular={setPopular}
        />
      </div>
   </div>

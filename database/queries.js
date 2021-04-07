@@ -18,7 +18,7 @@ module.exports.addMovie = `INSERT INTO movies (movieDBiD, title, poster, rating,
 module.exports.findOneMovie = `SELECT * FROM movies m WHERE m.movieDBiD = $1`;
 
 //find one movie from a user's list
-module.exports.findUserMovie = `SELECT * FROM users_movies u WHERE u.movieID = $1`;
+module.exports.findUserMovie = `SELECT * FROM users_movies u WHERE u.userID = $1 AND u.movieID = $2`;
 
 //add a movie to a user's list
 module.exports.addMovieToUser = `INSERT INTO users_movies (userID, movieID) VALUES ($1, $2) RETURNING id`;
