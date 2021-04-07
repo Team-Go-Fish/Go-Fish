@@ -12,8 +12,8 @@ CREATE TABLE users
     firstName text,
     lastName text,
     email text,
-    phone text,
-    password text,
+    picture text,
+    age boolean,
     PRIMARY KEY (id)
 );
 drop table if exists friendships;

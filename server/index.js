@@ -30,6 +30,9 @@ app.post('/movies/:userId', controller.addMovieToUser);
   // delete request should be to: /movies/:userid?movieId=:movieId
 app.delete('/movies/:userId', controller.removeMovieFromUser);
 
+// add a new user
+app.post('/users/add/user', controller.addNewUser);
+
 app.listen(PORT, (err, result) => {
   if (err) {
     console.log('there was an error starting the server!');

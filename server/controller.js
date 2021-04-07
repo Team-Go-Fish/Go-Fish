@@ -78,3 +78,12 @@ module.exports.addNewFriend = (req, res) => {
     });
 };
 
+module.exports.addNewUser = (req, res) => {
+  console.log(req.body);
+  const username = req.body.user;
+  const firstName;
+  const lastName;
+  const email;
+  const picture;
+
+}

@@ -43,11 +43,13 @@ const App = () => {
     className: 'justify-content-md-right',
   }
 
+  console.log('user:', user);
+
   return (
     <Container>
       <div className="App">
       <h4>Go Fish</h4>
-        {/* <Row>
+        <Row>
           <Col style={rowStyleRight}>
             <div className="login-container">
               <h1>GOFISH</h1>
@@ -56,7 +58,7 @@ const App = () => {
               <Profile setUser={setUser} />
             </div>
           </Col>
-        </Row> */}
+        </Row>
         <Row>
           <Col>
 

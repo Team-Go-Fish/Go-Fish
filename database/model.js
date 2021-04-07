@@ -83,3 +83,12 @@ module.exports.removeMovieFromUserList = async (userId, movieId) => {
   }
 };
 
+module.exports.addNewUser = async () => {
+  try {
+    let response = await pool.query(queries.addNewUser, [username, firstName, lastName, email, picture]);
+    return response;
+  }
+  catch (error) {
+    return error;
+  }
+}
