@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import './App.scss';
 import ButtonPanel from './Components/Button-Panel/ButtonPanel.js';
 import axios from 'axios';
-
 import ListsAndSearch from './Components/ListsAndSearch/ListsAndSearch.js';
 import LoginButton from './Components/Login-Signup/Login-Button';
 import LogoutButton from './Components/Login-Signup/Logout-Button';
@@ -45,13 +44,13 @@ const App = () => {
         <LogoutButton />
         <Profile setUser={setUser} />
       {/* // do login / signup shit */}
-      onChange={(user) => handleUserChange(user)}
+      {/* onChange={(user) => handleUserChange(user)} */}
       </div>
       <div className="button-panel">
-        {/* // notification
-        //. gofish
-        // friends */}
-        <ButtonPanel />
+        <ButtonPanel
+          myMovies={myMovies}
+          // friends={friends}
+        />
       </div>
 
      <div className="lists-and-search">
