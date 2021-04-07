@@ -1,15 +1,8 @@
 // initialize pool/client connection to postgres database
 const { Pool, Client } = require('pg');
-const config = require('../config.js');
+//const config = require('../config.js');
 const login = require('./config.js');
 
-// const pool = new Pool({
-//   host: 'localhost',
-//   user: 'postgres',
-//   password: `${config.password}`,
-//   database: 'go-fish',
-//   port: 5432
-// });
 const pool = new Pool({
   host: login.host,
   user: login.user,
