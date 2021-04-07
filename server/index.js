@@ -21,6 +21,7 @@ app.get('/search/:input', controller.searchMovies);
 app.get('/movies/:userId', controller.getMyMovies);
 
 // add a movie to a user's list, and add movie to database if not already stored
+  // takes a movie object as req.body
 app.post('/movies/:userId', controller.addMovieToUser);
 
 // remove a movie from a user's list
