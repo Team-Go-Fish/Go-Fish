@@ -1,17 +1,35 @@
 import { useState, useEffect } from 'react';
 //import Glide from "@glidejs/glide";
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
+import axios from 'axios';
+import Description from './Description.js';
 
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const WatchList = ({ myMovies, user }) => {
-    // const slider = new Glide('.glide', sliderConfiguration);
+////////////changed from myMovies to movies for demo sake/////////////
+const WatchList = ({ movies, user, getMyMovies }) => {
 
-    // useEffect(() => {
-    //   return () => slider.mount();
-    // }, [slider])
+  const [modalShow, setModalShow] = useState(false);
+  const [movieInfo, setMovieInfo] = useState({});
+  const [render, setRender] = useState(false);
+
+  const getInfo = (e) => {
+    axios.get(`http://www.omdbapi.com/?apikey=4bcf0035&t=${e.target.value}`)
+    .then((res) => setMovieInfo(res.data))
+    .then(() => setModalShow(true))
+    .catch((err) => console.log(err))
+  }
+
+  const addMovie = (e) => {
+    //check if user, if so, add to list. If not, route to signup
+    // user ?
+    axios.post(`http://localhost:3005/movies/${e.target.id}`)
+    .then(() => getMyMovies(e.target.id))
+    .catch((err) => console.log(err))
+    // : route to login
+  }
     const settings = {
       dots: false,
       infinite: true,
@@ -23,39 +41,44 @@ const WatchList = ({ myMovies, user }) => {
 
     return (
       <>
-      {(user) && (
+      {/* {(user) && ( */}
         <>
         <Container>
+        <h4><strong>My Movies</strong></h4>
           <Row>
             <Col>
 
           <Slider {...settings}>
-            {
-              myMovies.map((movie) => {
-                return (
-                  <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
-                    <Card.Body>
-                      <Card.Header>{movie.title}</Card.Header>
-                      <Card.Text>
-                        {movie.vote_average}
-                      </Card.Text>
-                      <Card.Text>
-                        {movie.overview}
-                      </Card.Text>
-                      <Button variant="primary">Add to my list</Button>
-                    </Card.Body>
-                  </Card>
-                )
-              })
-            }
+          {
+                movies.map((movie) => {
+                  return (
+                    <Card style={{ width: '18rem' }}>
+                      <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
+                      <Card.Body>
+                        <Card.Header>{movie.title}</Card.Header>
+                        <Card.Text>
+                          {movie.vote_average}
+                        </Card.Text>
+                        <Button variant="outline-info" value={movie.title} id={movie.id} onClick={(e) => getInfo(e)}>Info</Button>
+                        <Description
+                          show={modalShow}
+                          onHide={() => setModalShow(false)}
+                          movie={movieInfo}
+                        /> {' '}
+                        <Button variant="outline-info" id={user} onClick={(e) => addMovie(e)}>Add to My List</Button>
+                        {/* <Button variant="primary">Add to my list</Button> */}
+                      </Card.Body>
+                    </Card>
+                  )
+                })
+              }
 
           </Slider>
             </Col>
           </Row>
         </Container>
         </>
-      )}
+      {/* )} */}
       </>
     );
 };
