@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import AgeButton from './AgeButton.js';
 
 export default function Profile({ setUser }) {
     const { user, isAuthenticated } = useAuth0();
@@ -13,6 +14,7 @@ export default function Profile({ setUser }) {
             <div>
                 {user.nickname}
                 <img width="50px" src={user.picture} />
+                <AgeButton />
             </div>
         )
     )
