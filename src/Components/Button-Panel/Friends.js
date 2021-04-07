@@ -32,7 +32,7 @@ const Friends = ({ users, myMovies }) => {
 
   return (
     <>
-      <Button onClick={() => setLgShow(true)}>Friends</Button>
+      <Button variant="outline-info" onClick={() => setLgShow(true)}>Friends</Button>
       <Modal
         size="lg"
         show={lgShow}
