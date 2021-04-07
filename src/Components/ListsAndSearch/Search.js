@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SearchField from "react-search-field";
 import axios from 'axios';
 
-const Search = ({ setMovies }) => {
+const Search = ({ setMovies, setPopular }) => {
   const [input, setInput] = useState('');
 
   const searchMovies = () => {
@@ -12,7 +12,13 @@ const Search = ({ setMovies }) => {
       .catch((error) => console.log(error));
     } else if(input.length === 0) {
       axios.get('http://localhost:3005/movies')
-      .then((response) => setMovies(response.data))
+      .then((response => {
+        //  remove after demo
+        const noTom = response.data.filter(({ title }) => !title.includes("Tom"));
+        //  remove after demo
+        setPopular(noTom);
+        setMovies(noTom);
+        }))
       .catch((error) => console.log(error))
     }
   };
