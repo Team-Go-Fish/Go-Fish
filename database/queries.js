@@ -34,19 +34,19 @@ module.exports.getMyFriends = (userID) => {
   ;`
 };
 
-// SELECT
-//       ARRAY_AGG (
-//         friendID
-//         ORDER BY f.userID
-//       ) friends
-//     FROM friendships f
-//     WHERE f.userID = ${userID}
+module.exports.addNewFriend = (userID, friendID) => {
+  return `
+    INSERT INTO friendships (userID, friendID)
+    VALUES (${userID}, ${friendID})
+    ON CONFLICT (userID, friendID)
+    DO NOTHING
+  ;`
+};
 
-// SELECT *
-//     FROM users u
-//     JOIN (
-//       SELECT f.userID AS userID, f.friendID AS friendID
-//       FROM friendships f
-//       WHERE f.userID = ${userID}
-//     ) friends
-//     ON u.id = ${userID}
+module.exports.getUserIDByUserName = (username) => {
+  return `
+    SELECT id
+    FROM users
+    WHERE username = '${username}'
+  ;`
+}

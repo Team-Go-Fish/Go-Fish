@@ -37,3 +37,17 @@ module.exports.getMyFriends = async (userId) => {
   }
 };
 
+module.exports.addNewFriend = async (userId, username) => {
+  try {
+    let friendId = await pool.query(queries.getUserIDByUserName(username));
+    friendId = friendId.rows[0].id;
+    // console.log({friendId})
+    // return friendId;
+    let data = await pool.query(queries.addNewFriend(userId, friendId));
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+

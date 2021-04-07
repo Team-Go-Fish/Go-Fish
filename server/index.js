@@ -17,6 +17,7 @@ const PORT = '3005';
 app.get('/movies', controller.getPopularMovies);
 app.get('/movies/:userId', controller.getMyMovies);
 app.get('/friends/:userId', controller.getMyFriends);
+app.post('/friends/add/:userId', controller.addNewFriend);
 
 app.listen(PORT, (err, result) => {
   if (err) {

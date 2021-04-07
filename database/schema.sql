@@ -62,7 +62,6 @@ VALUES
   ('trooper', 'Storm', 'Trooper', 'trooper@starwars.com', '1234567890', 'hash'),
   ('bountyhunter', 'Boba', 'Fett', 'bountyhunter@starwars.com', '1234567890', 'hash')
 ;
-
 INSERT INTO friendships (userID, friendID)
 VALUES
   (1, 2),

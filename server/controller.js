@@ -32,3 +32,17 @@ module.exports.getMyFriends = (req, res) => {
       res.status(500).send(err);
     });
 };
+
+module.exports.addNewFriend = (req, res) => {
+  const username = req.body.username;
+  db.addNewFriend(req.params.userId, username)
+    .then(result => {
+      console.log(result);
+      res.status(200).send(result.rows);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+};
+
+
