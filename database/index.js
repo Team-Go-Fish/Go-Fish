@@ -17,14 +17,6 @@ const pool = new Pool({
   database: login.database,
   port: 5432
 });
-// const pool = new Pool({
-//   host: 'ec2-3-15-155-18.us-east-2.compute.amazonaws.com',
-//   user: 'fish',
-//   password: 'fish',
-//   database: 'fish',
-//   port: 5432
-// });
-
 
 pool.connect((err, client, release) => {
   if (err) {
