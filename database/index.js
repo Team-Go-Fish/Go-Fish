@@ -1,7 +1,6 @@
 // initialize pool/client connection to postgres database
 const { Pool, Client } = require('pg');
-const config = require('../config.js');
-const login = require('./config.js');
+const login = require('../config.js');
 
 // const pool = new Pool({
 //   host: 'localhost',

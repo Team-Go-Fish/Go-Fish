@@ -22,6 +22,10 @@ function Description(props) {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
+          {props.id === 'goFish' ?
+          <img alt="" src={props.movie.Poster}></img>
+          : null
+          }
             <h4>Rating: {props.movie.Rated}</h4>
             <h4>Runtime: {props.movie.Runtime}</h4>
             <h4>Genre: {props.movie.Genre}</h4>

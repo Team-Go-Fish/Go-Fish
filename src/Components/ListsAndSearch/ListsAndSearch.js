@@ -26,7 +26,7 @@ const ListsAndSearch = ({ myMovies, user, getMyMovies, setPopular }) => {
 
   return (
     <>
-      <Search setMovies={setMovies}/>
+      <Search setMovies={setMovies} setPopular={setPopular}/>
       <MovieList
         movies={movies}
         user={user}
