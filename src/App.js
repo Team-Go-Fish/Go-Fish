@@ -3,6 +3,9 @@ import './App.scss';
 import ButtonPanel from './Components/Button-Panel/ButtonPanel.js';
 import axios from 'axios';
 import ListsAndSearch from './Components/ListsAndSearch/ListsAndSearch.js';
+import LoginButton from './Components/Login-Signup/Login-Button';
+import LogoutButton from './Components/Login-Signup/Logout-Button';
+import Profile from './Components/Login-Signup/Profile';
 
 const App = () => {
   // state initialization
@@ -35,12 +38,14 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>GOFISH</h1>
       <div className="login-container">
+        <h1>GOFISH</h1>
+        <LoginButton />
+        <LogoutButton />
+        <Profile setUser={setUser} />
       {/* // do login / signup shit */}
       {/* onChange={(user) => handleUserChange(user)} */}
       </div>
-
       <div className="button-panel">
         <ButtonPanel
           myMovies={myMovies}

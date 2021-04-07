@@ -10,6 +10,10 @@ const Search = ({ setMovies }) => {
       axios.get(`http://localhost:3005/search/${input}`)
       .then((response) => setMovies(response.data))
       .catch((error) => console.log(error));
+    } else if(input.length === 0) {
+      axios.get('http://localhost:3005/movies')
+      .then((response) => setMovies(response.data))
+      .catch((error) => console.log(error))
     }
   };
 

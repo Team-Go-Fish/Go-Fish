@@ -7,16 +7,26 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const MovieList = ({ movies }) => {
+const MovieList = ({ movies, user, getMyMovies }) => {
 
   const [modalShow, setModalShow] = useState(false);
-  const [movieInfo, setMovieInfo] = useState({})
+  const [movieInfo, setMovieInfo] = useState({});
+  const [render, setRender] = useState(false);
 
   const getInfo = (e) => {
     axios.get(`http://www.omdbapi.com/?apikey=4bcf0035&t=${e.target.value}`)
     .then((res) => setMovieInfo(res.data))
     .then(() => setModalShow(true))
     .catch((err) => console.log(err))
+  }
+
+  const addMovie = (e) => {
+    //check if user, if so, add to list. If not, route to signup
+    // user ?
+    axios.post(`http://localhost:3005/movies/${e.target.id}`)
+    .then(() => getMyMovies(e.target.id))
+    .catch((err) => console.log(err))
+    // : route to login
   }
 
   const settings = {
@@ -51,7 +61,7 @@ const MovieList = ({ movies }) => {
                           onHide={() => setModalShow(false)}
                           movie={movieInfo}
                         /> {' '}
-                        <Button variant="outline-info">Add to My List</Button>
+                        <Button variant="outline-info" id={user} onClick={(e) => addMovie(e)}>Add to My List</Button>
                         {/* <Button variant="primary">Add to my list</Button> */}
                       </Card.Body>
                     </Card>
