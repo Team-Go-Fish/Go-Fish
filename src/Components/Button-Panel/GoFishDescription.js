@@ -6,7 +6,7 @@ function GoFishDescription(props) {
   return (
     <>
       <Modal
-        // {...props}
+        {...props}
         size="sm"
         aria-labelledby="selected movie poster"
         centered
@@ -18,6 +18,9 @@ function GoFishDescription(props) {
         </Modal.Header>
         <Modal.Body>
           <img src={props.movie.poster} alt="movie poster"></img>
+          <h4>Rating: {props.movie.rating}</h4>
+          <h4>Plot: </h4>
+            <p>{props.movie.movie_description}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="outline-danger" onClick={props.onHide}>Close</Button>
