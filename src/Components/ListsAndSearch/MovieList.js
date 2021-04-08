@@ -20,13 +20,19 @@ const MovieList = ({ movies, user, getMyMovies }) => {
     .catch((err) => console.log(err))
   }
 
-  const addMovie = (e) => {
-    //check if user, if so, add to list. If not, route to signup
-    // user ?
-    axios.post(`http://localhost:3005/movies/${e.target.id}`)
-    .then(() => getMyMovies(e.target.id))
-    .catch((err) => console.log(err))
-    // : route to login
+  const addMovie = async (e) => {
+    try {
+      const userID = await axios.get(`http://localhost:3005/user/${e.target.id}`);
+      console.log(userID);
+    }
+    catch (error) {
+      console.log(error);
+    }
+
+    // axios.post(`http://localhost:3005/movies/${e.target.id}`)
+    // .then(() => getMyMovies(e.target.id))
+    // .catch((err) => console.log(err))
+    // // : route to login
   }
 
   const settings = {
@@ -62,7 +68,7 @@ const MovieList = ({ movies, user, getMyMovies }) => {
                           onHide={() => setModalShow(false)}
                           movie={movieInfo}
                         /> {' '}
-                        <Button variant="outline-info" id={user} onClick={(e) => addMovie(e)}>Add to My List</Button>
+                        <Button variant="outline-info" id={user?.email} onClick={(e) => addMovie(e)}>Add to My List</Button>
                         {/* <Button variant="primary">Add to my list</Button> */}
                       </Card.Body>
                     </Card>
@@ -77,8 +83,6 @@ const MovieList = ({ movies, user, getMyMovies }) => {
       <hr></hr>
     </>
   );
-
-
 };
 
 export default MovieList;
