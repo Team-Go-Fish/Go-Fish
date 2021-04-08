@@ -80,7 +80,6 @@ const NotificationsModal = (props) => {
         const url = `http://localhost:3005/notifications/${user}`
         const response = await axios.get(url);
         await setNotifications(response.data);
-        console.log(response.data)
       } catch (error) {
         console.error(error);
       }
