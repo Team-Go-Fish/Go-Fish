@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import NotificationsModal from './NotificationsModal';
 
-const Notifications = () => {
+const Notifications = ({ user, friends, myMovies }) => {
   const [modalShow, setModalShow] = React.useState(false);
 
   return (
@@ -14,6 +14,9 @@ const Notifications = () => {
       <NotificationsModal
         show={modalShow}
         onHide={() => setModalShow(false)}
+        user={user}
+        friends={friends}
+        myMovies={myMovies}
       />
     </>
   )

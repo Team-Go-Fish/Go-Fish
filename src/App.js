@@ -43,13 +43,12 @@ const App = () => {
   };
   // get friends list for user once logged in
   const getFriends = (user_id) => {
-    axios.get(`http://localhost:3005/friends/${user_id}`)
+    axios.get(`http://localhost:3005/friends/${user_id}`)               //hard coded for user 1
       .then((response => setFriends(response.data)))
       .catch((error) => console.log(error));
   };
 
-  // pass this event handler down to login component
-  const handleUserChange = (user) => {
+  const handleUserChange = (user) => {    // pass this event handler down to login component
     setUser(user);
   }
 
@@ -67,9 +66,11 @@ const App = () => {
       style={{ background: `linear-gradient(#88CDDC, #E389A9, #E1B7D5)` }}
     >
       <div className="App">
+
         <Row>
           <Col style={rowStyleRight}>
-            <div className="login-container" style={{ display: 'flex', flexDirection: 'row-reverse'}}>
+            <div className="login-container">
+              <h1>GO FISH</h1>
               <LoginButton />
               <LogoutButton />
               <Profile setUser={setUser} />
