@@ -50,15 +50,21 @@ module.exports.addNewFriend = (userID, friendID) => {
   return `
     INSERT INTO friendships (userID, friendID)
     VALUES (${userID}, ${friendID})
-    ON CONFLICT (userID, friendID)
-    DO NOTHING
   ;`
 };
 
-module.exports.getUserIDByUserName = (username) => {
-  return `
-    SELECT id
+module.exports.getUsers = `
+    SELECT *
     FROM users
-    WHERE username = '${username}'
   ;`
-}
+;
+
+module.exports.getUserNotifications = (userID) => {
+  return `
+    SELECT *
+    FROM notifications
+    WHERE userID = ${userID}
+  ;`
+};
+
+

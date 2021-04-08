@@ -47,6 +47,21 @@ CREATE TABLE users_movies
   FOREIGN KEY (userID) REFERENCES users(id),
   FOREIGN KEY (movieID) REFERENCES movies(id)
 );
+CREATE TABLE notifications
+(
+  id serial NOT NULL,
+  userID integer,
+  friendID integer,
+  movieID integer,
+  notification_type text,
+  notification_time timestamp,
+  notification_message text,
+  PRIMARY KEY (id),
+  FOREIGN KEY (userID) REFERENCES users(id),
+  FOREIGN KEY (friendID) REFERENCES users(id),
+  FOREIGN KEY (movieID) REFERENCES movies(id)
+);
+SET timezone = 'America/Los_Angeles';
 
 -- SAMPLE DATA FOR TESTING
 INSERT INTO users (username, firstName, lastName, email, phone, password)
@@ -66,4 +81,15 @@ VALUES
   (1, 2),
   (1, 3),
   (2, 3)
+;
+INSERT INTO notifications (userID, friendID, movieID, notification_type, notification_time, notification_message)
+VALUES
+  ('1', '2', NULL, 'newFriend', '2016-06-22 19:10:25-07', 'Jack wants to be friends!'),
+  ('1', '3', NULL, 'newFriend', '2016-06-22 19:10:25-07', 'Dorien wants to be friends!'),
+  ('1', '4', '3', 'matchedMovie', '2016-06-22 19:10:25-07', 'You and Nick have a matched movie!'),
+  ('1', '5', NULL, 'newFriend', '2016-06-22 19:10:25-07', 'Jake wants to be friends!'),
+  ('1', '6', '4', 'matchedMovie', '2016-06-22 19:10:25-07', 'You and Mason have a matched movie!'),
+  ('1', '7', NULL, 'newFriend', '2016-06-22 19:10:25-07', 'Malcolm wants to be friends!'),
+  ('1', '8', NULL, 'newFriend', '2016-06-22 19:10:25-07', 'Kevin wants to be friends!'),
+  ('1', '9', '5', 'matchedMovie', '2016-06-22 19:10:25-07', 'You and Ryne have a matched movie!')
 ;

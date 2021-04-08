@@ -78,10 +78,29 @@ module.exports.getMyFriends = (req, res) => {
 };
 
 module.exports.addNewFriend = (req, res) => {
-  const username = req.body.username;
-  db.addNewFriend(req.params.userId, username)
+  const friend = req.body.friendID;
+  db.addNewFriend(req.params.userId, friend)
     .then(result => {
-      console.log(result);
+      res.status(200).send(result.rows);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+};
+
+module.exports.getUsers = (req, res) => {
+  db.getUsers()
+    .then(result => {
+      res.status(200).send(result.rows);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+};
+
+module.exports.getUserNotifications = (req, res) => {
+  db.getUserNotifications(req.params.userID)
+    .then(result => {
       res.status(200).send(result.rows);
     })
     .catch(err => {
