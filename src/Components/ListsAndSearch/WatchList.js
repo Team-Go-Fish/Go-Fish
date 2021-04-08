@@ -30,6 +30,42 @@ const WatchList = ({ myMovies, user, getMyMovies }) => {
       slidesToScroll: 2,
       spacing: 2
     };
+    const settings1 = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      spacing: 2
+    };
+    const settings2 = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 2,
+      slidesToScroll: 2,
+      spacing: 2
+    };
+    const settings3 = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 2,
+      spacing: 2
+    };
+
+    let sliderSettings = settings;
+
+    if (myMovies.length === 1) {
+      sliderSettings = settings1;
+    } else if (myMovies.length === 2) {
+      sliderSettings = settings2;
+    } else if (myMovies.length === 3) {
+      sliderSettings = settings3;
+    } else {
+      sliderSettings = settings;
+    }
 
     return (
       <>
@@ -40,7 +76,7 @@ const WatchList = ({ myMovies, user, getMyMovies }) => {
           <Row>
             <Col>
 
-          <Slider {...settings}>
+          <Slider {...sliderSettings}>
           {
                 myMovies.map((movie) => {
                   return (
