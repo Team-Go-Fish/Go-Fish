@@ -59,3 +59,9 @@ module.exports.getUserIDByUserName = (username) => {
     WHERE username = '${username}'
   ;`
 }
+
+module.exports.addUserAge = (email, adult) => {
+  return `
+    UPDATE users SET adult=${adult}
+    WHERE email=${email};`
+}

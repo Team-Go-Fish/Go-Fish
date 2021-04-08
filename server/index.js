@@ -33,6 +33,9 @@ app.delete('/movies/:userId', controller.removeMovieFromUser);
 // add a new user
 app.post('/users/add/user', controller.addNewUser);
 
+// update age of user
+app.put('/users/age/:email', controller.updateUserAge);
+
 // get user ID
 app.get('/user/:email', controller.getUserID);
 
