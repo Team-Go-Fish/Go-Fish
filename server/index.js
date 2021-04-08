@@ -14,21 +14,27 @@ const controller = require('./controller.js');
 const PORT = '3005';
 
 // route(s)
-
-//  get userID
-app.get('/user/:email', controller.getUserID);
-
-//get popular movies / search movies
 app.get('/movies', controller.getPopularMovies);
 app.get('/search/:input', controller.searchMovies);
 
-// retrieve a user's friends
-app.get('/friends/:userId', controller.getMyFriends);
-// add a new friend for a user
-app.post('/friends/add/:userId', controller.addNewFriend);
-
 // get a user's movie list
 app.get('/movies/:userId', controller.getMyMovies);
+
+// get a user's friends
+app.get('/friends/:userId', controller.getMyFriends);
+
+// add new friend to a user
+app.post('/friends/add/:userId', controller.addNewFriend);
+
+// return all users
+app.get('/users', controller.getUsers);
+
+// return user's notifications
+app.get('/notifications/:userID', controller.getUserNotifications);
+
+// get a user's friend list
+app.get('/friends/:userId', controller.getMyFriends);
+
 // add a movie to a user's list, and add movie to database if not already stored
   // takes a movie object as req.body
 app.post('/movies/:userId', controller.addMovieToUser);
@@ -36,7 +42,11 @@ app.post('/movies/:userId', controller.addMovieToUser);
   // delete request should be to: /movies/:userid?movieId=:movieId
 app.delete('/movies/:userId', controller.removeMovieFromUser);
 
+// add a new user
+app.post('/users/add/user', controller.addNewUser);
 
+// get user ID
+app.get('/user/:email', controller.getUserID);
 
 app.listen(PORT, (err, result) => {
   if (err) {
