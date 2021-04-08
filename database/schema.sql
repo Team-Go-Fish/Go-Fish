@@ -51,6 +51,8 @@ CREATE TABLE users_movies
   FOREIGN KEY (userID) REFERENCES users(id),
   FOREIGN KEY (movieID) REFERENCES movies(id)
 );
+
+DROP TABLE IF EXISTS notifications;
 CREATE TABLE notifications
 (
   id serial NOT NULL,
@@ -103,6 +105,7 @@ VALUES
   (1, 3),
   (2, 3)
 ;
+
 INSERT INTO notifications (userID, friendID, movieID, notification_type, notification_time, notification_message)
 VALUES
   ('1', '2', NULL, 'newFriend', '2016-06-22 19:10:25-07', 'Jack wants to be friends!'),
