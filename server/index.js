@@ -38,6 +38,9 @@ app.delete('/movies/:userId', controller.removeMovieFromUser);
 // add a new user
 app.post('/users/add/user', controller.addNewUser);
 
+// update age of user
+app.put('/users/:email', controller.updateUserAge);
+
 app.listen(PORT, (err, result) => {
   if (err) {
     console.log('there was an error starting the server!');

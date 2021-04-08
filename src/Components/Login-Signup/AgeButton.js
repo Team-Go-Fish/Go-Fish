@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import axios from 'axios';
 
 const AgeButton = ({ user, setUser }) => {
   const [show, setShow] = useState(false);
@@ -12,6 +13,9 @@ const AgeButton = ({ user, setUser }) => {
     const userWithAge = user;
     userWithAge.adult = true;
     setUser(userWithAge);
+    axios.put(`http://localhost:3005/user/?email=${user.email}`, {
+      adult: true
+    });
   }
 
   const setChild = () => {
@@ -19,6 +23,9 @@ const AgeButton = ({ user, setUser }) => {
     const userWithAge = user;
     userWithAge.adult = false;
     setUser(userWithAge);
+    axios.put(`http://localhost:3005/user/?email=${user.email}`, {
+      adult: false
+    });
   }
 
   const renderAgeGroup = () => {
@@ -31,13 +38,13 @@ const AgeButton = ({ user, setUser }) => {
     } else if (user.adult === true) {
       return (
         <Button variant="outline-info" onClick={handleShow} >
-          <img src="./sharks.png" width="35px" />
+          <img src="./sharks.png" width="25px" />
         </Button>
       )
     } else {
       return (
         <Button variant="outline-info" onClick={handleShow} >
-          <img src="./no_sharks.png" width="35px" />
+          <img src="./no_sharks.png" width="25px" />
         </Button>
       )
     }
