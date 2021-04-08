@@ -14,11 +14,6 @@ const controller = require('./controller.js');
 const PORT = '3005';
 
 // route(s)
-
-//  get userID
-app.get('/user/:email', controller.getUserID);
-
-//get popular movies / search movies
 app.get('/movies', controller.getPopularMovies);
 app.get('/search/:input', controller.searchMovies);
 
@@ -37,6 +32,12 @@ app.post('/movies/:userId', controller.addMovieToUser);
 // remove a movie from a user's list
   // delete request should be to: /movies/:userid?movieId=:movieId
 app.delete('/movies/:userId', controller.removeMovieFromUser);
+
+// add a new user
+app.post('/users/add/user', controller.addNewUser);
+
+// get user ID
+app.get('/user/:email', controller.getUserID);
 
 app.listen(PORT, (err, result) => {
   if (err) {

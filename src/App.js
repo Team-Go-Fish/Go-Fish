@@ -59,6 +59,8 @@ const App = () => {
   //   backgroundImage: linearGradient(red, yellow, green),
   // }
 
+  console.log('user:', user);
+
   return (
     <Container
     style={{ background:`linear-gradient(#88CDDC, #E389A9, #E1B7D5)` }}

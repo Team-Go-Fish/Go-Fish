@@ -14,7 +14,7 @@ export default function Profile({ setUser }) {
             <div>
                 {user.nickname}
                 <img width="50px" src={user.picture} />
-                <AgeButton />
+                <AgeButton user={user} setUser={setUser} />
             </div>
         )
     )
