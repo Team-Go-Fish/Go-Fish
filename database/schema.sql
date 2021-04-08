@@ -59,7 +59,8 @@ VALUES
   ('chewie', 'Chewbacca', 'Chewbacca', 'chewie@starwars.com', '1234567890', 'hash'),
   ('yoda', 'Yoda', 'Yoda', 'yoda@starwars.com', '1234567890', 'hash'),
   ('trooper', 'Storm', 'Trooper', 'trooper@starwars.com', '1234567890', 'hash'),
-  ('bountyhunter', 'Boba', 'Fett', 'bountyhunter@starwars.com', '1234567890', 'hash')
+  ('bountyhunter', 'Boba', 'Fett', 'bountyhunter@starwars.com', '1234567890', 'hash'),
+  ('nickfin', 'Nick', 'Papadakis', 'nickfin2014@gmail.com', '1234567890', 'hash')
 ;
 INSERT INTO friendships (userID, friendID)
 VALUES
