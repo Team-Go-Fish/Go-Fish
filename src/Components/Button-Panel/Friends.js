@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import FriendSearch from './FriendSearch.js';
 
-const Friends = ({ user, friends, myMovies }) => {
+const Friends = ({ userID, user, friends, myMovies }) => {
   const [lgShow, setLgShow] = useState(false);
   const [selected, setSelected] = useState('');
   // const [friendList, setFriendList] = useState([]);
@@ -26,9 +26,9 @@ const Friends = ({ user, friends, myMovies }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FriendSearch friends={friends} user={user} />
-          <FriendList friends={friends} setSelected={setSelected}/>
-          <GoFishWithFriends selected={selected} myMovies={myMovies}/>
+          <FriendSearch friends={friends} user={user} userID={userID}/>
+          <FriendList friends={friends} userID={userID} setSelected={setSelected}/>
+          <GoFishWithFriends selected={selected} userID={userID} myMovies={myMovies}/>
         </Modal.Body>
       </Modal>
     </>

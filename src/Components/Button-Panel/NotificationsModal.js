@@ -57,6 +57,7 @@ import axios from 'axios';
 
 const NotificationsModal = (props) => {
   let user = props.user;
+  let userID = props.userID;
   let friends = props.friends;
   let myMovies = props.myMovies;
   const [modalShow, setModalShow] = useState(false);
@@ -77,10 +78,9 @@ const NotificationsModal = (props) => {
   useEffect(() => {
     const initialLoad = async () => {
       try {
-        const url = `http://localhost:3005/notifications/${user}`
+        const url = `http://localhost:3005/notifications/${userID}`
         const response = await axios.get(url);
         await setNotifications(response.data);
-        console.log(response.data)
       } catch (error) {
         console.error(error);
       }

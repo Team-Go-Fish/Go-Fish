@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Container, Row, Col, Button, Dropdown, DropdownButton } from 'react-bootstrap';
 import SearchField from 'react-search-field';
 
-const FriendSearch = ( {friends, user} ) => {
+const FriendSearch = ( {friends, user, userID} ) => {
   // state
   const [users, setUsers] = useState([]);
   const [searchList, setSearchList] = useState([]);
@@ -42,7 +42,6 @@ const FriendSearch = ( {friends, user} ) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userID = user;
     const url = `http://localhost:3005/friends/add/${userID}`;
     const body = {
       friendID: friendToAdd
