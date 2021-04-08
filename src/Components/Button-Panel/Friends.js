@@ -1,32 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import FriendList from './FriendList.js';
-import FriendSearch from './FriendSearch.js';
 import GoFishWithFriends from './GoFishWithFriends.js';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import FriendSearch from './FriendSearch.js';
 
 const Friends = ({ user, friends, myMovies }) => {
   const [lgShow, setLgShow] = useState(false);
   const [selected, setSelected] = useState('');
   // const [friendList, setFriendList] = useState([]);
-
-  // // methods
-  // const getFriendList = (userID) => {
-  //   const url = `http://localhost:3005/friends/${userID}`;
-  //   axios.get(url)
-  //     .then((res) => {
-  //       setFriendList(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
-
-  // // effects
-  // useEffect(() => {
-  //   getFriendList(currentUser.id);
-  // }, [currentUser]);
 
   return (
     <>

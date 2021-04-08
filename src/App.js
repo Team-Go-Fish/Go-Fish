@@ -7,7 +7,8 @@ import GoFish from './Components/GoFish/GoFish.js';
 import LoginButton from './Components/Login-Signup/Login-Button';
 import LogoutButton from './Components/Login-Signup/Logout-Button';
 import Profile from './Components/Login-Signup/Profile';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Container, Image } from 'react-bootstrap';
+import bg from './images/bg1.png';
 
 const App = () => {
   const [user, setUser] = useState(1);
@@ -42,34 +43,40 @@ const App = () => {
   };
   // get friends list for user once logged in
   const getFriends = (user_id) => {
-    axios.get(`http://localhost:3005/friends/${user_id}`)
+    axios.get(`http://localhost:3005/friends/${user_id}`)               //hard coded for user 1
       .then((response => setFriends(response.data)))
       .catch((error) => console.log(error));
   };
 
-  // pass this event handler down to login component
-  const handleUserChange = (user) => {
+  const handleUserChange = (user) => {    // pass this event handler down to login component
     setUser(user);
   }
 
   const rowStyleRight = {
     className: 'justify-content-md-right',
   }
+  // const background = {
+  //   backgroundImage: linearGradient(red, yellow, green),
+  // }
+
+  console.log('user:', user);
 
   return (
-    <Container>
+    <Container
+    style={{ background:`linear-gradient(#88CDDC, #E389A9, #E1B7D5)` }}
+    >
       <div className="App">
-      <h4>Go Fish</h4>
+
         <Row>
           <Col style={rowStyleRight}>
             <div className="login-container">
-              <h1>GOFISH</h1>
+              <h1>GO FISH</h1>
               <LoginButton />
               <LogoutButton />
               <Profile setUser={setUser} />
             </div>
           </Col>
-        </Row> */}
+        </Row>
         <Row>
           <Col>
             <div className="button-panel">
