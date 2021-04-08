@@ -20,9 +20,8 @@ const MovieList = ({ movies, user, getMyMovies }) => {
     .catch((err) => console.log(err))
   }
 
-  const addMovie = async (e, movie) => {
+  const addMovie = async (movie) => {
     console.log('I am in the addMovie function on the Front-end!')
-    e.persist();
     try {
       const response = await axios.get(`http://localhost:3005/user/${user.email}`);
       const userID = response.data;
@@ -35,15 +34,9 @@ const MovieList = ({ movies, user, getMyMovies }) => {
         },
         data: movie
       };
-
-      console.log(movie);
-
       const postMovie = await axios(options);
-      console.log(postMovie);
-
-    //   axios.post(`http://localhost:3005/movies/${e.target.id}`)
-    // .then(() => getMyMovies(e.target.id))
-    // .catch((err) => console.log(err))
+      getMyMovies(userID);
+      return postMovie;
     }
     catch (error) {
       console.log(error);
@@ -77,13 +70,17 @@ const MovieList = ({ movies, user, getMyMovies }) => {
                         <Card.Text>
                           {movie.vote_average}
                         </Card.Text>
-                        <Button variant="outline-info" value={movie.title} id={movie.id} onClick={(e) => getInfo(e)}>Info</Button>
+                        <Button variant="outline-info"
+                        value={movie.title}
+                        id={movie.id}
+                        onClick={(e) => getInfo(e)}
+                        >Info</Button>
                         <Description
                           show={modalShow}
                           onHide={() => setModalShow(false)}
                           movie={movieInfo}
                         /> {' '}
-                        <Button variant="outline-info" value={movie} onClick={(e) => addMovie(e, movie)}>Add to My List</Button>
+                        <Button variant="outline-info" onClick={() => addMovie(movie)}>Add to My List</Button>
                         {/* <Button variant="primary">Add to my list</Button> */}
                       </Card.Body>
                     </Card>

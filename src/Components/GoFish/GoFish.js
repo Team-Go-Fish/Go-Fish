@@ -21,7 +21,6 @@ const GoFish = ({ popular }) => {
     }
   };
 
-
   const toggleModal = () => {
     setModal(!modal);
   };

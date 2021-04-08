@@ -9,7 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 ////////////changed from myMovies to movies for demo sake/////////////
-const WatchList = ({ movies, user, getMyMovies }) => {
+const WatchList = ({ myMovies, user, getMyMovies }) => {
 
   const [modalShow, setModalShow] = useState(false);
   const [movieInfo, setMovieInfo] = useState({});
@@ -33,7 +33,7 @@ const WatchList = ({ movies, user, getMyMovies }) => {
 
     return (
       <>
-      {/* {(user) && ( */}
+      {(myMovies) && (
         <>
         <Container>
         <h4><strong>My Movies</strong></h4>
@@ -42,14 +42,14 @@ const WatchList = ({ movies, user, getMyMovies }) => {
 
           <Slider {...settings}>
           {
-                movies.map((movie) => {
+                myMovies.map((movie) => {
                   return (
                     <Card style={{ width: '18rem' }}>
-                      <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
+                      <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500/${movie.poster}`} />
                       <Card.Body>
                         <Card.Header>{movie.title}</Card.Header>
                         <Card.Text>
-                          {movie.vote_average}
+                          {movie.rating}
                         </Card.Text>
                         <Button variant="outline-info" value={movie.title} id={movie.id} onClick={(e) => getInfo(e)}>Info</Button>
                         <Description
@@ -71,7 +71,7 @@ const WatchList = ({ movies, user, getMyMovies }) => {
           </Row>
         </Container>
         </>
-      {/* )} */}
+      )}
       </>
     );
 };
