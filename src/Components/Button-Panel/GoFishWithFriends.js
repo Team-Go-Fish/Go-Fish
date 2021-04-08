@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-//import Description from '../ListsAndSearch/Description';
 import GoFishDescription from './GoFishDescription'
-import gofish from '../GoFish/goFishBro.png';
 import Button from 'react-bootstrap/Button';
 
 const GoFishWithFriends = ({ selected, myMovies }) => {
@@ -50,7 +48,6 @@ const GoFishWithFriends = ({ selected, myMovies }) => {
     findMatches();
     toggleModal();
   },[friendMovies]);
-
 
   return (
     <div className="go-fish">

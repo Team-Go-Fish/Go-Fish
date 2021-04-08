@@ -21,6 +21,7 @@ const App = () => {
     try {
       const response = await axios.get(`http://localhost:3005/user/${user.email}`);
       const userID = response.data;
+      console.log('test', response)
       setUserID(userID);
       getMyMovies(userID);
       getFriends(userID);
@@ -43,7 +44,7 @@ const App = () => {
   };
   // get friends list for user once logged in
   const getFriends = (user_id) => {
-    axios.get(`http://localhost:3005/friends/${user_id}`)               //hard coded for user 1
+    axios.get(`http://localhost:3005/friends/${user_id}`)
       .then((response => setFriends(response.data)))
       .catch((error) => console.log(error));
   };
