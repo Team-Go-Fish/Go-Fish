@@ -35,6 +35,7 @@ module.exports.getMyFriends = async (req, res) => {
 
 module.exports.addMovieToUser = async (req, res) => {
   try {
+    console.log(req.body);
     let result = await db.addMovieToUserList(req.params.userId, req.body);
     res.status(201).send(result);
   }
@@ -86,5 +87,16 @@ module.exports.addNewFriend = (req, res) => {
     .catch(err => {
       res.status(500).send(err);
     });
+};
+
+module.exports.getUserID = (req, res) => {
+  const email = req.params.email;
+  db.getUserID(email)
+  .then(result => {
+    res.status(200).send(result.toString());
+  })
+  .catch(err => {
+    res.status(500).send(err);
+  });
 };
 

@@ -7,24 +7,37 @@ import GoFish from './Components/GoFish/GoFish.js';
 import LoginButton from './Components/Login-Signup/Login-Button';
 import LogoutButton from './Components/Login-Signup/Logout-Button';
 import Profile from './Components/Login-Signup/Profile';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Container, Image } from 'react-bootstrap';
+import bg from './images/bg1.png';
 
 const App = () => {
-  // state initialization
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(1);
+  const [userID, setUserID] = useState(0);
   const [myMovies, setMyMovies] = useState([]);
   const [friends, setFriends] = useState([]);
   const [popular, setPopular] = useState([]);
 
-  // on user state change, run axios requests below
+  const getUserID = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3005/user/${user.email}`);
+      const userID = response.data;
+      setUserID(userID);
+      getMyMovies(userID);
+      getFriends(userID);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    getMyMovies(user);
-    getFriends(user);
-  },[user]);
+    getUserID();
+  }, [user]);
 
   // get movie list for user once logged in
   const getMyMovies = (user_id) => {
-    axios.get(`http://localhost:3005/movies/${2}`)            //hardcoded for user 1
+    console.log(user_id);
+    axios.get(`http://localhost:3005/movies/${user_id}`)
       .then((response => setMyMovies(response.data)))
       .catch((error) => console.log(error));
   };
@@ -42,10 +55,16 @@ const App = () => {
   const rowStyleRight = {
     className: 'justify-content-md-right',
   }
+  // const background = {
+  //   background-image: url('./Components/images/bg1.png');
+  // }
 
   return (
-    <Container>
+    <Container
+    //style={{ backgroundImage:`url(${bg})` }}
+    >
       <div className="App">
+      <h4>Go Fish</h4>
         <Row>
           <Col style={rowStyleRight}>
             <div className="login-container">
@@ -86,10 +105,7 @@ const App = () => {
         </Row>
       </div>
     </Container>
-
-
-
   );
-}
+};
 
 export default App;
