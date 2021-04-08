@@ -138,13 +138,12 @@ module.exports.getUserID = (req, res) => {
 module.exports.updateUserAge = (req, res) => {
   const email = req.params.email;
   const adult = req.body.adult;
-  res.send('hello');
-  // db.addUserAge(email, adult)
-  // .then(result => {
-  //   res.send("success")
-  // })
-  // .catch(err => {
-  //   res.status(500).send(err);
-  // })
+  db.addUserAge(email, adult)
+  .then(result => {
+    res.send(result)
+  })
+  .catch(err => {
+    res.status(500).send(err);
+  })
 }
 

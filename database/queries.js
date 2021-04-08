@@ -60,6 +60,7 @@ module.exports.getUsers = () => {`
 };
 
 module.exports.addUserAge = (email, adult) => {
+  console.log(email, adult, 'queries')
   return `
     UPDATE users SET adult=${adult}
     WHERE email=${email};`
