@@ -57,12 +57,12 @@ const App = () => {
     className: 'justify-content-md-right',
   }
   // const background = {
-  //   background-image: url('./Components/images/bg1.png');
+  //   backgroundImage: linearGradient(red, yellow, green),
   // }
 
   return (
     <Container
-    //style={{ backgroundImage:`url(${bg})` }}
+    style={{ background:`linear-gradient(#88CDDC, #E389A9, #E1B7D5)` }}
     >
       <div className="App">
       <h4>Go Fish</h4>
