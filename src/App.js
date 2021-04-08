@@ -11,7 +11,7 @@ import { Row, Col, Container } from 'react-bootstrap';
 
 const App = () => {
   // state initialization
-  const [user, setUser] = useState(1);
+  const [user, setUser] = useState();
   const [myMovies, setMyMovies] = useState([]);
   const [friends, setFriends] = useState([]);
   const [popular, setPopular] = useState([]);
@@ -20,22 +20,22 @@ const App = () => {
   useEffect(() => {
     getMyMovies(user);
     getFriends(user);
-  }, [user]);
+  },[]);
+
   // get movie list for user once logged in
   const getMyMovies = (user_id) => {
-    axios.get(`http://localhost:3005/movies/${user_id}`)
+    axios.get(`http://localhost:3005/movies/${1}`)            //hardcoded for user 1
       .then((response => setMyMovies(response.data)))
       .catch((error) => console.log(error));
   };
   // get friends list for user once logged in
   const getFriends = (user_id) => {
-    axios.get(`/friends/${user_id}`)
+    axios.get(`http://localhost:3005/friends/${1}`)               //hard coded for user 1
       .then((response => setFriends(response.data)))
       .catch((error) => console.log(error));
   };
 
-  // pass this event handler down to login component
-  const handleUserChange = (user) => {
+  const handleUserChange = (user) => {    // pass this event handler down to login component
     setUser(user);
   }
 
@@ -46,8 +46,7 @@ const App = () => {
   return (
     <Container>
       <div className="App">
-      <h4>Go Fish</h4>
-        {/* <Row>
+        <Row>
           <Col style={rowStyleRight}>
             <div className="login-container">
               <h1>GOFISH</h1>
@@ -56,7 +55,7 @@ const App = () => {
               <Profile setUser={setUser} />
             </div>
           </Col>
-        </Row> */}
+        </Row>
         <Row>
           <Col>
             <div className="button-panel">

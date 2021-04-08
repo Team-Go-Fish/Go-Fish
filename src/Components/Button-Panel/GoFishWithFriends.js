@@ -1,31 +1,46 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Description from '../ListsAndSearch/Description';
 
 const GoFishWithFriends = ({ selected, myMovies }) => {
   const [friendMovies, setFriendMovies] = useState([]);
+  const [match, setMatch] = useState({});
 
-  let match = '';
-  const findMatches = (friendMovies, myMovies) => {
+
+  const findMatches = () => {
+    console.log(myMovies);
+    console.log(friendMovies)
+
+    let myIds = [];
     for (var i = 0; i < myMovies.length; i ++) {
-      let currentMovie = myMovies[i];
-      if(friendMovies.find(currentMovie) !== undefined) {
-        match = currentMovie;
+      myIds.push(myMovies[i].moviedbid);
+    }
+    let friendIds = [];
+    for (var j = 0; j < friendMovies.length; j ++) {
+      friendIds.push(friendMovies[j].moviedbid)
+    }
+    for (var k = 0; k < myIds.length; k ++) {
+      if (friendIds.includes(myIds[k])) {
+        setMatch(myMovies[k]);
+        break;
       }
     }
-    match = 'No Matches'
+    console.log(match)
   }
 
-  const getFriendMovies = (selected) => {
-    axios.get(`/movies/${selected}`)
+  const getFriendMovies = () => {
+    axios.get(`http://localhost:3005/movies/${selected}`)
       .then((response => setFriendMovies(response.data)))
-      .then(findMatches(friendMovies, myMovies))
+      .then(findMatches)
       .catch((error) => console.log(error));
   };
+
 
   return (
     <div className="GoFishWithFriends">
       <h1>{match}</h1>
-      <button onClick={getFriendMovies(selected)}>Go Fish With A Friend</button>
+      <button onClick={getFriendMovies}>Go Fish With A Friend</button>
+      {/* <Description movie={match} /> */}
     </div>
   )
 };
