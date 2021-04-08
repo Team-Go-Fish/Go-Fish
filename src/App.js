@@ -63,7 +63,8 @@ const App = () => {
 
   return (
     <Container
-      style={{ background: `linear-gradient(#88CDDC, #E389A9, #E1B7D5)` }}
+      // style={{ background: `linear-gradient(#88CDDC, #E389A9, #E1B7D5)` }}
+    style={{ background:`linear-gradient(#A1DAE6, #F8D8ED, #D18BC2, #58AAB8)`,  width: `calc(100vw)` }}
     >
       <div className="App">
         <Row>
