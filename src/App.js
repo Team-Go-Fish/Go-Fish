@@ -69,7 +69,7 @@ const App = () => {
       <div className="App">
         <Row>
           <Col style={rowStyleRight}>
-            <div className="login-container" style={{ display: 'flex', flexDirection: 'row-reverse'}}>
+            <div className="login-container" style={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between'}}>
               <LoginButton />
               <LogoutButton />
               <Profile setUser={setUser} />
