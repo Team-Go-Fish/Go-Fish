@@ -77,6 +77,7 @@ const App = () => {
             </div>
           </Col>
         </Row>
+        <h1>GOFISH</h1>
         <Row>
           <Col>
             <div className="button-panel">

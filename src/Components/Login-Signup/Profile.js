@@ -12,8 +12,8 @@ export default function Profile({ setUser }) {
     return (
         isAuthenticated && (
             <div>
-                {user.nickname}
                 <img width="50px" src={user.picture} />
+                {user.nickname}
                 <AgeButton user={user} setUser={setUser} />
             </div>
         )
