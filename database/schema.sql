@@ -4,7 +4,8 @@ DROP DATABASE IF EXISTS fish;
 
 CREATE DATABASE fish;
 \c fish;
-drop table if exists users;
+
+DROP TABLE IF EXISTS users;
 CREATE TABLE users
 (
     id serial NOT NULL,
@@ -12,11 +13,12 @@ CREATE TABLE users
     firstName text,
     lastName text,
     email text,
-    phone text,
-    password text,
+    picture text,
+    adult boolean,
     PRIMARY KEY (id)
 );
-drop table if exists friendships;
+
+DROP TABLE IF EXISTS friendships;
 CREATE TABLE friendships
 (
     id serial NOT NULL,
@@ -26,7 +28,8 @@ CREATE TABLE friendships
     FOREIGN KEY (userID) REFERENCES users(id),
     FOREIGN KEY (friendID) REFERENCES users(id)
 );
-drop table if exists movies;
+
+DROP TABLE IF EXISTS movies;
 CREATE TABLE movies
 (
   id serial NOT NULL,
@@ -37,7 +40,8 @@ CREATE TABLE movies
   movie_description text,
   PRIMARY KEY (id)
 );
-drop table if exists users_movies;
+
+DROP TABLE IF EXISTS users_movies;
 CREATE TABLE users_movies
 (
   id serial NOT NULL,
@@ -49,18 +53,19 @@ CREATE TABLE users_movies
 );
 
 -- SAMPLE DATA FOR TESTING
-INSERT INTO users (username, firstName, lastName, email, phone, password)
+INSERT INTO users (username, firstName, lastName, email, picture, adult)
 VALUES
-  ('skywalker', 'Luke', 'Skywalker', 'luke@starwars.com', '1234567890', 'hash'),
-  ('princess', 'Princess', 'Leia', 'leia@starwars.com', '1234567890', 'hash'),
-  ('solo', 'Han', 'Solo', 'solo@starwars.com', '1234567890', 'hash'),
-  ('vader', 'Darth', 'Vader', 'vader@starwars.com', '1234567890', 'hash'),
-  ('r2d2', 'R2', 'D2', 'r2d2@starwars.com', '1234567890', 'hash'),
-  ('chewie', 'Chewbacca', 'Chewbacca', 'chewie@starwars.com', '1234567890', 'hash'),
-  ('yoda', 'Yoda', 'Yoda', 'yoda@starwars.com', '1234567890', 'hash'),
-  ('trooper', 'Storm', 'Trooper', 'trooper@starwars.com', '1234567890', 'hash'),
-  ('bountyhunter', 'Boba', 'Fett', 'bountyhunter@starwars.com', '1234567890', 'hash'),
-  ('nickfin', 'Nick', 'Papadakis', 'nickfin2014@gmail.com', '1234567890', 'hash')
+  ('skywalker', 'Luke', 'Skywalker', 'luke@starwars.com', 'img/src', 'false'),
+  ('princess', 'Princess', 'Leia', 'leia@starwars.com', 'img/src', 'true'),
+  ('solo', 'Han', 'Solo', 'solo@starwars.com', 'img/src', 'true'),
+  ('vader', 'Darth', 'Vader', 'vader@starwars.com', 'img/src', 'true'),
+  ('r2d2', 'R2', 'D2', 'r2d2@starwars.com', 'img/src', 'false'),
+  ('chewie', 'Chewbacca', 'Chewbacca', 'chewie@starwars.com', 'img/src', 'false'),
+  ('yoda', 'Yoda', 'Yoda', 'yoda@starwars.com', 'img/src', 'true'),
+  ('trooper', 'Storm', 'Trooper', 'trooper@starwars.com', 'img/src', 'false'),
+  ('bountyhunter', 'Boba', 'Fett', 'bountyhunter@starwars.com', 'img/src', 'false'),
+  ('nickfin', 'Nick', 'Papadakis', 'nickfin2014@gmail.com', 'img/src', 'true'),
+  ('mmarshall', 'Malcolm', 'Marshall', 'm.marshall369@gmail.com', 'img/src', 'true')
 ;
 
 INSERT INTO movies (movieDBiD, title, poster, rating, movie_description)

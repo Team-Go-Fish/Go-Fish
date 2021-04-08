@@ -22,15 +22,16 @@ app.get('/user/:email', controller.getUserID);
 app.get('/movies', controller.getPopularMovies);
 app.get('/search/:input', controller.searchMovies);
 
-// get a user's movie list
-app.get('/movies/:userId', controller.getMyMovies);
+// retrieve a user's friends
 app.get('/friends/:userId', controller.getMyFriends);
+// add a new friend for a user
 app.post('/friends/add/:userId', controller.addNewFriend);
 
+// get a user's movie list
+app.get('/movies/:userId', controller.getMyMovies);
 // add a movie to a user's list, and add movie to database if not already stored
   // takes a movie object as req.body
 app.post('/movies/:userId', controller.addMovieToUser);
-
 // remove a movie from a user's list
   // delete request should be to: /movies/:userid?movieId=:movieId
 app.delete('/movies/:userId', controller.removeMovieFromUser);
