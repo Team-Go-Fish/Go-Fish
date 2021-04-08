@@ -64,20 +64,19 @@ const App = () => {
 
   return (
     <Container
-    style={{ background:`linear-gradient(#88CDDC, #E389A9, #E1B7D5)` }}
+      style={{ background: `linear-gradient(#88CDDC, #E389A9, #E1B7D5)` }}
     >
       <div className="App">
-      <h4>Go Fish</h4>
         <Row>
           <Col style={rowStyleRight}>
-            <div className="login-container">
-              <h1>GOFISH</h1>
+            <div className="login-container" style={{ display: 'flex', flexDirection: 'row-reverse'}}>
               <LoginButton />
               <LogoutButton />
               <Profile setUser={setUser} />
             </div>
           </Col>
         </Row>
+        <h1>GOFISH</h1>
         <Row>
           <Col>
             <div className="button-panel">
