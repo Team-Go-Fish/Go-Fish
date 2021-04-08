@@ -7,7 +7,8 @@ import GoFish from './Components/GoFish/GoFish.js';
 import LoginButton from './Components/Login-Signup/Login-Button';
 import LogoutButton from './Components/Login-Signup/Logout-Button';
 import Profile from './Components/Login-Signup/Profile';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Container, Image } from 'react-bootstrap';
+import bg from './images/bg1.png';
 
 const App = () => {
   // state initialization
@@ -42,9 +43,14 @@ const App = () => {
   const rowStyleRight = {
     className: 'justify-content-md-right',
   }
+  // const background = {
+  //   background-image: url('./Components/images/bg1.png');
+  // }
 
   return (
-    <Container>
+    <Container
+    //style={{ backgroundImage:`url(${bg})` }}
+    >
       <div className="App">
       <h4>Go Fish</h4>
         <Row>
@@ -87,7 +93,6 @@ const App = () => {
         </Row>
       </div>
     </Container>
-
 
 
   );
