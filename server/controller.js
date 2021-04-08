@@ -109,6 +109,7 @@ module.exports.getUserNotifications = (req, res) => {
 };
 
 module.exports.addNewUser = (req, res) => {
+  console.log(req.body);
   const username = req.body.nickname;
   const firstName = req.body.given_name;
   const lastName = req.body.family_name;

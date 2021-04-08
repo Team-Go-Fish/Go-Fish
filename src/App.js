@@ -36,7 +36,6 @@ const App = () => {
 
   // get movie list for user once logged in
   const getMyMovies = (user_id) => {
-    console.log(user_id);
     axios.get(`http://localhost:3005/movies/${user_id}`)
       .then((response => setMyMovies(response.data)))
       .catch((error) => console.log(error));
@@ -58,8 +57,6 @@ const App = () => {
   // const background = {
   //   backgroundImage: linearGradient(red, yellow, green),
   // }
-
-  console.log('user:', user);
 
   return (
     <Container
