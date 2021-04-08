@@ -66,7 +66,7 @@ const MovieList = ({ movies, user, getMyMovies }) => {
                 movies.map((movie) => {
                   return (
                     <Card style={{ width: '18rem' }}>
-                      <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
+                      <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}/>
                       <Card.Body>
                         <Card.Header>{movie.title}</Card.Header>
                         <Card.Text>
