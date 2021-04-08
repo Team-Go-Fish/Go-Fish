@@ -4,7 +4,7 @@ import Friends from './Friends.js';
 import Notifications from './Notifications.js';
 import { Row, Col, Container } from 'react-bootstrap';
 
-const ButtonPanel = ({ user, friends, myMovies }) => {
+const ButtonPanel = ({ userID, user, friends, myMovies }) => {
 
   return (
     //Notifications
@@ -12,10 +12,10 @@ const ButtonPanel = ({ user, friends, myMovies }) => {
       <Container>
         <Row>
           <Col>
-            <Notifications user={user} friends={friends} myMovies={myMovies}></Notifications>
+            <Notifications userID={userID} user={user} friends={friends} myMovies={myMovies}></Notifications>
           </Col>
           <Col>
-            <Friends user={user} friends={friends} myMovies={myMovies}/>
+            <Friends userID={userID} user={user} friends={friends} myMovies={myMovies}/>
           </Col>
         </Row>
       </Container>
