@@ -11,19 +11,32 @@ import { Row, Col, Container, Image } from 'react-bootstrap';
 import bg from './images/bg1.png';
 
 const App = () => {
-  // state initialization
   const [user, setUser] = useState(1);
+  const [userID, setUserID] = useState(0);
   const [myMovies, setMyMovies] = useState([]);
   const [friends, setFriends] = useState([]);
   const [popular, setPopular] = useState([]);
 
-  // on user state change, run axios requests below
+  const getUserID = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3005/user/${user.email}`);
+      const userID = response.data;
+      setUserID(userID);
+      getMyMovies(userID);
+      getFriends(userID);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    getMyMovies(user);
-    getFriends(user);
+    getUserID();
   }, [user]);
+
   // get movie list for user once logged in
   const getMyMovies = (user_id) => {
+    console.log(user_id);
     axios.get(`http://localhost:3005/movies/${user_id}`)
       .then((response => setMyMovies(response.data)))
       .catch((error) => console.log(error));
@@ -93,9 +106,7 @@ const App = () => {
         </Row>
       </div>
     </Container>
-
-
   );
-}
+};
 
 export default App;
