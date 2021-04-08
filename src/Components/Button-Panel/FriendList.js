@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import FriendEntry from './FriendEntry.js';
 
 const FriendList = ({ friends, setSelected }) => {
-  // state
+  let hasFriends;
+  if (friends) {
+    hasFriends =
+      friends.map((user, index) => (
+          <FriendEntry user={user} key={index} setSelected={setSelected}/>
+      ))
+  } else {
+    hasFriends = <FriendEntry setSelected={setSelected}/>
+  }
 
-  // methods
   return (
     <div>
-      {friends.map((user, index) => (
-          <FriendEntry user={user} key={index} setSelected={setSelected}/>
-      ))}
+      {hasFriends}
     </div>
   )
 };

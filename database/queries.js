@@ -12,6 +12,9 @@ module.exports.getCommonMovies = `SELECT * FROM movies m JOIN (SELECT A.userID A
 //get a user's movie list
 module.exports.getMyMovies = `SELECT * FROM movies m, users_movies u WHERE m.id = u.movieID AND u.userID = $1`;
 
+//geta user's friend list
+//module.exports.getMyFriends = `SELECT * FROM `
+
 //add new movie to database
 module.exports.addMovie = `INSERT INTO movies (movieDBiD, title, poster, rating, movie_description) VALUES ($1, $2, $3, $4, $5) RETURNING id`;
 
@@ -47,21 +50,28 @@ module.exports.addNewFriend = (userID, friendID) => {
   return `
     INSERT INTO friendships (userID, friendID)
     VALUES (${userID}, ${friendID})
-    ON CONFLICT (userID, friendID)
-    DO NOTHING
   ;`
 };
 
-module.exports.getUserIDByUserName = (username) => {
-  return `
-    SELECT id
+module.exports.getUsers = () => {`
+    SELECT *
     FROM users
-    WHERE username = '${username}'
   ;`
-}
+};
 
 module.exports.addUserAge = (email, adult) => {
   return `
     UPDATE users SET adult=${adult}
     WHERE email=${email};`
 }
+;
+
+module.exports.getUserNotifications = (userID) => {
+  return `
+    SELECT *
+    FROM notifications
+    WHERE userID = ${userID}
+  ;`
+};
+
+

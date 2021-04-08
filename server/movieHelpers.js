@@ -1,4 +1,4 @@
-const config = require('../database/config.js');
+const config = require('../config');
 const axios = require('axios');
 
 exports.getPopularMovies = async () => {
