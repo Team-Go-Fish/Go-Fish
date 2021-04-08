@@ -43,7 +43,7 @@ const App = () => {
   };
   // get friends list for user once logged in
   const getFriends = (user_id) => {
-    axios.get(`http://localhost:3005/friends/${2}`)               //hard coded for user 1
+    axios.get(`http://localhost:3005/friends/${user_id}`)               //hard coded for user 1
       .then((response => setFriends(response.data)))
       .catch((error) => console.log(error));
   };
@@ -66,11 +66,11 @@ const App = () => {
     style={{ background:`linear-gradient(#A1DAE6, #F8D8ED, #D18BC2, #58AAB8)`,  width: `calc(100vw)` }}
     >
       <div className="App">
-      <h4>Go Fish</h4>
+
         <Row>
           <Col style={rowStyleRight}>
             <div className="login-container">
-              <h1>GOFISH</h1>
+              <h1>GO FISH</h1>
               <LoginButton />
               <LogoutButton />
               <Profile setUser={setUser} />

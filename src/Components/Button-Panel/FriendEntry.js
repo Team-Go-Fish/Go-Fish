@@ -6,8 +6,9 @@ const FriendEntry = ({ user, setSelected})=> {
   const handleChange = (event) => {
     setSelected(user.friendid);
   };
-
-    return (
+  let displayUser;
+  if (user) {
+    displayUser =
       <Form>
         <div key={'default-checkbox'} className="mb-3">
           <Form.Check
@@ -18,6 +19,14 @@ const FriendEntry = ({ user, setSelected})=> {
           />
         </div>
       </Form>
+  } else {
+    displayUser = <h2>No friends</h2>
+  }
+
+    return (
+      <div>
+        {displayUser}
+      </div>
     )
 };
 

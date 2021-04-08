@@ -53,12 +53,12 @@ const GoFishWithFriends = ({ selected, myMovies }) => {
 
   return (
     <div className="go-fish">
-    <img
-      src={gofish}
-      alt=""
-      onClick={() => getFriendMovies()}
-    ></img>
-    {modal && (<GoFishDescription show={modal} onHide={toggleModal} movie={match} id="goFish"/>)}
+      <img
+        src={gofish}
+        alt=""
+        onClick={() => getFriendMovies()}
+      ></img>
+      {modal && (<GoFishDescription show={modal} onHide={toggleModal} movie={match} id="goFish"/>)}
     </div>
   )
 };
