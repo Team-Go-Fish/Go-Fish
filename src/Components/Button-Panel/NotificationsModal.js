@@ -102,7 +102,8 @@ const NotificationsModal = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {notifications.map((notification) => {
+        {!!notifications &&
+        notifications.map((notification) => {
           if (notification.notification_type === 'newFriend') {
             return (
             <Container>
