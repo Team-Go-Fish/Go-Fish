@@ -47,7 +47,7 @@ const App = () => {
     <Container>
       <div className="App">
       <h4>Go Fish</h4>
-        {/* <Row>
+        <Row>
           <Col style={rowStyleRight}>
             <div className="login-container">
               <h1>GOFISH</h1>
