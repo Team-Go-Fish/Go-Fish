@@ -14,7 +14,6 @@ const WatchList = ({ myMovies, user, getMyMovies }) => {
   const [modalShow, setModalShow] = useState(false);
   const [movieInfo, setMovieInfo] = useState({});
   const [render, setRender] = useState(false);
-  const [sliderSettings, setSliderSettings] = useState('')
 
   const getInfo = (e) => {
     axios.get(`http://www.omdbapi.com/?apikey=4bcf0035&t=${e.target.value}`)
@@ -56,6 +55,18 @@ const WatchList = ({ myMovies, user, getMyMovies }) => {
       spacing: 2
     };
 
+    let sliderSettings = settings;
+
+    if (myMovies.length === 1) {
+      sliderSettings = settings1;
+    } else if (myMovies.length === 2) {
+      sliderSettings = settings2;
+    } else if (myMovies.length === 3) {
+      sliderSettings = settings3;
+    } else {
+      sliderSettings = settings;
+    }
+
     return (
       <>
       {(myMovies) && (
@@ -65,7 +76,7 @@ const WatchList = ({ myMovies, user, getMyMovies }) => {
           <Row>
             <Col>
 
-          <Slider {...settings}>
+          <Slider {...sliderSettings}>
           {
                 myMovies.map((movie) => {
                   return (

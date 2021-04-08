@@ -22,9 +22,11 @@ const MovieList = ({ movies, user, getMyMovies }) => {
 
   const addMovie = async (movie) => {
     console.log('I am in the addMovie function on the Front-end!')
+    console.log(user)
     try {
       const response = await axios.get(`http://localhost:3005/user/${user.email}`);
       const userID = response.data;
+      console.log(userID)
 
       const options = {
         method: 'POST',
