@@ -112,7 +112,7 @@ module.exports.getUserNotifications = async (userID) => {
 module.exports.addNewUser = async (username, firstName, lastName, email, picture, adult = false) => {
   try {
     let response = await pool.query(queries.addNewUser, [username, firstName, lastName, email, picture, adult]);
-  }
+    return response;
   catch (error) {
     return error;
   }

@@ -31,7 +31,7 @@ module.exports.addMovieToUser = `INSERT INTO users_movies (userID, movieID) VALU
 module.exports.deleteUserMovie = `DELETE FROM users_movies WHERE userID = $1 AND movieID = $2 RETURNING users_movies.id`;
 
 //add new user after signing up
-module.exports.addNewUser = `INSERT INTO users ( username, firstName, lastName, email, picture, adult) VALUES ($1, $2, $3, $4, $5 $6) RETURNING id`;
+module.exports.addNewUser = `INSERT INTO users ( username, firstName, lastName, email, picture, adult) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`;
 //find a userID by email
 module.exports.getUserID = `SELECT id FROM users WHERE email = $1`;
 
@@ -53,10 +53,17 @@ module.exports.addNewFriend = (userID, friendID) => {
   ;`
 };
 
-module.exports.getUsers = `
+module.exports.getUsers = () => {`
     SELECT *
     FROM users
   ;`
+};
+
+module.exports.addUserAge = (email, adult) => {
+  return `
+    UPDATE users SET adult=${adult}
+    WHERE email=${email};`
+}
 ;
 
 module.exports.getUserNotifications = (userID) => {

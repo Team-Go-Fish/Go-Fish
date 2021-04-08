@@ -37,7 +37,6 @@ const App = () => {
 
   // get movie list for user once logged in
   const getMyMovies = (user_id) => {
-    console.log(user_id);
     axios.get(`http://localhost:3005/movies/${user_id}`)
       .then((response => setMyMovies(response.data)))
       .catch((error) => console.log(error));
@@ -60,18 +59,15 @@ const App = () => {
   //   backgroundImage: linearGradient(red, yellow, green),
   // }
 
-  console.log('user:', user);
-
   return (
     <Container
+      // style={{ background: `linear-gradient(#88CDDC, #E389A9, #E1B7D5)` }}
     style={{ background:`linear-gradient(#A1DAE6, #F8D8ED, #D18BC2, #58AAB8)`,  width: `calc(100vw)` }}
     >
       <div className="App">
-
         <Row>
           <Col style={rowStyleRight}>
-            <div className="login-container">
-              <h1>GO FISH</h1>
+            <div className="login-container" style={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between'}}>
               <LoginButton />
               <LogoutButton />
               <Profile setUser={setUser} />
