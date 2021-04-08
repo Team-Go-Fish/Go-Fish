@@ -23,7 +23,7 @@ const AgeButton = ({ user, setUser }) => {
     const userWithAge = user;
     userWithAge.adult = false;
     setUser(userWithAge);
-    axios.put(`http://localhost:3005/user/?email=${user.email}`, {
+    axios.put(`http://localhost:3005/users/age/${user.email}`, {
       adult: false
     });
   }
