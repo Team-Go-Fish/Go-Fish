@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 const FriendEntry = ({ user, setSelected})=> {
 
   const handleChange = (event) => {
-    setSelected(user.id);
+    setSelected(user.friendid);
   };
 
     return (

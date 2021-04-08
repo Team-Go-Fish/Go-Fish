@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import FriendList from './FriendList.js';
-import FriendSearch from './FriendSearch.js';
 import GoFishWithFriends from './GoFishWithFriends.js';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import FriendSearch from './FriendSearch.js';
 
 const Friends = ({ user, friends, myMovies }) => {
   const [lgShow, setLgShow] = useState(false);

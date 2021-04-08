@@ -22,6 +22,9 @@ app.get('/movies/:userId', controller.getMyMovies);
 app.get('/friends/:userId', controller.getMyFriends);
 app.post('/friends/add/:userId', controller.addNewFriend);
 
+// get a user's friend list
+app.get('/friends/:userId', controller.getMyFriends);
+
 // add a movie to a user's list, and add movie to database if not already stored
   // takes a movie object as req.body
 app.post('/movies/:userId', controller.addMovieToUser);

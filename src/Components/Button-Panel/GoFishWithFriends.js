@@ -1,35 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+//import Description from '../ListsAndSearch/Description';
+import GoFishDescription from './GoFishDescription'
+import gofish from '../GoFish/goFishBro.png';
 
 const GoFishWithFriends = ({ selected, myMovies }) => {
   const [friendMovies, setFriendMovies] = useState([]);
+  const [match, setMatch] = useState({});
+  const [modal, setModal] = useState(true);
 
-  const openModal = () => {
-    console.log('Open modal');
-  }
-
-  let match = '';
-  const findMatches = (friendMovies, myMovies) => {
+  let matchedMovie = {};
+  const findMatches = () => {
+    console.log(myMovies);
+    console.log(friendMovies)
+    let myIds = [];
     for (var i = 0; i < myMovies.length; i ++) {
-      let currentMovie = myMovies[i];
-      if(friendMovies.find(currentMovie) !== undefined) {
-        match = currentMovie;
+      myIds.push(myMovies[i].moviedbid);
+    }
+    let friendIds = [];
+    for (var j = 0; j < friendMovies.length; j ++) {
+      friendIds.push(friendMovies[j].moviedbid)
+    }
+    console.log(myIds)
+    console.log(friendIds)
+    for (var k = 0; k < myIds.length; k ++) {
+      if (friendIds.includes(myIds[k])) {
+        matchedMovie = myMovies[k];
+        setMatch(matchedMovie);
+        return;
       }
     }
-    match = 'No Matches'
   }
 
-  const getFriendMovies = (selected) => {
-    axios.get(`http://localhost:3005/movies/${selected}`)
-      .then((response => setFriendMovies(response.data)))
-      .then(findMatches(friendMovies, myMovies))
-      .catch((error) => console.log(error));
+  const toggleModal = () => {
+    setModal(!modal);
   };
 
+  const getFriendMovies = async() => {
+    try {
+      const response = await axios.get(`http://localhost:3005/movies/${selected}`);
+      setFriendMovies(response.data);
+    } catch (err) {
+        console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    findMatches();
+    toggleModal();
+  },[friendMovies]);
+
+
   return (
-    <div className="GoFishWithFriends">
-      <h1>{match}</h1>
-      <button onClick={getFriendMovies(selected)}>Go Fish With A Friend</button>
+    <div className="go-fish">
+    <img
+      src={gofish}
+      alt=""
+      onClick={() => getFriendMovies()}
+    ></img>
+    {modal && (<GoFishDescription show={modal} onHide={toggleModal} movie={match} id="goFish"/>)}
     </div>
   )
 };
