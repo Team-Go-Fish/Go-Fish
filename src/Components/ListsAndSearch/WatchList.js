@@ -22,14 +22,6 @@ const WatchList = ({ movies, user, getMyMovies }) => {
     .catch((err) => console.log(err))
   }
 
-  const addMovie = (e) => {
-    //check if user, if so, add to list. If not, route to signup
-    // user ?
-    axios.post(`http://localhost:3005/movies/${e.target.id}`)
-    .then(() => getMyMovies(e.target.id))
-    .catch((err) => console.log(err))
-    // : route to login
-  }
     const settings = {
       dots: false,
       infinite: true,
@@ -65,7 +57,8 @@ const WatchList = ({ movies, user, getMyMovies }) => {
                           onHide={() => setModalShow(false)}
                           movie={movieInfo}
                         /> {' '}
-                        <Button variant="outline-info" id={user} onClick={(e) => addMovie(e)}>Add to My List</Button>
+                        {/* modify button below later */}
+                        {/* <Button variant="outline-info" id={user.email} onClick={(e) => addMovie(e)}>Add to My List</Button> */}
                         {/* <Button variant="primary">Add to my list</Button> */}
                       </Card.Body>
                     </Card>

@@ -78,3 +78,14 @@ module.exports.addNewFriend = (req, res) => {
     });
 };
 
+module.exports.getUserID = (req, res) => {
+  const email = req.params.email;
+  db.getUserID(email)
+  .then(result => {
+    res.status(200).send(result.toString());
+  })
+  .catch(err => {
+    res.status(500).send(err);
+  });
+};
+
