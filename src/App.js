@@ -60,6 +60,8 @@ const App = () => {
   //   backgroundImage: linearGradient(red, yellow, green),
   // }
 
+  console.log('user:', user);
+
   return (
     <Container
     style={{ background:`linear-gradient(#88CDDC, #E389A9, #E1B7D5)` }}
@@ -75,7 +77,7 @@ const App = () => {
               <Profile setUser={setUser} />
             </div>
           </Col>
-        </Row> */}
+        </Row>
         <Row>
           <Col>
             <div className="button-panel">
