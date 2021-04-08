@@ -12,9 +12,9 @@ const FriendEntry = ({ user, setSelected})=> {
         <div key={'default-checkbox'} className="mb-3">
           <Form.Check
             type='checkbox'
-            key={user.firstName}
+            key={user.firstname}
             onChange = {handleChange}
-            label={<span>{user.firstName} {user.lastName}</span>}
+            label={<span>{user.firstname} {user.lastname}</span>}
           />
         </div>
       </Form>
