@@ -12,7 +12,7 @@ const ButtonPanel = ({ user, friends, myMovies }) => {
       <Container>
         <Row>
           <Col>
-            <Notifications></Notifications>
+            <Notifications user={user} friends={friends} myMovies={myMovies}></Notifications>
           </Col>
           <Col>
             <Friends user={user} friends={friends} myMovies={myMovies}/>
