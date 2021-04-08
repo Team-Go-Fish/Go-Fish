@@ -12,6 +12,7 @@ const MovieList = ({ movies, user, getMyMovies }) => {
 
   const [modalShow, setModalShow] = useState(false);
   const [movieInfo, setMovieInfo] = useState({});
+  const [toolTip, setToolTip] = useState(false);
 
   const getInfo = (e) => {
     axios.get(`http://www.omdbapi.com/?apikey=4bcf0035&t=${e.target.value}`)
@@ -83,6 +84,8 @@ const MovieList = ({ movies, user, getMyMovies }) => {
     ]
   };
 
+  setTimeout(() => setToolTip(true), 5000);
+
   return (
     <>
       <Container>
@@ -101,9 +104,9 @@ const MovieList = ({ movies, user, getMyMovies }) => {
                           data-tip data-for={movie.title}
                         >
                           {movie.title}
-                          <ReactTooltip id={movie.title} place="bottom" effect="solid">
+                          {toolTip && <ReactTooltip id={movie.title} place="bottom" effect="solid">
                           {document.getElementById(`${movie.title}`).id}
-                          </ReactTooltip>
+                          </ReactTooltip>}
 
                         </Card.Header>
                         <Card.Text>
