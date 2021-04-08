@@ -7,11 +7,15 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ReactTooltip from "react-tooltip";
+import StarRatings from "react-star-ratings";
+
 
 const MovieList = ({ movies, user, getMyMovies }) => {
 
   const [modalShow, setModalShow] = useState(false);
   const [movieInfo, setMovieInfo] = useState({});
+  const [toolTip, setToolTip] = useState(false);
+  // const [rating, setRating] = useState(newRating);
 
   const getInfo = (e) => {
     axios.get(`http://www.omdbapi.com/?apikey=4bcf0035&t=${e.target.value}`)
@@ -47,7 +51,7 @@ const MovieList = ({ movies, user, getMyMovies }) => {
 
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
@@ -62,7 +66,7 @@ const MovieList = ({ movies, user, getMyMovies }) => {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
-          dots: true
+          dots: false
         }
       },
       {
@@ -77,11 +81,15 @@ const MovieList = ({ movies, user, getMyMovies }) => {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+          vertical: true,
+          verticalSwiping: true,
         }
       }
     ]
   };
+
+  setTimeout(() => setToolTip(true), 5000);
 
   return (
     <>
@@ -101,13 +109,22 @@ const MovieList = ({ movies, user, getMyMovies }) => {
                           data-tip data-for={movie.title}
                         >
                           {movie.title}
-                          <ReactTooltip id={movie.title} place="bottom" effect="solid">
-                          {document.getElementById(`${movie.title}`).id}
-                          </ReactTooltip>
+                          {/* {toolTip && <ReactTooltip id={movie.title} place="bottom" effect="solid">
+                            {document.getElementById(`${movie.title}`).id}
+                          </ReactTooltip>} */}
 
                         </Card.Header>
                         <Card.Text>
-                          {movie.vote_average}
+                          {/* {movie.vote_average} */}
+                          <StarRatings
+                            rating={movie.vote_average}
+                            starRatedColor="blue"
+                            // changeRating={this.changeRating}
+                            numberOfStars={10}
+                            name='rating'
+                            starDimension="10px"
+                            starSpacing="1px"
+                          />
                         </Card.Text>
                         <Button variant="outline-info"
                           value={movie.title}

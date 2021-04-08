@@ -108,6 +108,7 @@ module.exports.getUserNotifications = (req, res) => {
 };
 
 module.exports.addNewUser = (req, res) => {
+  console.log(req.body);
   const username = req.body.nickname;
   const firstName = req.body.given_name;
   const lastName = req.body.family_name;
@@ -132,4 +133,17 @@ module.exports.getUserID = (req, res) => {
     res.status(500).send(err);
   });
 };
+
+module.exports.updateUserAge = (req, res) => {
+  const email = req.params.email;
+  const adult = req.body.adult;
+  res.send('hello');
+  // db.addUserAge(email, adult)
+  // .then(result => {
+  //   res.send("success")
+  // })
+  // .catch(err => {
+  //   res.status(500).send(err);
+  // })
+}
 
