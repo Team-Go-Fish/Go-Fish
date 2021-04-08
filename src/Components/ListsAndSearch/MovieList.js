@@ -101,9 +101,9 @@ const MovieList = ({ movies, user, getMyMovies }) => {
                           data-tip data-for={movie.title}
                         >
                           {movie.title}
-                          <ReactTooltip id={movie.title} place="bottom" effect="solid">
+                          {/* <ReactTooltip id={movie.title} place="bottom" effect="solid">
                           {document.getElementById(`${movie.title}`).id}
-                          </ReactTooltip>
+                          </ReactTooltip> */}
 
                         </Card.Header>
                         <Card.Text>

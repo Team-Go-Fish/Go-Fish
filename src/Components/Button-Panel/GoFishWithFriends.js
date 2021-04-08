@@ -3,6 +3,7 @@ import axios from 'axios';
 //import Description from '../ListsAndSearch/Description';
 import GoFishDescription from './GoFishDescription'
 import gofish from '../GoFish/goFishBro.png';
+import Button from 'react-bootstrap/Button';
 
 const GoFishWithFriends = ({ selected, myMovies }) => {
   const [friendMovies, setFriendMovies] = useState([]);
@@ -53,11 +54,7 @@ const GoFishWithFriends = ({ selected, myMovies }) => {
 
   return (
     <div className="go-fish">
-      <img
-        src={gofish}
-        alt=""
-        onClick={() => getFriendMovies()}
-      ></img>
+      <Button variant="outline-info" onClick={() => getFriendMovies()}>Go Fish!</Button>
       {modal && (<GoFishDescription show={modal} onHide={toggleModal} movie={match} id="goFish"/>)}
     </div>
   )
