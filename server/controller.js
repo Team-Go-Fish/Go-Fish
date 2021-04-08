@@ -25,6 +25,7 @@ module.exports.getMyMovies = async (req, res) => {
 
 module.exports.addMovieToUser = async (req, res) => {
   try {
+    console.log(req.body);
     let result = await db.addMovieToUserList(req.params.userId, req.body);
     res.status(201).send(result);
   }
