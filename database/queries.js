@@ -29,6 +29,8 @@ module.exports.deleteUserMovie = `DELETE FROM users_movies WHERE userID = $1 AND
 
 //add new user after signing up
 module.exports.addNewUser = `INSERT INTO users ( username, firstName, lastName, email, picture) VALUES ($1, $2, $3, $4, $5) RETURNING id`;
+//find a userID by email
+module.exports.getUserID = `SELECT id FROM users WHERE email = $1`;
 
 // friends
 module.exports.getMyFriends = (userID) => {
