@@ -11,23 +11,6 @@ const Friends = ({ user, friends, myMovies }) => {
   const [selected, setSelected] = useState('');
   // const [friendList, setFriendList] = useState([]);
 
-  // // methods
-  // const getFriendList = (userID) => {
-  //   const url = `http://localhost:3005/friends/${userID}`;
-  //   axios.get(url)
-  //     .then((res) => {
-  //       setFriendList(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
-
-  // // effects
-  // useEffect(() => {
-  //   getFriendList(currentUser.id);
-  // }, [currentUser]);
-
   return (
     <>
       <Button variant="outline-info" onClick={() => setLgShow(true)}>Friends</Button>
