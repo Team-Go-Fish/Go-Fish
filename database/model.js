@@ -95,10 +95,10 @@ module.exports.removeMovieFromUserList = async (userId, movieId) => {
   }
 };
 
-module.exports.addNewUser = async () => {
+module.exports.addNewUser = async (username, firstName, lastName, email, picture, adult = false) => {
   try {
-    let response = await pool.query(queries.addNewUser, [username, firstName, lastName, email, picture]);
-    return response;
+    let response = await pool.query(queries.addNewUser, [username, firstName, lastName, email, picture, adult]);
+    console.log(response);
   }
   catch (error) {
     return error;

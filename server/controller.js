@@ -79,12 +79,18 @@ module.exports.addNewFriend = (req, res) => {
 };
 
 module.exports.addNewUser = (req, res) => {
-  console.log(req.body);
-  const username = req.body.user;
-  const firstName;
-  const lastName;
-  const email;
-  const picture;
+  const username = req.body.nickname;
+  const firstName = req.body.given_name;
+  const lastName = req.body.family_name;
+  const email = req.body.email;
+  const picture= req.body.picture;
+  db.addNewUser(username, firstName, lastName, email, picture)
+  .then(result => {
+    res.status(200).send(result.toString());
+  })
+  .catch(err => {
+    res.status(500).send(err);
+  })
 
 }
 module.exports.getUserID = (req, res) => {
