@@ -52,11 +52,6 @@ const GoFishWithFriends = ({ selected, myMovies }) => {
 
 
   return (
-<<<<<<< HEAD
-    <div className="GoFishWithFriends">
-      <h1>{match}</h1>
-      <button onClick={getFriendMovies}>Go Fish With A Friend</button>
-=======
     <div className="go-fish">
     <img
       src={gofish}
@@ -64,7 +59,6 @@ const GoFishWithFriends = ({ selected, myMovies }) => {
       onClick={() => getFriendMovies()}
     ></img>
     {modal && (<GoFishDescription show={modal} onHide={toggleModal} movie={match} id="goFish"/>)}
->>>>>>> 176d5b71f0f4ab721617585116078bcf9c255e42
     </div>
   )
 };
