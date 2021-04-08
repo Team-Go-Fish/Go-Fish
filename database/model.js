@@ -18,6 +18,18 @@ const queries = require('./queries.js');
 
 // };
 
+module.exports.getUserID = async (email) => {
+  try {
+    const response = await pool.query(queries.getUserID, [email]);
+    const userID = response.rows[0].id;
+    return userID;
+  }
+  catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 module.exports.getMyMovies = async (userId) => {
   try {
     let movies = await pool.query(queries.getMyMovies, [userId]);
@@ -97,3 +109,12 @@ module.exports.getUserNotifications = async (userID) => {
   }
 };
 
+module.exports.addNewUser = async (username, firstName, lastName, email, picture, adult = false) => {
+  try {
+    let response = await pool.query(queries.addNewUser, [username, firstName, lastName, email, picture, adult]);
+    console.log(response);
+  }
+  catch (error) {
+    return error;
+  }
+}

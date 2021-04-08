@@ -32,6 +32,9 @@ app.get('/users', controller.getUsers);
 // return user's notifications
 app.get('/notifications/:userID', controller.getUserNotifications);
 
+// get a user's friend list
+app.get('/friends/:userId', controller.getMyFriends);
+
 // add a movie to a user's list, and add movie to database if not already stored
   // takes a movie object as req.body
 app.post('/movies/:userId', controller.addMovieToUser);
@@ -39,6 +42,12 @@ app.post('/movies/:userId', controller.addMovieToUser);
 // remove a movie from a user's list
   // delete request should be to: /movies/:userid?movieId=:movieId
 app.delete('/movies/:userId', controller.removeMovieFromUser);
+
+// add a new user
+app.post('/users/add/user', controller.addNewUser);
+
+// get user ID
+app.get('/user/:email', controller.getUserID);
 
 app.listen(PORT, (err, result) => {
   if (err) {

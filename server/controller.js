@@ -23,8 +23,19 @@ module.exports.getMyMovies = async (req, res) => {
   }
 };
 
+module.exports.getMyFriends = async (req, res) => {
+  try {
+    let friends = await db.getMyFriends(req.params.userId);
+    res.status(200).send(friends.rows);
+  }
+  catch (error) {
+    res.status(500).send(error);
+  }
+}
+
 module.exports.addMovieToUser = async (req, res) => {
   try {
+    console.log(req.body);
     let result = await db.addMovieToUserList(req.params.userId, req.body);
     res.status(201).send(result);
   }
@@ -95,5 +106,31 @@ module.exports.getUserNotifications = (req, res) => {
     .catch(err => {
       res.status(500).send(err);
     });
+};
+
+module.exports.addNewUser = (req, res) => {
+  const username = req.body.nickname;
+  const firstName = req.body.given_name;
+  const lastName = req.body.family_name;
+  const email = req.body.email;
+  const picture= req.body.picture;
+  db.addNewUser(username, firstName, lastName, email, picture)
+  .then(result => {
+    res.status(200).send(result.toString());
+  })
+  .catch(err => {
+    res.status(500).send(err);
+  })
+
+}
+module.exports.getUserID = (req, res) => {
+  const email = req.params.email;
+  db.getUserID(email)
+  .then(result => {
+    res.status(200).send(result.toString());
+  })
+  .catch(err => {
+    res.status(500).send(err);
+  });
 };
 

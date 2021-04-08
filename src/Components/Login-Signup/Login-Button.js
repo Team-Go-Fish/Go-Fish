@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import { useAuth0 } from '@auth0/auth0-react';
 
 export default function LoginButton() {
@@ -6,9 +7,9 @@ export default function LoginButton() {
 
     return (
         !isAuthenticated && (
-            <button onClick={() => loginWithRedirect()}>
+            <Button variant="outline-info" onClick={() => loginWithRedirect()}>
                 Log In
-            </button>
+            </Button>
         )
     )
 }
