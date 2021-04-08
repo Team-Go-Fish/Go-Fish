@@ -20,17 +20,17 @@ const App = () => {
   useEffect(() => {
     getMyMovies(user);
     getFriends(user);
-  },[]);
+  },[user]);
 
   // get movie list for user once logged in
   const getMyMovies = (user_id) => {
-    axios.get(`http://localhost:3005/movies/${1}`)            //hardcoded for user 1
+    axios.get(`http://localhost:3005/movies/${2}`)            //hardcoded for user 1
       .then((response => setMyMovies(response.data)))
       .catch((error) => console.log(error));
   };
   // get friends list for user once logged in
   const getFriends = (user_id) => {
-    axios.get(`http://localhost:3005/friends/${1}`)               //hard coded for user 1
+    axios.get(`http://localhost:3005/friends/${2}`)               //hard coded for user 1
       .then((response => setFriends(response.data)))
       .catch((error) => console.log(error));
   };
