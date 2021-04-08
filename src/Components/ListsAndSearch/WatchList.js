@@ -14,6 +14,7 @@ const WatchList = ({ myMovies, user, getMyMovies }) => {
   const [modalShow, setModalShow] = useState(false);
   const [movieInfo, setMovieInfo] = useState({});
   const [render, setRender] = useState(false);
+  const [sliderSettings, setSliderSettings] = useState('')
 
   const getInfo = (e) => {
     axios.get(`http://www.omdbapi.com/?apikey=4bcf0035&t=${e.target.value}`)
@@ -27,6 +28,30 @@ const WatchList = ({ myMovies, user, getMyMovies }) => {
       infinite: true,
       speed: 500,
       slidesToShow: 4,
+      slidesToScroll: 2,
+      spacing: 2
+    };
+    const settings1 = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      spacing: 2
+    };
+    const settings2 = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 2,
+      slidesToScroll: 2,
+      spacing: 2
+    };
+    const settings3 = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 3,
       slidesToScroll: 2,
       spacing: 2
     };
