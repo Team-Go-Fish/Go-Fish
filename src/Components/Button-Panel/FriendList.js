@@ -1,7 +1,7 @@
 import React from 'react';
 import FriendEntry from './FriendEntry.js';
 
-const FriendList = ({ friends, setSelected }) => {
+const FriendList = ({ userID, friends, setSelected }) => {
   let hasFriends;
   if (friends) {
     hasFriends =

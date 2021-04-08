@@ -3,7 +3,7 @@ import axios from 'axios';
 import GoFishDescription from './GoFishDescription'
 import Button from 'react-bootstrap/Button';
 
-const GoFishWithFriends = ({ selected, myMovies }) => {
+const GoFishWithFriends = ({ userID, selected, myMovies }) => {
   const [friendMovies, setFriendMovies] = useState([]);
   const [match, setMatch] = useState({});
   const [modal, setModal] = useState(true);
@@ -42,7 +42,7 @@ const GoFishWithFriends = ({ selected, myMovies }) => {
     } catch (err) {
         console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
     findMatches();

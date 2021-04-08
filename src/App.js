@@ -86,6 +86,7 @@ const App = () => {
                 myMovies={myMovies}
                 friends={friends}
                 user={user}
+                userID={userID}
               />
             </div>
           </Col>
