@@ -19,8 +19,18 @@ app.get('/search/:input', controller.searchMovies);
 
 // get a user's movie list
 app.get('/movies/:userId', controller.getMyMovies);
+
+// get a user's friends
 app.get('/friends/:userId', controller.getMyFriends);
+
+// add new friend to a user
 app.post('/friends/add/:userId', controller.addNewFriend);
+
+// return all users
+app.get('/users', controller.getUsers);
+
+// return user's notifications
+app.get('/notifications/:userID', controller.getUserNotifications);
 
 // get a user's friend list
 app.get('/friends/:userId', controller.getMyFriends);
