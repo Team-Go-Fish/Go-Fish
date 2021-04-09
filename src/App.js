@@ -99,6 +99,7 @@ const App = () => {
                 user={user}
                 getMyMovies={getMyMovies}
                 setPopular={setPopular}
+                userID={userID}
               />
             </div>
           </Col>
