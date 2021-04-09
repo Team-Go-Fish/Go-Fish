@@ -93,7 +93,7 @@ module.exports.removeMovieFromUserList = async (userId, movieId) => {
 
 module.exports.getUsers = async () => {
   try {
-    let result = await pool.query(queries.getUsers);
+    let result = await pool.query(queries.getUsers());
     return result;
   } catch (err) {
     return err;
@@ -109,11 +109,25 @@ module.exports.getUserNotifications = async (userID) => {
   }
 };
 
+module.exports.addUserNotification = async (userID, friendID, movieID, type, message) => {
+  try {
+    console.log('before')
+    const query = queries.addUserNotification();
+    console.log({query})
+    let result = await pool.query(queries.addUserNotification(userID, friendID, movieID, type, message));
+    console.log('after')
+    console.log('result:', result)
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports.addNewUser = async (username, firstName, lastName, email, picture, adult = false) => {
   try {
     let response = await pool.query(queries.addNewUser, [username, firstName, lastName, email, picture, adult]);
     return response;
-  catch (error) {
+  } catch (error) {
     return error;
   }
-}
+};
