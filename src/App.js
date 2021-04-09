@@ -10,6 +10,12 @@ import Profile from './Components/Login-Signup/Profile';
 import { Row, Col, Container, Image } from 'react-bootstrap';
 import bg from './images/bg1.png';
 
+// scrap button panel, import files here
+import Friends from './Components/Button-Panel/Friends.js';
+// import users from '../../exampleData.js';
+import Notifications from './Components/Button-Panel/Notifications.js';
+import About from './Components/Button-Panel/About.js';
+
 const App = () => {
   const [user, setUser] = useState(1);
   const [userID, setUserID] = useState(0);
@@ -77,18 +83,32 @@ const App = () => {
     style={{ background:`linear-gradient(#A1DAE6, #F8D8ED, #D18BC2, #58AAB8)`,  width: `calc(100vw)` }}
     >
       <div className="App">
+        <Container fluid>
         <Row>
-          <Col style={rowStyleRight}>
-            <div className="login-container" style={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between'}}>
+          {/* <Col style={rowStyleRight}>
+            <div className="login-container" style={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between'}}> */}
+            <Col>
+              <Profile setUser={setUser} />
+            </Col>
+            <Col>
               <LoginButton />
               <LogoutButton />
-              <Profile setUser={setUser} />
-            </div>
-          </Col>
+            </Col>
+            <Col>
+              <Friends userID={userID} user={user} friends={friends} myMovies={myMovies} getFriends={getFriends}/>
+            </Col>
+            <Col>
+            <Notifications userID={userID} user={user} friends={friends} myMovies={myMovies}></Notifications>
+            </Col>
+            <Col>
+              <About />
+            </Col>
         </Row>
-        <h1>GOFISH</h1>
+        </Container>
+
+        <h1><strong>GOFISH</strong></h1>
         <Row>
-          <Col>
+          {/* <Col>
             <div className="button-panel">
               <ButtonPanel
                 myMovies={myMovies}
@@ -98,7 +118,7 @@ const App = () => {
                 getFriends={getFriends}
               />
             </div>
-          </Col>
+          </Col> */}
         </Row>
         <Row>
           <Col>
@@ -119,6 +139,8 @@ const App = () => {
           </Col>
         </Row>
       </div>
+      <br></br>
+      <br></br>
     </Container>
   );
 };

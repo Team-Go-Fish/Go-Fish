@@ -68,8 +68,13 @@ const NotificationsModal = (props) => {
   const handleClick = (e) => {
     e.persist();
     const tName = e.target.name;
+    const tValue = e.target.value;
     if (tName === 'newFriend') {
-      setMovieToShow();
+      let tempNotifications = notifications.filter(notification => {
+        return notification.id.toString() !== tValue;
+      });
+      console.log(tempNotifications);
+      setNotifications(tempNotifications);
     } else if (tName === 'matchedMovie') {
 
     }
@@ -86,7 +91,7 @@ const NotificationsModal = (props) => {
       }
     };
     initialLoad();
-  }, []);
+  }, [userID]);
 
 
   return (
@@ -112,7 +117,7 @@ const NotificationsModal = (props) => {
                   <p>{notification.notification_message}</p>
                 </Col>
                 <Col>
-                  <Button name="newFriend" className="float-right" onClick={handleClick}>Accept</Button>
+                  <Button name="newFriend" value={notification.id} className="float-right" onClick={handleClick}>Accept</Button>
                 </Col>
               </Row>
             </Container>
