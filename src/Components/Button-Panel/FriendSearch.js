@@ -3,12 +3,14 @@ import axios from 'axios';
 import { Container, Row, Col, Button, Dropdown, DropdownButton } from 'react-bootstrap';
 import SearchField from 'react-search-field';
 
-const FriendSearch = ( {friends, user, userID} ) => {
+const FriendSearch = ({ friends, user, userID, getFriends }) => {
   // state
   const [users, setUsers] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [friendToSearch, setFriendToSearch] = useState('');
   const [friendToAdd, setFriendToAdd] = useState('');
+  const [friendNameToAdd, setFriendNameToAdd] = useState('');
+  const [wasFriendAdded, setWasFriendAdded] = useState(false);
 
   // methods
   const handleChange = (e) => {
@@ -19,20 +21,24 @@ const FriendSearch = ( {friends, user, userID} ) => {
       setSearchList(users);
     }
     if (tName === 'friendToSearch') {
+      setWasFriendAdded(false);
       setFriendToSearch(tValue);
       handleSearch(friendToSearch);
     } else if (tName === 'friendToAdd') {
+      setWasFriendAdded(false);
       let friend = users.filter((user) => {
         return user.username === tValue;
       });
       let friendID = friend[0].id;
+      setFriendNameToAdd(friend[0].username);
       setFriendToAdd(friendID);
     }
   };
   const handleSearch = () => {
     const q = friendToSearch.toLowerCase();
     if (q.length === 0) {
-      setSearchList(users);
+      let set = new Set(users);
+      setSearchList(set);
     } else {
       let result = users.filter(friend =>
         friend.username.toLowerCase().includes(q)
@@ -49,6 +55,8 @@ const FriendSearch = ( {friends, user, userID} ) => {
     axios.post(url, body)
       .then((doc) => {
         console.log(doc);
+        getFriends(userID);
+        setWasFriendAdded(true);
       })
       .catch((err) => {
         console.error(err);
@@ -61,6 +69,7 @@ const FriendSearch = ( {friends, user, userID} ) => {
         const url = `http://localhost:3005/users`;
         const response = await axios.get(url);
         await setUsers(response.data);
+        console.log('this', response)
         // const getID = (obj) => obj.id;
         // const filterBySet = set => obj => !set.has(getID(obj));
         // const idSet = new Set([...users.map(getID), ...friends.map(getID)]);
@@ -96,7 +105,7 @@ const FriendSearch = ( {friends, user, userID} ) => {
             onClick={() => setFriendToSearch()}
             />
           </Col>
-          <Col md="auto">
+          <Col md="auto" className="flex-column">
 
             <select onChange={handleChange} name="friendToAdd">
               {searchList.length ?
@@ -126,8 +135,11 @@ const FriendSearch = ( {friends, user, userID} ) => {
                 <Dropdown.Item>none</Dropdown.Item>
               }
             </DropdownButton> */}
-
-
+          {wasFriendAdded ?
+            <p className="friend-added">{friendNameToAdd} was added successfully!</p>
+          :
+            null
+          }
 
           </Col>
           <Col md="auto">
