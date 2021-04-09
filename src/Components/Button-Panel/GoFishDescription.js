@@ -7,17 +7,18 @@ function GoFishDescription(props) {
     <>
       <Modal
         {...props}
-        size="sm"
+        size="lg"
         aria-labelledby="selected movie poster"
         centered
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
+          {console.log(props.movie)}
             {props.movie.title}
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <img src={props.movie.poster} alt="movie poster"></img>
+        <Modal.Body style={{overflowY: 'scroll'}}>
+          <img src={`https://image.tmdb.org/t/p/w500/${props.movie.poster}`} alt=""></img>
           <h4>Rating: {props.movie.rating}</h4>
           <h4>Plot: </h4>
             <p>{props.movie.movie_description}</p>

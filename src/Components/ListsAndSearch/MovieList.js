@@ -9,7 +9,6 @@ import "slick-carousel/slick/slick-theme.css";
 import ReactTooltip from "react-tooltip";
 import StarRatings from "react-star-ratings";
 
-
 const MovieList = ({ movies, user, getMyMovies }) => {
 
   const [modalShow, setModalShow] = useState(false);
@@ -25,8 +24,6 @@ const MovieList = ({ movies, user, getMyMovies }) => {
   }
 
   const addMovie = async (movie) => {
-    console.log('I am in the addMovie function on the Front-end!')
-    console.log(user)
     try {
       const response = await axios.get(`https://3.136.112.63/user/${user.email}`);
       const userID = response.data;
@@ -48,7 +45,6 @@ const MovieList = ({ movies, user, getMyMovies }) => {
       console.log(error);
     }
   }
-
 
   const settings = {
     dots: false,
@@ -109,21 +105,21 @@ const MovieList = ({ movies, user, getMyMovies }) => {
                           data-tip data-for={movie.title}
                         >
                           {movie.title}
-                          {/* {toolTip && <ReactTooltip id={movie.title} place="bottom" effect="solid">
+                          {toolTip && <ReactTooltip id={movie.title} place="bottom" effect="solid">
                             {document.getElementById(`${movie.title}`).id}
-                          </ReactTooltip>} */}
+                          </ReactTooltip>}
 
                         </Card.Header>
                         <Card.Text>
                           {/* {movie.vote_average} */}
                           <StarRatings
-                            rating={movie.vote_average}
+                            rating={movie.vote_average / 2}
                             starRatedColor="blue"
                             // changeRating={this.changeRating}
-                            numberOfStars={10}
+                            numberOfStars={5}
                             name='rating'
-                            starDimension="10px"
-                            starSpacing="1px"
+                            starDimension="15px"
+                            starSpacing="3px"
                           />
                         </Card.Text>
                         <Button variant="outline-info"
@@ -137,7 +133,6 @@ const MovieList = ({ movies, user, getMyMovies }) => {
                           movie={movieInfo}
                         /> {' '}
                         <Button variant="outline-info" onClick={() => addMovie(movie)}>Add</Button>
-                        {/* <Button variant="primary">Add to my list</Button> */}
                       </Card.Body>
                     </Card>
                   )

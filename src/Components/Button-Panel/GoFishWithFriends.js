@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-//import Description from '../ListsAndSearch/Description';
+import Description from '../ListsAndSearch/Description';
 import GoFishDescription from './GoFishDescription'
 import gofish from '../GoFish/goFishBro.png';
 
@@ -58,6 +58,7 @@ const GoFishWithFriends = ({ userID, selected, myMovies }) => {
         alt=""
         onClick={() => getFriendMovies()}
       ></img>
+      {/* {modal && (<Description show={modal} onHide={toggleModal} movie={match} id="goFish"/>)} */}
       {modal && (<GoFishDescription show={modal} onHide={toggleModal} movie={match} id="goFish"/>)}
     </div>
   )
