@@ -80,7 +80,6 @@ module.exports.addNewFriend = async (userId, friendID) => {
   }
 };
 
-
 module.exports.removeMovieFromUserList = async (userId, movieId) => {
   try {
     let result = await pool.query(queries.deleteUserMovie, [userId, movieId]);
@@ -93,7 +92,7 @@ module.exports.removeMovieFromUserList = async (userId, movieId) => {
 
 module.exports.getUsers = async () => {
   try {
-    let result = await pool.query(queries.getUsers);
+    let result = await pool.query(queries.getUsers());
     return result;
   } catch (err) {
     return err;
@@ -112,7 +111,7 @@ module.exports.getUserNotifications = async (userID) => {
 module.exports.addNewUser = async (username, firstName, lastName, email, picture, adult = false) => {
   try {
     let response = await pool.query(queries.addNewUser, [username, firstName, lastName, email, picture, adult]);
-    console.log(response);
+    return response;
   }
   catch (error) {
     return error;

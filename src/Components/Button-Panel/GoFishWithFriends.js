@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-//import Description from '../ListsAndSearch/Description';
+import Description from '../ListsAndSearch/Description';
 import GoFishDescription from './GoFishDescription'
 import gofish from '../GoFish/goFishBro.png';
 
-const GoFishWithFriends = ({ selected, myMovies }) => {
+const GoFishWithFriends = ({ userID, selected, myMovies }) => {
   const [friendMovies, setFriendMovies] = useState([]);
   const [match, setMatch] = useState({});
   const [modal, setModal] = useState(true);
@@ -43,7 +43,7 @@ const GoFishWithFriends = ({ selected, myMovies }) => {
     } catch (err) {
         console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
     findMatches();
@@ -58,6 +58,7 @@ const GoFishWithFriends = ({ selected, myMovies }) => {
         alt=""
         onClick={() => getFriendMovies()}
       ></img>
+      {/* {modal && (<Description show={modal} onHide={toggleModal} movie={match} id="goFish"/>)} */}
       {modal && (<GoFishDescription show={modal} onHide={toggleModal} movie={match} id="goFish"/>)}
     </div>
   )
