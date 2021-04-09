@@ -73,7 +73,7 @@ module.exports.getUserNotifications = (userID) => {
   return `
     SELECT *
     FROM notifications
-    WHERE userID = ${userID}
+    WHERE userid = ${userID}
   ;`
 };
 
