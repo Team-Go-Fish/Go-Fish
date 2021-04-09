@@ -114,7 +114,8 @@ module.exports.addNewUser = async (username, firstName, lastName, email, picture
   try {
     let response = await pool.query(queries.addNewUser, [username, firstName, lastName, email, picture, adult]);
     return response;
-  } catch (error) {
+  }
+  catch (error) {
     return error;
   }
 }
