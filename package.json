@@ -37,7 +37,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "server": "nodemon server/index.js"
+    "server": "nodemon server/index.js",
+    "server-prod": "forever start server/index.js"
   },
   "eslintConfig": {
     "extends": [
