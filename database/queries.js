@@ -53,8 +53,8 @@ module.exports.addNewFriend = (userID, friendID) => {
   ;`
 };
 
-module.exports.getUsers = `
-    SELECT *
+module.exports.getUsers =
+  `SELECT *
     FROM users
   ;`
 ;
