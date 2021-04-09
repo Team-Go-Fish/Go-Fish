@@ -22,6 +22,7 @@ module.exports.getUserID = async (email) => {
   try {
     const response = await pool.query(queries.getUserID, [email]);
     const userID = response.rows[0].id;
+    console.log(userID)
     return userID;
   }
   catch (error) {
