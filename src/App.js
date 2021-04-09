@@ -95,7 +95,7 @@ const App = () => {
               <LogoutButton />
             </Col>
             <Col>
-              <Friends userID={userID} user={user} friends={friends} myMovies={myMovies}/>
+              <Friends userID={userID} user={user} friends={friends} myMovies={myMovies} getFriends={getFriends}/>
             </Col>
             <Col>
             <Notifications userID={userID} user={user} friends={friends} myMovies={myMovies}></Notifications>
