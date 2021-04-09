@@ -13,6 +13,7 @@ const Friends = ({ userID, user, friends, myMovies }) => {
 
   return (
     <>
+
       <Button variant="outline-info" onClick={() => setLgShow(true)}>Friends</Button>
       <Modal
         size="lg"

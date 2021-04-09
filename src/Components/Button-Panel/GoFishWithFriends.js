@@ -51,7 +51,7 @@ const GoFishWithFriends = ({ userID, selected, myMovies }) => {
 
   return (
     <div className="go-fish">
-      <Button variant="outline-info" onClick={() => getFriendMovies()}>Go Fish!</Button>
+      <Button variant="primary" onClick={() => getFriendMovies()}>Go Fish!</Button>
       {modal && (<GoFishDescription show={modal} onHide={toggleModal} movie={match} id="goFish"/>)}
     </div>
   )

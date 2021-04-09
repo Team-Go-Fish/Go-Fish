@@ -22,6 +22,7 @@ module.exports.getUserID = async (email) => {
   try {
     const response = await pool.query(queries.getUserID, [email]);
     const userID = response.rows[0].id;
+    console.log(userID)
     return userID;
   }
   catch (error) {
@@ -93,7 +94,7 @@ module.exports.removeMovieFromUserList = async (userId, movieId) => {
 
 module.exports.getUsers = async () => {
   try {
-    let result = await pool.query(queries.getUsers);
+    let result = await pool.query(queries.getUsers());
     return result;
   } catch (err) {
     return err;
@@ -113,7 +114,7 @@ module.exports.addNewUser = async (username, firstName, lastName, email, picture
   try {
     let response = await pool.query(queries.addNewUser, [username, firstName, lastName, email, picture, adult]);
     return response;
-  catch (error) {
+  } catch (error) {
     return error;
   }
 }

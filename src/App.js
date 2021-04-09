@@ -21,7 +21,6 @@ const App = () => {
     try {
       const response = await axios.get(`http://localhost:3005/user/${user.email}`);
       const userID = response.data;
-      console.log('test', response)
       setUserID(userID);
       getMyMovies(userID);
       getFriends(userID);
