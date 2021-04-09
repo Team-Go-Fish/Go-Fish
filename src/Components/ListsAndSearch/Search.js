@@ -7,11 +7,11 @@ const Search = ({ setMovies, setPopular }) => {
 
   const searchMovies = () => {
     if (input.length >= 1) {
-      axios.get(`https://3.136.112.63:3005/search/${input}`)
+      axios.get(`https://3.136.112.63/search/${input}`)
       .then((response) => setMovies(response.data))
       .catch((error) => console.log(error));
     } else if(input.length === 0) {
-      axios.get('https://3.136.112.63:3005/movies')
+      axios.get('https://3.136.112.63/movies')
       .then((response => {
         //  remove after demo
         const noTom = response.data.filter(({ title }) => !title.includes("Tom"));

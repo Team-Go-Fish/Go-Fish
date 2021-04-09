@@ -19,7 +19,7 @@ const App = () => {
 
   const getUserID = async () => {
     try {
-      const response = await axios.get(`https://3.136.112.63:3005/user/${user.email}`);
+      const response = await axios.get(`https://3.136.112.63/user/${user.email}`);
       const userID = response.data;
       setUserID(userID);
       getMyMovies(userID);
@@ -36,13 +36,13 @@ const App = () => {
 
   // get movie list for user once logged in
   const getMyMovies = (user_id) => {
-    axios.get(`https://3.136.112.63:3005/movies/${user_id}`)
+    axios.get(`https://3.136.112.63/movies/${user_id}`)
       .then((response => setMyMovies(response.data)))
       .catch((error) => console.log(error));
   };
   // get friends list for user once logged in
   const getFriends = (user_id) => {
-    axios.get(`https://3.136.112.63:3005/friends/${user_id}`)               //hard coded for user 1
+    axios.get(`https://3.136.112.63/friends/${user_id}`)               //hard coded for user 1
       .then((response => setFriends(response.data)))
       .catch((error) => console.log(error));
   };

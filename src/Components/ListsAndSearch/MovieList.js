@@ -28,13 +28,13 @@ const MovieList = ({ movies, user, getMyMovies }) => {
     console.log('I am in the addMovie function on the Front-end!')
     console.log(user)
     try {
-      const response = await axios.get(`https://3.136.112.63:3005/user/${user.email}`);
+      const response = await axios.get(`https://3.136.112.63/user/${user.email}`);
       const userID = response.data;
       console.log(userID)
 
       const options = {
         method: 'POST',
-        url: `https://3.136.112.63:3005/movies/${userID}`,
+        url: `https://3.136.112.63/movies/${userID}`,
         headers: {
           type: 'Application/json'
         },
