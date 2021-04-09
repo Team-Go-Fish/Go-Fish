@@ -38,7 +38,7 @@ const GoFishWithFriends = ({ userID, selected, myMovies }) => {
 
   const getFriendMovies = async() => {
     try {
-      const response = await axios.get(`http://localhost:3005/movies/${selected}`);
+      const response = await axios.get(`http://3.131.99.55:3005/movies/${selected}`);
       setFriendMovies(response.data);
     } catch (err) {
         console.log(err);

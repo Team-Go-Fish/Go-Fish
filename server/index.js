@@ -6,7 +6,7 @@ app.use(cors());
 app.use(express.json());
 
 //  serve build folder when it is time for production environment
-// app.use(express.static(__dirname + '/../build'));
+app.use(express.static(__dirname + '/../build'));
 
 //const database = require('../database/index.js');
 const controller = require('./controller.js');

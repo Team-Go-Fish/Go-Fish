@@ -72,6 +72,9 @@ SET timezone = 'America/Los_Angeles';
 -- SAMPLE DATA FOR TESTING
 INSERT INTO users (username, firstName, lastName, email, picture, adult)
 VALUES
+  ('verploegjack', 'Jack', 'Verploeg', 'Verploegjack@gmail.com', 'img/src', 'true')
+;
+/*
   ('skywalker', 'Luke', 'Skywalker', 'luke@starwars.com', 'img/src', 'false'),
   ('princess', 'Princess', 'Leia', 'leia@starwars.com', 'img/src', 'true'),
   ('solo', 'Han', 'Solo', 'solo@starwars.com', 'img/src', 'true'),
@@ -82,9 +85,10 @@ VALUES
   ('trooper', 'Storm', 'Trooper', 'trooper@starwars.com', 'img/src', 'false'),
   ('bountyhunter', 'Boba', 'Fett', 'bountyhunter@starwars.com', 'img/src', 'false'),
   ('nickfin', 'Nick', 'Papadakis', 'nickfin2014@gmail.com', 'img/src', 'true'),
-  ('mmarshall', 'Malcolm', 'Marshall', 'm.marshall369@gmail.com', 'img/src', 'true')
-;
-
+  ('mmarshall', 'Malcolm', 'Marshall', 'm.marshall369@gmail.com', 'img/src', 'true'),
+  ('ryne201011', 'Ryne', 'Schroder', 'ryne201011@gmail.com', 'img/src', 'true'),
+  ('mhoffman', 'Mason', 'Hoffman', 'mhoffman3939@gmail.com', 'img/src', 'true'),
+*/
 INSERT INTO movies (movieDBiD, title, poster, rating, movie_description)
 VALUES
 (11, "Star Wars", "/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg", 8.2, "Princess Leia is captured and held hostage by the evil Imperial forces in their effort to take over the galactic Empire. Venturesome Luke Skywalker and dashing captain Han Solo team together with the loveable robot duo R2-D2 and C-3PO to rescue the beautiful princess and restore peace and justice in the Empire."),

@@ -42,7 +42,7 @@ const FriendSearch = ( {friends, user, userID} ) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = `http://localhost:3005/friends/add/${userID}`;
+    const url = `http://3.131.99.55:3005/friends/add/${userID}`;
     const body = {
       friendID: friendToAdd
     };
@@ -58,7 +58,7 @@ const FriendSearch = ( {friends, user, userID} ) => {
   useEffect(() => {
     const initialLoad = async () => {
       try {
-        const url = `http://localhost:3005/users`;
+        const url = `http://3.131.99.55:3005/users`;
         const response = await axios.get(url);
         await setUsers(response.data);
         // const getID = (obj) => obj.id;
