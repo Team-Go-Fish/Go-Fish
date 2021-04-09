@@ -13,7 +13,7 @@ const GoFish = ({ popular }) => {
     const random = Math.floor(Math.random() * (popular.length - 1));
 
     try {
-      const response = await axios.get(`http://www.omdbapi.com/?apikey=4bcf0035&t=${popular[random].title}`);
+      const response = await axios.get(`https://www.omdbapi.com/?apikey=4bcf0035&t=${popular[random].title}`);
       setMovie(response.data);
       toggleModal();
     }

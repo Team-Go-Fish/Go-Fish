@@ -8,10 +8,10 @@ export default function LogoutButton() {
 
     useEffect(() => {
         if (isAuthenticated) {
-            axios.get(`http://3.131.99.55:3005/user/${user.email}`)
+            axios.get(`https://3.136.112.63:3005/user/${user.email}`)
             .then((res) => {
                 if (res.data === "TypeError: Cannot read property 'id' of undefined") {
-                    axios.post('http://3.131.99.55:3005/users/add/user', user)
+                    axios.post('https://3.136.112.63:3005/users/add/user', user)
                 }
             })
             .catch((err) => {

@@ -17,7 +17,7 @@ const WatchList = ({ myMovies, user, getMyMovies }) => {
   const [render, setRender] = useState(false);
 
   const getInfo = (e) => {
-    axios.get(`http://www.omdbapi.com/?apikey=4bcf0035&t=${e.target.value}`)
+    axios.get(`https://www.omdbapi.com/?apikey=4bcf0035&t=${e.target.value}`)
     .then((res) => setMovieInfo(res.data))
     .then(() => setModalShow(true))
     .catch((err) => console.log(err))

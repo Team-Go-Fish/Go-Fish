@@ -13,7 +13,7 @@ const AgeButton = ({ user, setUser }) => {
     const userWithAge = user;
     userWithAge.adult = true;
     setUser(userWithAge);
-    axios.put(`http://3.131.99.55:3005/user/?email=${user.email}`, {
+    axios.put(`https://3.136.112.63:3005/user/?email=${user.email}`, {
       adult: true
     });
   }
@@ -23,7 +23,7 @@ const AgeButton = ({ user, setUser }) => {
     const userWithAge = user;
     userWithAge.adult = false;
     setUser(userWithAge);
-    axios.put(`http://3.131.99.55:3005/users/age/${user.email}`, {
+    axios.put(`https://3.136.112.63:3005/users/age/${user.email}`, {
       adult: false
     });
   }

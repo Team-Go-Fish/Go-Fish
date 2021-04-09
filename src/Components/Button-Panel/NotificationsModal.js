@@ -78,7 +78,7 @@ const NotificationsModal = (props) => {
   useEffect(() => {
     const initialLoad = async () => {
       try {
-        const url = `http://3.131.99.55:3005/notifications/${userID}`
+        const url = `https://3.136.112.63:3005/notifications/${userID}`
         const response = await axios.get(url);
         await setNotifications(response.data);
       } catch (error) {

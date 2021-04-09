@@ -18,7 +18,7 @@ const MovieList = ({ movies, user, getMyMovies }) => {
   // const [rating, setRating] = useState(newRating);
 
   const getInfo = (e) => {
-    axios.get(`http://www.omdbapi.com/?apikey=4bcf0035&t=${e.target.value}`)
+    axios.get(`https://www.omdbapi.com/?apikey=4bcf0035&t=${e.target.value}`)
       .then((res) => setMovieInfo(res.data))
       .then(() => setModalShow(true))
       .catch((err) => console.log(err))
@@ -28,13 +28,13 @@ const MovieList = ({ movies, user, getMyMovies }) => {
     console.log('I am in the addMovie function on the Front-end!')
     console.log(user)
     try {
-      const response = await axios.get(`http://3.131.99.55:3005/user/${user.email}`);
+      const response = await axios.get(`https://3.136.112.63:3005/user/${user.email}`);
       const userID = response.data;
       console.log(userID)
 
       const options = {
         method: 'POST',
-        url: `http://3.131.99.55:3005/movies/${userID}`,
+        url: `https://3.136.112.63:3005/movies/${userID}`,
         headers: {
           type: 'Application/json'
         },
