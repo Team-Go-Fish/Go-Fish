@@ -117,4 +117,13 @@ module.exports.addNewUser = async (username, firstName, lastName, email, picture
   catch (error) {
     return error;
   }
-}
+};
+
+module.exports.updateUserAge = async (email, adult) => {
+  try {
+    let result = await pool.query(queries.updateUserAge(email, adult));
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
