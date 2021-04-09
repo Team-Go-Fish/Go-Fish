@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useState, useEffect } from 'react';
 import { Card, Button, Container, Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Description from './Description';
@@ -87,9 +88,14 @@ const MovieList = ({ movies, user, getMyMovies }) => {
 
   setTimeout(() => setToolTip(true), 5000);
 
+  useEffect(() => {
+    setToolTip(true);
+  }, [])
+
   return (
     <>
       <Container>
+      <br></br>
         <h4><strong>Popular Movies</strong></h4>
         <Row>
           <Col size="xs">

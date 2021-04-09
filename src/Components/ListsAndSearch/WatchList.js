@@ -13,7 +13,6 @@ const WatchList = ({ myMovies, user, getMyMovies, userID }) => {
 
   const [modalShow, setModalShow] = useState(false);
   const [movieInfo, setMovieInfo] = useState({});
-  const [render, setRender] = useState(false);
 
   const getInfo = (e) => {
     axios.get(`http://www.omdbapi.com/?apikey=4bcf0035&t=${e.target.value}`)
@@ -76,25 +75,42 @@ const WatchList = ({ myMovies, user, getMyMovies, userID }) => {
 
     // let sliderSettings = settings;
 
-    // if (myMovies.length === 1) {
-    //   sliderSettings = settings1;
-    // } else if (myMovies.length === 2) {
-    //   sliderSettings = settings2;
-    // } else if (myMovies.length === 3) {
-    //   sliderSettings = settings3;
-    // } else {
-    //   sliderSettings = settings;
-    // }
+    let toShow;
+    let toScroll;
+    let varW;
+
+    if (myMovies.length === 1) {
+      toShow = 1;
+      toScroll = 1;
+      varW = true;
+    } else if (myMovies.length === 2) {
+      toShow = 2;
+      toScroll = 2;
+      varW = true;
+    } else if (myMovies.length === 3) {
+      toShow = 3;
+      toScroll = 2;
+      varW = true;
+    } else {
+      toShow = 4;
+      toScroll = 2;
+      varW = false;
+    }
+
+    console.log(window.innerWidth / 2)
 
     const settings = {
       dots: false,
       infinite: true,
       speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 2,
+      slidesToShow: toShow,
+      slidesToScroll: toScroll,
       spacing: 2,
       autoplay: false,
       autoplaySpeed: 3000,
+      variableWidth: varW,
+      // centerMode: true,
+      // centerPadding: ,
       responsive: [
         {
           breakpoint: 1024,
@@ -145,11 +161,9 @@ const WatchList = ({ myMovies, user, getMyMovies, userID }) => {
                         style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
                         >{movie.title}</Card.Header>
                         <Card.Text>
-                          {/* {movie.rating} */}
                           <StarRatings
                             rating={parseInt(movie.rating) / 2}
                             starRatedColor="blue"
-                            // changeRating={changeRating}
                             numberOfStars={5}
                             name='rating'
                             starDimension="15px"
