@@ -12,7 +12,7 @@ import bg from './images/bg1.png';
 
 const App = () => {
   const [user, setUser] = useState(1);
-  const [userID, setUserID] = useState(0);
+  const [userID, setUserID] = useState(1);
   const [myMovies, setMyMovies] = useState([]);
   const [friends, setFriends] = useState([]);
   const [popular, setPopular] = useState([]);
