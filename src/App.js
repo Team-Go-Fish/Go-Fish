@@ -115,6 +115,7 @@ const App = () => {
                 friends={friends}
                 user={user}
                 userID={userID}
+                getFriends={getFriends}
               />
             </div>
           </Col> */}
