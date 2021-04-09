@@ -65,9 +65,9 @@ module.exports.getUsers = () => {
 module.exports.addUserAge = (email, adult) => {
   return `
     UPDATE users SET adult=${adult}
-    WHERE email=${email};`
-}
-;
+    WHERE email=${email}
+  ;`
+};
 
 module.exports.getUserNotifications = (userID) => {
   return `
@@ -77,4 +77,11 @@ module.exports.getUserNotifications = (userID) => {
   ;`
 };
 
-
+module.exports.addUserNotification = (userID, friendID, movieID, type, message) => {
+  return ( `
+    INSERT INTO notifications (userid, friendid, movieid, notification_type, notification_message)
+    VALUES (${userID}, ${friendID}, ${movieID}, ${type}, ${message})
+    RETURNING *
+  ;`
+  )
+};
