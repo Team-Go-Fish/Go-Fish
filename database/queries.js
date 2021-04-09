@@ -53,10 +53,13 @@ module.exports.addNewFriend = (userID, friendID) => {
   ;`
 };
 
-module.exports.getUsers = () => {`
-    SELECT *
-    FROM users
-  ;`
+module.exports.getUsers = () => {
+  return (
+    `
+      SELECT *
+      FROM users
+    ;`
+  )
 };
 
 module.exports.addUserAge = (email, adult) => {

@@ -129,13 +129,13 @@ const WatchList = ({ myMovies, user, getMyMovies }) => {
                         <Card.Text>
                           {/* {movie.rating} */}
                           <StarRatings
-                            rating={parseInt(movie.rating)}
+                            rating={parseInt(movie.rating) / 2}
                             starRatedColor="blue"
                             // changeRating={changeRating}
-                            numberOfStars={10}
+                            numberOfStars={5}
                             name='rating'
-                            starDimension="10px"
-                            starSpacing="1px"
+                            starDimension="15px"
+                            starSpacing="3px"
                           />
                         </Card.Text>
                         <Button variant="outline-info" value={movie.title} id={movie.id} onClick={(e) => getInfo(e)}>Info</Button>
