@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useState, useEffect } from 'react';
 import { Card, Button, Container, Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Description from './Description';
@@ -87,6 +88,10 @@ const MovieList = ({ movies, user, getMyMovies }) => {
 
   setTimeout(() => setToolTip(true), 5000);
 
+  useEffect(() => {
+    setToolTip(true);
+  }, [])
+
   return (
     <>
       <Container>
@@ -106,9 +111,9 @@ const MovieList = ({ movies, user, getMyMovies }) => {
                           data-tip data-for={movie.title}
                         >
                           {movie.title}
-                          {toolTip && <ReactTooltip id={movie.title} place="bottom" effect="solid">
+                          {/* {toolTip && <ReactTooltip id={movie.title} place="bottom" effect="solid">
                             {document.getElementById(`${movie.title}`).id}
-                          </ReactTooltip>}
+                          </ReactTooltip>} */}
 
                         </Card.Header>
                         <Card.Text>
