@@ -146,4 +146,3 @@ module.exports.updateUserAge = (req, res) => {
     res.status(500).send(err);
   })
 }
-
