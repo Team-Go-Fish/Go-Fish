@@ -46,7 +46,7 @@ const GoFishWithFriends = ({ userID, selected, myMovies }) => {
 
   const getFriendMovies = async() => {
     try {
-      const response = await axios.get(`https://dailystevieplayer.com/movies/${selected}`);
+      const response = await axios.get(`https://gofishmovies.com/movies/${selected}`);
       setFriendMovies(response.data);
     } catch (err) {
         console.log(err);

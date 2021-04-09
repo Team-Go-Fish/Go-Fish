@@ -13,7 +13,7 @@ const AgeButton = ({ user, setUser }) => {
     const userWithAge = user;
     userWithAge.adult = true;
     setUser(userWithAge);
-    axios.put(`https://dailystevieplayer.com/users/age/${user.email}`, {
+    axios.put(`https://gofishmovies.com/users/age/${user.email}`, {
       adult: true
     });
   }
@@ -23,7 +23,7 @@ const AgeButton = ({ user, setUser }) => {
     const userWithAge = user;
     userWithAge.adult = false;
     setUser(userWithAge);
-    axios.put(`https://dailystevieplayer.com/users/age/${user.email}`, {
+    axios.put(`https://gofishmovies.com/users/age/${user.email}`, {
       adult: false
     });
   }

@@ -25,7 +25,7 @@ const App = () => {
 
   const getUserID = async () => {
     try {
-      const response = await axios.get(`https://dailystevieplayer.com/user/${user.email}`);
+      const response = await axios.get(`https://gofishmovies.com/user/${user.email}`);
       const userID = response.data;
       setUserID(userID);
       getMyMovies(userID);
@@ -42,18 +42,18 @@ const App = () => {
 
   // get movie list for user once logged in
   const getMyMovies = (user_id) => {
-    axios.get(`https://dailystevieplayer.com/movies/${user_id}`)
+    axios.get(`https://gofishmovies.com/movies/${user_id}`)
       .then((response => setMyMovies(response.data)))
       .catch((error) => console.log(error));
   };
   // get friends list for user once logged in
   const getFriends = (user_id) => {
-    axios.get(`https://dailystevieplayer.com/friends/${user_id}`)
+    axios.get(`https://gofishmovies.com/friends/${user_id}`)
       .then((response => setFriends(response.data)))
       .catch((error) => console.log(error));
   };
   const addUserNotification = (userID, friendID, movieID, type, message) => {
-    const url = `https://dailystevieplayer.com/notifications/add`;
+    const url = `https://gofishmovies.com/notifications/add`;
     const body = {
       userID: userID,
       friendID: friendID,

@@ -7,11 +7,11 @@ const Search = ({ setMovies, setPopular }) => {
 
   const searchMovies = () => {
     if (input.length >= 1) {
-      axios.get(`https://dailystevieplayer.com/search/${input}`)
+      axios.get(`https://gofishmovies.com/search/${input}`)
       .then((response) => setMovies(response.data))
       .catch((error) => console.log(error));
     } else if(input.length === 0) {
-      axios.get('https://dailystevieplayer.com/movies')
+      axios.get('https://gofishmovies.com/movies')
       .then((response => {
         //  remove after demo
         const noTom = response.data.filter(({ title }) => !title.includes("Tom"));

@@ -8,10 +8,10 @@ export default function LogoutButton() {
 
     useEffect(() => {
         if (isAuthenticated) {
-            axios.get(`https://dailystevieplayer.com/user/${user.email}`)
+            axios.get(`https://gofishmovies.com/user/${user.email}`)
             .then((res) => {
                 if (res.data === "TypeError: Cannot read property 'id' of undefined") {
-                    axios.post('https://dailystevieplayer.com/users/add/user', user)
+                    axios.post('https://gofishmovies.com/users/add/user', user)
                 }
             })
             .catch((err) => {

@@ -29,7 +29,7 @@ const GoFishWithFriends = ({ selected, myMovies }) => {
   }
 
   const getFriendMovies = () => {
-    axios.get(`https://dailystevieplayer.com/movies/${selected}`)
+    axios.get(`https://gofishmovies.com/movies/${selected}`)
       .then((response => setFriendMovies(response.data)))
       .then(findMatches)
       .catch((error) => console.log(error));
