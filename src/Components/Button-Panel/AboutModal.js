@@ -29,14 +29,12 @@ const AboutModal = (props) => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          How Do I go Fishing
+          How Do I go Fishing?
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
             <Container>
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-          terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-          labore wes anderson cred nesciunt sapiente ea proident.
+            This app will select a movie for me and a friend to watch together. Both add a collection of movies to watch and the app will give you a recommendation. Click on the <strong>fish icon</strong> on the home page to select a random movie from your own collection.
             </Container>
 
       </Modal.Body>

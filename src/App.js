@@ -106,7 +106,7 @@ const App = () => {
         </Row>
         </Container>
 
-        <h1>GOFISH</h1>
+        <h1><strong>GOFISH</strong></h1>
         <Row>
           {/* <Col>
             <div className="button-panel">

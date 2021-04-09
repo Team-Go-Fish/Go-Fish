@@ -101,7 +101,7 @@ const WatchList = ({ myMovies, user, getMyMovies, userID }) => {
 
     const settings = {
       dots: false,
-      infinite: false,
+      infinite: true,
       speed: 500,
       slidesToShow: toShow,
       slidesToScroll: toScroll,
