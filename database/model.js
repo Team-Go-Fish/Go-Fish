@@ -80,7 +80,6 @@ module.exports.addNewFriend = async (userId, friendID) => {
   }
 };
 
-
 module.exports.removeMovieFromUserList = async (userId, movieId) => {
   try {
     let result = await pool.query(queries.deleteUserMovie, [userId, movieId]);
@@ -113,6 +112,7 @@ module.exports.addNewUser = async (username, firstName, lastName, email, picture
   try {
     let response = await pool.query(queries.addNewUser, [username, firstName, lastName, email, picture, adult]);
     return response;
+  }
   catch (error) {
     return error;
   }

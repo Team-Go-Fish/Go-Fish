@@ -9,7 +9,6 @@ import "slick-carousel/slick/slick-theme.css";
 import ReactTooltip from "react-tooltip";
 import StarRatings from "react-star-ratings";
 
-
 const MovieList = ({ movies, user, getMyMovies }) => {
 
   const [modalShow, setModalShow] = useState(false);
@@ -25,8 +24,6 @@ const MovieList = ({ movies, user, getMyMovies }) => {
   }
 
   const addMovie = async (movie) => {
-    console.log('I am in the addMovie function on the Front-end!')
-    console.log(user)
     try {
       const response = await axios.get(`http://localhost:3005/user/${user.email}`);
       const userID = response.data;
@@ -48,7 +45,6 @@ const MovieList = ({ movies, user, getMyMovies }) => {
       console.log(error);
     }
   }
-
 
   const settings = {
     dots: false,
@@ -137,7 +133,6 @@ const MovieList = ({ movies, user, getMyMovies }) => {
                           movie={movieInfo}
                         /> {' '}
                         <Button variant="outline-info" onClick={() => addMovie(movie)}>Add</Button>
-                        {/* <Button variant="primary">Add to my list</Button> */}
                       </Card.Body>
                     </Card>
                   )
