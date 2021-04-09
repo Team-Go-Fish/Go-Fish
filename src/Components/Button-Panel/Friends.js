@@ -23,7 +23,7 @@ const Friends = ({ userID, user, friends, myMovies }) => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="Friends List">
-            Friends List
+            My Pond
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

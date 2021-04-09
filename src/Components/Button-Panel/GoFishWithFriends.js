@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Description from '../ListsAndSearch/Description';
 import GoFishDescription from './GoFishDescription'
 import Button from 'react-bootstrap/Button';
 
@@ -52,16 +51,10 @@ const GoFishWithFriends = ({ userID, selected, myMovies }) => {
 
   return (
     <div className="go-fish">
-      <img
-        src={gofish}
-        alt=""
-        onClick={() => getFriendMovies()}
-      ></img>
-      {/* {modal && (<Description show={modal} onHide={toggleModal} movie={match} id="goFish"/>)} */}
+      <Button onClick={getFriendMovies}>Add Friend</Button>
       {modal && (<GoFishDescription show={modal} onHide={toggleModal} movie={match} id="goFish"/>)}
     </div>
   )
 };
 
 export default GoFishWithFriends;
-

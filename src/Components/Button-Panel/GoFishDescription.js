@@ -23,9 +23,9 @@ function GoFishDescription(props) {
           <h4>Plot: </h4>
             <p>{props.movie.movie_description}</p>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="outline-danger" onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
+        {/* <Modal.Footer>
+          <Button variant="primary" onClick={props.onHide}>Close</Button>
+        </Modal.Footer> */}
       </Modal>
     </>
   )
