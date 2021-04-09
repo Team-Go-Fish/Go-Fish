@@ -8,27 +8,36 @@ const GoFishWithFriends = ({ userID, selected, myMovies }) => {
   const [match, setMatch] = useState({});
   const [modal, setModal] = useState(true);
 
-  let matchedMovie = {};
   const findMatches = () => {
-    console.log(myMovies);
-    console.log(friendMovies)
     let myIds = [];
     for (var i = 0; i < myMovies.length; i ++) {
-      myIds.push(myMovies[i].moviedbid);
+      myIds.push(myMovies[i].movieid);
     }
     let friendIds = [];
     for (var j = 0; j < friendMovies.length; j ++) {
-      friendIds.push(friendMovies[j].moviedbid)
+      friendIds.push(friendMovies[j].movieid)
     }
-    console.log(myIds)
-    console.log(friendIds)
-    for (var k = 0; k < myIds.length; k ++) {
-      if (friendIds.includes(myIds[k])) {
-        matchedMovie = myMovies[k];
-        setMatch(matchedMovie);
-        return;
+    console.log('my:', myIds);
+    console.log('friend:', friendIds);
+    let matchedMovies = [];
+    for (var k = 0; k < friendIds.length; k ++) {
+      if (myIds.includes(friendIds[k])) {
+        matchedMovies.push(friendMovies[k]);
       }
     }
+    console.log('matches:', matchedMovies)
+    var random = matchedMovies[Math.floor(Math.random() * matchedMovies.length)];
+    console.log(random)
+    setMatch(random);
+
+    // let matchedMovie = {};
+    // for (var k = 0; k < myIds.length; k ++) {
+    //   if (friendIds.includes(myIds[k])) {
+    //     matchedMovie = myMovies[k];
+    //     setMatch(matchedMovie);
+    //     return;
+    //   }
+    // }
   }
 
   const toggleModal = () => {
@@ -51,7 +60,7 @@ const GoFishWithFriends = ({ userID, selected, myMovies }) => {
 
   return (
     <div className="go-fish">
-      <Button onClick={getFriendMovies}>Add Friend</Button>
+      <Button onClick={getFriendMovies}>Go Fish!</Button>
       {modal && (<GoFishDescription show={modal} onHide={toggleModal} movie={match} id="goFish"/>)}
     </div>
   )
