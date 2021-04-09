@@ -46,6 +46,19 @@ const App = () => {
       .then((response => setFriends(response.data)))
       .catch((error) => console.log(error));
   };
+  const addUserNotification = (userID, friendID, movieID, type, message) => {
+    const url = `http://localhost:3005/notifications/add`;
+    const body = {
+      userID: userID,
+      friendID: friendID,
+      movieID: movieID,
+      notification_type: type,
+      notification_message: message
+    };
+    axios.post(url, body)
+      .then((response) => console.log(response))
+      .catch((error) => console.error(error));
+  };
 
   const handleUserChange = (user) => {    // pass this event handler down to login component
     setUser(user);
