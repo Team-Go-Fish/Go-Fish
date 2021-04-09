@@ -83,7 +83,7 @@ const NotificationsModal = (props) => {
   useEffect(() => {
     const initialLoad = async () => {
       try {
-        const url = `https://3.136.112.63/notifications/${userID}`
+        const url = `https://dailystevieplayer.com/notifications/${userID}`
         const response = await axios.get(url);
         await setNotifications(response.data);
       } catch (error) {

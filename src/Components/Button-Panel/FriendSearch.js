@@ -48,7 +48,7 @@ const FriendSearch = ({ friends, user, userID, getFriends }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = `https://3.136.112.63/friends/add/${userID}`;
+    const url = `https://dailystevieplayer.com/friends/add/${userID}`;
     const body = {
       friendID: friendToAdd
     };
@@ -66,7 +66,7 @@ const FriendSearch = ({ friends, user, userID, getFriends }) => {
   useEffect(() => {
     const initialLoad = async () => {
       try {
-        const url = `https://3.136.112.63/users`;
+        const url = `https://dailystevieplayer.com/users`;
         const response = await axios.get(url);
         await setUsers(response.data);
         console.log('this', response)

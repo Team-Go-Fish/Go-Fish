@@ -26,7 +26,7 @@ const WatchList = ({ myMovies, user, getMyMovies, userID }) => {
     try {
       const options = {
         method: 'DELETE',
-        url: `https://3.136.112.63/movies/${userID}?movieId=${movie.movieid}`,
+        url: `https://dailystevieplayer.com/movies/${userID}?movieId=${movie.movieid}`,
         headers: {
           type: 'Application/json'
         }

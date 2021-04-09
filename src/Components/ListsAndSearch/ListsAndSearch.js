@@ -13,7 +13,7 @@ const ListsAndSearch = ({ myMovies, user, getMyMovies, setPopular, userID }) => 
   }, []);
 
   const getPopularMovies = () => {
-    axios.get('https://3.136.112.63/movies')
+    axios.get('https://dailystevieplayer.com/movies')
       .then((response => {
         //  remove after demo
         const noTom = response.data.filter(({ title }) => !title.includes("Tom"));

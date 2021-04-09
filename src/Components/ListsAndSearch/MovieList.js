@@ -26,13 +26,13 @@ const MovieList = ({ movies, user, getMyMovies }) => {
 
   const addMovie = async (movie) => {
     try {
-      const response = await axios.get(`https://3.136.112.63/user/${user.email}`);
+      const response = await axios.get(`https://dailystevieplayer.com/user/${user.email}`);
       const userID = response.data;
       console.log(userID)
 
       const options = {
         method: 'POST',
-        url: `https://3.136.112.63/movies/${userID}`,
+        url: `https://dailystevieplayer.com/movies/${userID}`,
         headers: {
           type: 'Application/json'
         },
