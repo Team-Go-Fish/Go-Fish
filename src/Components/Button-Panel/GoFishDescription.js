@@ -13,7 +13,6 @@ function GoFishDescription(props) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-          {console.log(props.movie)}
             {props.movie.title}
           </Modal.Title>
         </Modal.Header>
@@ -24,11 +23,11 @@ function GoFishDescription(props) {
             <p>{props.movie.movie_description}</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="outline-danger" onClick={props.onHide}>Close</Button>
+          <Button variant="primary" onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
     </>
   )
-};
+}
 
 export default GoFishDescription;

@@ -73,7 +73,7 @@ const NotificationsModal = (props) => {
     } else if (tName === 'matchedMovie') {
 
     }
-  }
+  };
 
   useEffect(() => {
     const initialLoad = async () => {

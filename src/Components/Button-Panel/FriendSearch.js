@@ -61,6 +61,7 @@ const FriendSearch = ( {friends, user, userID} ) => {
         const url = `https://3.136.112.63/users`;
         const response = await axios.get(url);
         await setUsers(response.data);
+        console.log('this', response)
         // const getID = (obj) => obj.id;
         // const filterBySet = set => obj => !set.has(getID(obj));
         // const idSet = new Set([...users.map(getID), ...friends.map(getID)]);

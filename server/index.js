@@ -32,6 +32,9 @@ app.get('/users', controller.getUsers);
 // return user's notifications
 app.get('/notifications/:userID', controller.getUserNotifications);
 
+// add new notification
+app.post('/notifications/add', controller.addUserNotification);
+
 // get a user's friend list
 app.get('/friends/:userId', controller.getMyFriends);
 
