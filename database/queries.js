@@ -54,10 +54,12 @@ module.exports.addNewFriend = (userID, friendID) => {
 };
 
 module.exports.getUsers = () => {
-  return `
-    SELECT *
-    FROM users
-  ;`
+  return (
+    `
+      SELECT *
+      FROM users
+    ;`
+  )
 };
 
 module.exports.addUserAge = (email, adult) => {
@@ -76,9 +78,10 @@ module.exports.getUserNotifications = (userID) => {
 };
 
 module.exports.addUserNotification = (userID, friendID, movieID, type, message) => {
-  return `
+  return ( `
     INSERT INTO notifications (userid, friendid, movieid, notification_type, notification_message)
     VALUES (${userID}, ${friendID}, ${movieID}, ${type}, ${message})
     RETURNING *
   ;`
+  )
 };
