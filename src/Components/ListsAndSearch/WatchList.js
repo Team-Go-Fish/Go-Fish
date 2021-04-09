@@ -9,8 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import StarRatings from "react-star-ratings";
 
-////////////changed from myMovies to movies for demo sake/////////////
-const WatchList = ({ myMovies, user, getMyMovies }) => {
+const WatchList = ({ myMovies, user, getMyMovies, userID }) => {
 
   const [modalShow, setModalShow] = useState(false);
   const [movieInfo, setMovieInfo] = useState({});
@@ -22,6 +21,25 @@ const WatchList = ({ myMovies, user, getMyMovies }) => {
     .then(() => setModalShow(true))
     .catch((err) => console.log(err))
   }
+
+  const removeMovie = async (movie) => {
+    console.log(`I am currently removing ${movie.title}`);
+    try {
+      const options = {
+        method: 'DELETE',
+        url: `http://localhost:3005/movies/${userID}?movieId=${movie.movieid}`,
+        headers: {
+          type: 'Application/json'
+        }
+      };
+      const removeMovie = await axios(options);
+      console.log(removeMovie);
+      getMyMovies(userID);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
 
     // const settings = {
     //   dots: false,
@@ -144,9 +162,7 @@ const WatchList = ({ myMovies, user, getMyMovies }) => {
                           onHide={() => setModalShow(false)}
                           movie={movieInfo}
                         /> {' '}
-                        {/* modify button below later */}
-                        {/* <Button variant="outline-info" id={user.email} onClick={(e) => addMovie(e)}>Add to My List</Button> */}
-                        {/* <Button variant="primary">Add to my list</Button> */}
+                        <Button variant="outline-info" onClick={() => removeMovie(movie)}>Remove</Button>
                       </Card.Body>
                     </Card>
                   )

@@ -80,7 +80,6 @@ module.exports.addNewFriend = async (userId, friendID) => {
   }
 };
 
-
 module.exports.removeMovieFromUserList = async (userId, movieId) => {
   try {
     let result = await pool.query(queries.deleteUserMovie, [userId, movieId]);
