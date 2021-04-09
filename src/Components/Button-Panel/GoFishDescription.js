@@ -13,6 +13,7 @@ function GoFishDescription(props) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
+          {console.log(props.movie)}
             {props.movie.title}
           </Modal.Title>
         </Modal.Header>

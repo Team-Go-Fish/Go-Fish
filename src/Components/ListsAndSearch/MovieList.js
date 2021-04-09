@@ -109,21 +109,21 @@ const MovieList = ({ movies, user, getMyMovies }) => {
                           data-tip data-for={movie.title}
                         >
                           {movie.title}
-                          {/* {toolTip && <ReactTooltip id={movie.title} place="bottom" effect="solid">
+                          {toolTip && <ReactTooltip id={movie.title} place="bottom" effect="solid">
                             {document.getElementById(`${movie.title}`).id}
-                          </ReactTooltip>} */}
+                          </ReactTooltip>}
 
                         </Card.Header>
                         <Card.Text>
                           {/* {movie.vote_average} */}
                           <StarRatings
-                            rating={movie.vote_average}
+                            rating={movie.vote_average / 2}
                             starRatedColor="blue"
                             // changeRating={this.changeRating}
-                            numberOfStars={10}
+                            numberOfStars={5}
                             name='rating'
-                            starDimension="10px"
-                            starSpacing="1px"
+                            starDimension="15px"
+                            starSpacing="3px"
                           />
                         </Card.Text>
                         <Button variant="outline-info"
