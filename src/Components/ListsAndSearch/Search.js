@@ -28,6 +28,8 @@ const Search = ({ setMovies, setPopular }) => {
   }, [input]);
 
   return (
+    <>
+    <br></br>
     <SearchField
       className="QA-SearchBar"
       placeholder="Search for something to watch!"
@@ -35,6 +37,7 @@ const Search = ({ setMovies, setPopular }) => {
       onChange={(value) => setInput(value)}
       onClick={() => setInput()}
     />
+    </>
   );
 };
 

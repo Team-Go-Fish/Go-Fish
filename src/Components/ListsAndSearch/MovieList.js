@@ -90,6 +90,7 @@ const MovieList = ({ movies, user, getMyMovies }) => {
   return (
     <>
       <Container>
+      <br></br>
         <h4><strong>Popular Movies</strong></h4>
         <Row>
           <Col size="xs">
