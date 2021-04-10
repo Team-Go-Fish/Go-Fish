@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { useState, useEffect } from 'react';
 import { Card, Button, Container, Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Description from './Description';
@@ -88,14 +87,9 @@ const MovieList = ({ movies, user, getMyMovies }) => {
 
   setTimeout(() => setToolTip(true), 5000);
 
-  useEffect(() => {
-    setToolTip(true);
-  }, [])
-
   return (
     <>
       <Container>
-      <br></br>
         <h4><strong>Popular Movies</strong></h4>
         <Row>
           <Col size="xs">
@@ -111,10 +105,10 @@ const MovieList = ({ movies, user, getMyMovies }) => {
                           data-tip data-for={movie.title}
                         >
                           {movie.title}
-                          {/* {toolTip && <ReactTooltip id={movie.title} place="bottom" effect="solid">
-                            {document.getElementById(`${movie.title}`).id}
-                          </ReactTooltip>} */}
-
+                          {toolTip && <ReactTooltip id={movie.title} place="bottom" effect="solid">
+                            {/* {document.getElementById(`${movie.title}`).id} */}
+                            {movie.title}
+                          </ReactTooltip>}
                         </Card.Header>
                         <Card.Text>
                           {/* {movie.vote_average} */}
