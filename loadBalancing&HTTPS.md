@@ -13,7 +13,7 @@ Finally, move the key to apt trusted key storage (note the "asc" file extension 
 `sudo mv /tmp/nginx_signing.key /etc/apt/trusted.gpg.d/nginx_signing.asc`\
 To install nginx, run the following commands:\
 `sudo apt update`\
-`sudo apt install nginx`\
+`sudo apt install nginx`
 ### Configuration ###
 nginx runs a server (or servers) off of a basix config file that tells it what to do. You simply need to edit this file or make a new one for this application.\
 `cd /etc/nginx`\
@@ -25,14 +25,14 @@ To set up a simple load balancer, see the example at [nginx.com](https://www.ngi
 Open up the vim editor:\
 `sudo vi goFish.conf`\
 For a basic, round-robin style load balancer, in which the nginx server just takes turns passing each incoming request to the next application server in the rotation, all your `goFish.conf` needs to contain is:\
-#Note: I don't actually undertand this first few settings. They are required, and the load balancer should work fine with these numbers, which are just the defaults\
+#Note: I don't actually undertand this first few settings. They are required, and the load balancer should work fine with these numbers, which are just the defaults
 ```
-`worker_processes 5;`\
-`worker_rlimit_nofile 8192;`\
-`events {`\
-`  worker_connections  4096;`\
-`}`\
-#These are the actual server settings\
+worker_processes 5;
+worker_rlimit_nofile 8192;
+events {
+  worker_connections  4096;
+}
+#These are the actual server settings
 http {
   upstream goFish {
     #This is where to list all instances of the application server
@@ -60,7 +60,7 @@ To stop nginx:\
 `sudo nginx -s quit` - graceful shutdown\
 `sudo nginx -s stop` - fast shutdown\
 To reload the config file without shutting down:\
-`sudo nginx -s reload`\
+`sudo nginx -s reload`
 
 ## HTTPS ##
 ### Requirements ###
@@ -87,7 +87,7 @@ Next, create a second configuration snippet:\
 `sudo touch ssl-params.conf`\
 `sudo vi ssl-params.conf`\
 and add these contents:\
-*Note: I don't know what all of these settings are, but this worked for me so I'm passing it along. The two lines to pay attention to are the ones commented out with #. For using a self-signed certificate leave those commented out. For a legit certificate, remove the # from those two lines*\
+*Note: I don't know what all of these settings are, but this worked for me so I'm passing it along. The two lines to pay attention to are the ones commented out with #. For using a self-signed certificate leave those commented out. For a legit certificate, remove the # from those two lines*
 ```
 ssl_protocols TLSv1.2;
 ssl_prefer_server_ciphers on;
@@ -111,7 +111,7 @@ Great! Now:\
 `cd /etc/nginx`\
 Edit the load balancer config file that you are using:\
 `sudo vi nginx.conf` or `sudo vi goFish.conf`\
-Change the `server block` to the following:\
+Change the `server block` to the following:
 ```
   server {
     #Set the nginx server to run on the port exposed for https traffic
@@ -128,16 +128,15 @@ Change the `server block` to the following:\
   }
 ```
 Great! Now restart the load balancer with this updated config file.\
-The browser will yell at you and tell you that this is not a trusted/secure connection. But its ok, you signed the certificate yourself! When you get this message from the browser, click on Advanced and Proceed to your application.\
-### Option 2. 3rd party signed SSL certificate ###
+The browser will yell at you and tell you that this is not a trusted/secure connection. But its ok, you signed the certificate yourself! When you get this message from the browser, click on Advanced and Proceed to your application.
+### Option 2: 3rd party signed SSL certificate ###
 From what I can tell, SSL certificates go with domains, not ip addresses, so the first thing to do is register a domain name, or just make me an offer for `gofishmovies.com`.\
 In the account you create with whomever for managing your domain, go to the `DNS` settings and add or edit the following rules:\
-*Type A is ipv4, this value should be the EC2 instance where the nginx load balancer runs*\
+*Type A is ipv4, this value should be the EC2 instance where the nginx load balancer runs*
 | TYPE | HOST NAME | VALUE |
 | ---- | ---- | ---- |
 | A | @ | 3.136.112.63 |
 | A | www | 3.136.112.63 |
-| ---- | ---- | ---- |
 
 Great, now your domain is connected to the ip address where the app receives incoming traffic!\
 Next, back to the app server. ssh into the EC2 where the nginx load balancer runs. You can find instruction for generating keys and a certificate signing request at [Enabling HTTPS on Your Servers](https://developers.google.com/web/fundamentals/security/encrypt-in-transit/enable-https), or follow these steps:\
@@ -169,7 +168,7 @@ This file should contain these two lines:\
 Then:\
 `sudo touch ssl-params.conf` - *If it doesn't exist*\
 `sudo vi ssl-params.conf`\
-This file should contain:\
+This file should contain:
 ```
 ssl_protocols TLSv1.2;
 ssl_prefer_server_ciphers on;
@@ -191,7 +190,7 @@ add_header X-XSS-Protection "1; mode=block";
 Then just include the legit certificate in the nginx config file:\
 `cd /etc/nginx`\
 `sudo vi goFish.conf`\
-The `server` block should now look like:\
+The `server` block should now look like:
 ```
   server {
     listen 443 ssl;
@@ -205,11 +204,11 @@ The `server` block should now look like:\
     }
   }
 ```
-That's it!\
+That's it!
 ### Alternative ###
-Try [**certbot**](https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx). Once you have your domain connected to the correct ip address, see if certbot really does streamline the above process.\
+Try [**certbot**](https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx). Once you have your domain connected to the correct ip address, see if **certbot** really does streamline the above process like it claims.
 ### Final notes ###
-The final step in setting up HTTPS is to redirect HTTP (port 80) traffic to HTTPS (port 443). As of this writing I have not been able to make this work. In theory, and based on my research, it should be as simple as editing your nginx config file by adding another server block like so:\
+The final step in setting up HTTPS is to redirect HTTP (port 80) traffic to HTTPS (port 443). As of this writing I have not been able to make this work. In theory, and based on my research, it should be as simple as editing your nginx config file by adding another server block like so:
 ```
 http {
   upstream goFish {
@@ -243,3 +242,5 @@ http {
 }
 ```
 If anyone figures out what I am doing wrong and can successfully redirect http traffic to https, please let me know!
+
+***Kevin Pierce - April 2021***
