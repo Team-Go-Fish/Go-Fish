@@ -1,31 +1,31 @@
 ## A basic load balancer with nginx ##
-A load balancer is a server that runs in front of the application server(s). It runs on the EC2 instance and on the port that all incoming traffic will hit, and then passes that traffic to the actual application server(s). This allows us to run multiple instances of our application server and handle more traffic. It also allows us to set up a secure (https) connection.
-***Installation***
-To install nginx, ssh into your EC2 instance and follow the installation instructions for Ubuntu at [nginx.org](https://nginx.org/en/linux_packages.html#Ubuntu), or use the following commands:
-*Ubuntu*
-Install the prerequisites:
-`sudo apt install curl gnupg2 ca-certificates lsb-release`
-To set up the apt repository for stable nginx packages, run the following command:
-`echo "deb http://nginx.org/packages/ubuntu` `lsb_release -cs` `nginx" \ | sudo tee /etc/apt/sources.list.d/nginx.list`
-Next, import an official nginx signing key so apt could verify the packages authenticity. Fetch the key:
-`curl -o /tmp/nginx_signing.key https://nginx.org/keys/nginx_signing.key`
-Finally, move the key to apt trusted key storage (note the "asc" file extension change):
-`sudo mv /tmp/nginx_signing.key /etc/apt/trusted.gpg.d/nginx_signing.asc`
-To install nginx, run the following commands:
-`sudo apt update`
-`sudo apt install nginx`
-***Configuration***
-nginx runs a server (or servers) off of a basix config file that tells it what to do. You simply need to edit this file or make a new one for this application.
-`cd /etc/nginx`
-If you're going to edit `nginx.conf`, first make a backup:
-`sudo cp nginx.conf nginx_backup.conf`
-Or you can just create a new config:
-`sudo touch goFish.conf`
-To set up a simple load balancer, see the example at [nginx.com](https://www.nginx.com/resources/wiki/start/topics/examples/loadbalanceexample/), or follow this example:
-Open up the vim editor:
-`sudo vi goFish.conf`
-For a basic, round-robin style load balancer, in which the nginx server just takes turns passing each incoming request to the next application server in the rotation, all your `goFish.conf` needs to contain is:
-`#Note: I don't actually undertand this first few settings. They are required, and the load balancer should work fine with these numbers, which are just the defaults
+A load balancer is a server that runs in front of the application server(s). It runs on the EC2 instance and on the port that all incoming traffic will hit, and then passes that traffic to the actual application server(s). This allows us to run multiple instances of our application server and handle more traffic. It also allows us to set up a secure (https) connection.\
+***Installation***\
+To install nginx, ssh into your EC2 instance and follow the installation instructions for Ubuntu at [nginx.org](https://nginx.org/en/linux_packages.html#Ubuntu), or use the following commands:\
+*Ubuntu*\
+Install the prerequisites:\
+`sudo apt install curl gnupg2 ca-certificates lsb-release`\
+To set up the apt repository for stable nginx packages, run the following command:\
+`echo "deb http://nginx.org/packages/ubuntu` `lsb_release -cs` `nginx" \ | sudo tee /etc/apt/sources.list.d/nginx.list`\
+Next, import an official nginx signing key so apt could verify the packages authenticity. Fetch the key:\
+`curl -o /tmp/nginx_signing.key https://nginx.org/keys/nginx_signing.key`\
+Finally, move the key to apt trusted key storage (note the "asc" file extension change):\
+`sudo mv /tmp/nginx_signing.key /etc/apt/trusted.gpg.d/nginx_signing.asc`\
+To install nginx, run the following commands:\
+`sudo apt update`\
+`sudo apt install nginx`\
+***Configuration***\
+nginx runs a server (or servers) off of a basix config file that tells it what to do. You simply need to edit this file or make a new one for this application.\
+`cd /etc/nginx`\
+If you're going to edit `nginx.conf`, first make a backup:\
+`sudo cp nginx.conf nginx_backup.conf`\
+Or you can just create a new config:\
+`sudo touch goFish.conf`\
+To set up a simple load balancer, see the example at [nginx.com](https://www.nginx.com/resources/wiki/start/topics/examples/loadbalanceexample/), or follow this example:\
+Open up the vim editor:\
+`sudo vi goFish.conf`\
+For a basic, round-robin style load balancer, in which the nginx server just takes turns passing each incoming request to the next application server in the rotation, all your `goFish.conf` needs to contain is:\
+`#Note: I don't actually undertand this first few settings. They are required, and the load balancer should work fine with these numbers, which are just the defaults\
 `worker_processes 5;`
 `worker_rlimit_nofile 8192;`
 `
