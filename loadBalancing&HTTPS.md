@@ -25,26 +25,26 @@ To set up a simple load balancer, see the example at [nginx.com](https://www.ngi
 Open up the vim editor:\
 `sudo vi goFish.conf`\
 For a basic, round-robin style load balancer, in which the nginx server just takes turns passing each incoming request to the next application server in the rotation, all your `goFish.conf` needs to contain is:\
-`#Note: I don't actually undertand this first few settings. They are required, and the load balancer should work fine with these numbers, which are just the defaults\
+#Note: I don't actually undertand this first few settings. They are required, and the load balancer should work fine with these numbers, which are just the defaults\
 `worker_processes 5;`
 `worker_rlimit_nofile 8192;`
-`
+
 `events {`
 `  worker_connections  4096;`
 `}`
-`#These are the actual server settings
+#These are the actual server settings
 `http {`
 `  upstream goFish {`
-`    #This is where to list all instances of the application server
+    #This is where to list all instances of the application server
 `    server 3.136.112.63:3005;`
-`    #...
+    #...
 `  }`
 `  server {`
-`    #Set the nginx server to run on the port exposed for incoming traffic
+    #Set the nginx server to run on the port exposed for incoming traffic
 `    listen 80;`
-`    #All request to the nginx server...
+    #All request to the nginx server...
 `    location / {`
-`      #...will be passed to the upstream application servers
+      #...will be passed to the upstream application servers
 `      proxy_pass http://qaAPI;`
 `    }`
 `  }`
