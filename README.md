@@ -14,13 +14,22 @@ Go Fish! is a social networking site designed around a common love for movies. F
 * [Mason Hoffman](https://github.com/mhoffman39)
 
 
-//  Getting Started
-1. 'npm 'install'
-2. 'npm run build'
+## Getting Started
+```
+$ npm install
+$ npm run build
+```
 
-//  To start developing:
-1. 'npm run start' to start app on localhost:3000
-2. app will reload with each change to component code
-3. 'npm run server' will start server on localhost:3005
-4. client will dynamically reload with changes to component code (react-app dev)
-5. server will dynamically reload with changes to server code (nodemon)
+## To start developing:
+
+Start app on localhost:3000
+```
+$ npm run start
+```
+Start server on localhost:3005
+```
+npm run server
+```
+Client will dynamically reload with changes to component code (react-app dev)
+
+Server will dynamically reload with changes to server code (nodemon)
