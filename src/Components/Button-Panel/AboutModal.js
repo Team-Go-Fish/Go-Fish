@@ -1,24 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
+import React from 'react';
+import { Container, Button, Modal } from 'react-bootstrap';
 
 
 
 const AboutModal = (props) => {
-  const [modalShow, setModalShow] = useState(false);
-
-  // useEffect(() => {
-  //   const initialLoad = async () => {
-  //     try {
-  //       const url = `http://localhost:3005/notifications/${userID}`
-  //       const response = await axios.get(url);
-  //       await setNotifications(response.data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   initialLoad();
-  // }, []);
-
 
   return (
     <Modal

@@ -35,6 +35,9 @@ app.get('/notifications/:userID', controller.getUserNotifications);
 // add new notification
 app.post('/notifications/add', controller.addUserNotification);
 
+// update notification
+app.put('/notifications/:notificationID', controller.updateUserNotification);
+
 // get a user's friend list
 app.get('/friends/:userId', controller.getMyFriends);
 

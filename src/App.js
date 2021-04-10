@@ -12,7 +12,6 @@ import bg from './images/bg1.png';
 
 // scrap button panel, import files here
 import Friends from './Components/Button-Panel/Friends.js';
-// import users from '../../exampleData.js';
 import Notifications from './Components/Button-Panel/Notifications.js';
 import About from './Components/Button-Panel/About.js';
 
@@ -21,6 +20,7 @@ const App = () => {
   const [userID, setUserID] = useState(0);
   const [myMovies, setMyMovies] = useState([]);
   const [friends, setFriends] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   const [popular, setPopular] = useState([]);
 
   const getUserID = async () => {
@@ -30,6 +30,7 @@ const App = () => {
       setUserID(userID);
       getMyMovies(userID);
       getFriends(userID);
+      getNotifications(userID);
     }
     catch (error) {
       console.log(error);
@@ -38,7 +39,7 @@ const App = () => {
 
   useEffect(() => {
     getUserID();
-  }, [user]);
+  }, [user, userID]);
 
   // get movie list for user once logged in
   const getMyMovies = (user_id) => {
@@ -52,6 +53,12 @@ const App = () => {
       .then((response => setFriends(response.data)))
       .catch((error) => console.log(error));
   };
+  // get notifications list for user once logged in
+  const getNotifications = (userID) => {
+    axios.get(`http://localhost:3005/notifications/${userID}`)
+      .then((response => setNotifications(response.data)))
+      .catch((error) => console.error(error));
+  };
   const addUserNotification = (userID, friendID, movieID, type, message) => {
     const url = `http://localhost:3005/notifications/add`;
     const body = {
@@ -59,7 +66,8 @@ const App = () => {
       friendID: friendID,
       movieID: movieID,
       notification_type: type,
-      notification_message: message
+      notification_message: message,
+      notification_status: 'open'
     };
     axios.post(url, body)
       .then((response) => console.log(response))
@@ -93,10 +101,10 @@ const App = () => {
               <LogoutButton />
             </Col>
             <Col>
-              <Friends userID={userID} user={user} friends={friends} myMovies={myMovies} getFriends={getFriends}/>
+              <Friends userID={userID} user={user} friends={friends} myMovies={myMovies} getFriends={getFriends} addUserNotification={addUserNotification} getNotifications={getNotifications}/>
             </Col>
             <Col>
-              <Notifications userID={userID} user={user} friends={friends} myMovies={myMovies}></Notifications>
+            <Notifications userID={userID} user={user} notifications={notifications} friends={friends} myMovies={myMovies}></Notifications>
             </Col>
             <Col>
               <About />

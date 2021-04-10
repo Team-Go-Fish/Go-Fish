@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Row, Col, Button, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import SearchField from 'react-search-field';
 
-const FriendSearch = ({ friends, user, userID, getFriends }) => {
+const FriendSearch = ({ friends, user, userID, getFriends, addUserNotification, getNotifications }) => {
   // state
   const [users, setUsers] = useState([]);
   const [searchList, setSearchList] = useState([]);
@@ -48,11 +48,16 @@ const FriendSearch = ({ friends, user, userID, getFriends }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = `http://localhost:3005/friends/add/${userID}`;
+    let alreadyFriend = friends.filter((friend) => {
+      return friend.username === friendNameToAdd;
+    });
+    if (alreadyFriend.length > 0) {
+      return;
+    };
     const body = {
       friendID: friendToAdd
     };
-    axios.post(url, body)
+    axios.post(`http://localhost:3005/friends/add/${userID}`, body)
       .then((doc) => {
         console.log(doc);
         getFriends(userID);
@@ -61,6 +66,14 @@ const FriendSearch = ({ friends, user, userID, getFriends }) => {
       .catch((err) => {
         console.error(err);
       });
+    addUserNotification(
+      friendToAdd,
+      userID,
+      'NULL',
+      'newFriend',
+      `${user.name} wants to be friends!`,
+    );
+    getNotifications(userID);
   };
 
   useEffect(() => {
@@ -69,12 +82,6 @@ const FriendSearch = ({ friends, user, userID, getFriends }) => {
         const url = `http://localhost:3005/users`;
         const response = await axios.get(url);
         await setUsers(response.data);
-        console.log('this', response)
-        // const getID = (obj) => obj.id;
-        // const filterBySet = set => obj => !set.has(getID(obj));
-        // const idSet = new Set([...users.map(getID), ...friends.map(getID)]);
-        // const unique = [...users.filter(filterBySet(idSet)), ...friends.filter(filterBySet(idSet))];
-        // console.log({unique})
         setSearchList(response.data);
       } catch (error) {
         console.error(error);
@@ -91,12 +98,6 @@ const FriendSearch = ({ friends, user, userID, getFriends }) => {
       <Container>
         <Row className="justify-content-md-center">
           <Col md="auto">
-          {/* <form className="form">
-            <label className="form">
-              Search User
-              <input className="form" type="text" name="friendToSearch" value={friendToSearch} onChange={handleChange}></input>
-            </label>
-          </form> */}
           <SearchField
             className="friend-search"
             placeholder="Search for username"
@@ -119,22 +120,6 @@ const FriendSearch = ({ friends, user, userID, getFriends }) => {
               }
             </select>
 
-            {/* <DropdownButton
-              alignRight
-              id="friendToAdd"
-              title="Add Friend"
-              onSelect={setFriendToAdd}
-              >
-              {searchList.length ?
-                searchList.map(friend => {
-                  return (
-                    <Dropdown.Item eventKey={friend.username}> {friend.username} </Dropdown.Item>
-                  )
-                })
-                :
-                <Dropdown.Item>none</Dropdown.Item>
-              }
-            </DropdownButton> */}
           {wasFriendAdded ?
             <p className="friend-added">{friendNameToAdd} was added successfully!</p>
           :
