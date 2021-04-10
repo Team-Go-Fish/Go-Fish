@@ -1,6 +1,6 @@
 ## A basic load balancer with nginx ##
 A load balancer is a server that runs in front of the application server(s). It runs on the EC2 instance and on the port that all incoming traffic will hit, and then passes that traffic to the actual application server(s). This allows us to run multiple instances of our application server and handle more traffic. It also allows us to set up a secure (https) connection.\
-***Installation***\
+### Installation ###
 To install nginx, ssh into your EC2 instance and follow the installation instructions for Ubuntu at [nginx.org](https://nginx.org/en/linux_packages.html#Ubuntu), or use the following commands:\
 *Ubuntu*\
 Install the prerequisites:\
@@ -14,7 +14,7 @@ Finally, move the key to apt trusted key storage (note the "asc" file extension 
 To install nginx, run the following commands:\
 `sudo apt update`\
 `sudo apt install nginx`\
-***Configuration***\
+### Configuration ###
 nginx runs a server (or servers) off of a basix config file that tells it what to do. You simply need to edit this file or make a new one for this application.\
 `cd /etc/nginx`\
 If you're going to edit `nginx.conf`, first make a backup:\
@@ -26,29 +26,31 @@ Open up the vim editor:\
 `sudo vi goFish.conf`\
 For a basic, round-robin style load balancer, in which the nginx server just takes turns passing each incoming request to the next application server in the rotation, all your `goFish.conf` needs to contain is:\
 #Note: I don't actually undertand this first few settings. They are required, and the load balancer should work fine with these numbers, which are just the defaults\
+```
 `worker_processes 5;`\
 `worker_rlimit_nofile 8192;`\
 `events {`\
 `  worker_connections  4096;`\
 `}`\
 #These are the actual server settings\
-`http {`\
-`  upstream goFish {`\
-    #This is where to list all instances of the application server\
-`    server 3.136.112.63:3005;`\
-    #...\
-`  }`\
-`  server {`\
-    #Set the nginx server to run on the port exposed for incoming traffic\
-`    listen 80;`\
-    #All request to the nginx server...\
-`    location / {`\
-      #...will be passed to the upstream application servers\
-`      proxy_pass http://qaAPI;`\
-`    }`\
-`  }`\
-`}`\
-***Running***\
+http {
+  upstream goFish {
+    #This is where to list all instances of the application server
+    server 3.136.112.63:3005;
+    #...
+  }
+  server {
+    #Set the nginx server to run on the port exposed for incoming traffic
+    listen 80;
+    #All request to the nginx server...
+    location / {
+      #...will be passed to the upstream application servers
+      proxy_pass http://qaAPI;
+    }
+  }
+}
+```
+### Running ###
 Make sure the application server(s) is/are running at the ips and on the ports listed in the config file. To run the nginx load balancer:\
 If you edited `nginx.conf` nginx runs with that file by default:\
 `sudo nginx`\
@@ -61,11 +63,11 @@ To reload the config file without shutting down:\
 `sudo nginx -s reload`\
 
 ## HTTPS ##
-***Requirements***
+### Requirements ###
 - A proxy server or load balancer, in this case nginx
 - An SSL certificate and private key
 
-***Option 1: self-signed SSL certificate***\
+### Option 1: self-signed SSL certificate ###
 To be legit, SSL certificates need to by signed by a verified 3rd party. However, for development and testing purposes, you may want to just have the load balancer serve up a self-signed certificate. The post I used is [How to enable SSL on NGINX](https://www.techrepublic.com/article/how-to-enable-ssl-on-nginx/), or follow these steps:\
 The first step is to generate a self-signed certificate using openssl. To do this, ssh into the EC2 where the nginx load balancer runs and run the following command:\
 `sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt`\
@@ -86,21 +88,23 @@ Next, create a second configuration snippet:\
 `sudo vi ssl-params.conf`\
 and add these contents:\
 *Note: I don't know what all of these settings are, but this worked for me so I'm passing it along. The two lines to pay attention to are the ones commented out with #. For using a self-signed certificate leave those commented out. For a legit certificate, remove the # from those two lines*\
-`ssl_protocols TLSv1.2;`\
-`ssl_prefer_server_ciphers on;`\
-`ssl_dhparam /etc/ssl/certs/dhparam.pem;`\
-`ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384;`\
-`ssl_ecdh_curve secp384r1; # Requires nginx >= 1.1.0`\
-`ssl_session_timeout  10m;`\
-`ssl_session_cache shared:SSL:10m;`\
-`ssl_session_tickets off; # Requires nginx >= 1.5.9`\
-`# ssl_stapling on; # Requires nginx >= 1.3.7`\
-`# ssl_stapling_verify on; # Requires nginx => 1.3.7`\
-`resolver 8.8.8.8 8.8.4.4 valid=300s;`\
-`resolver_timeout 5s;`\
-`add_header X-Frame-Options DENY;`\
-`add_header X-Content-Type-Options nosniff;`\
-`add_header X-XSS-Protection "1; mode=block";`\
+```
+ssl_protocols TLSv1.2;
+ssl_prefer_server_ciphers on;
+ssl_dhparam /etc/ssl/certs/dhparam.pem;
+ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384;
+ssl_ecdh_curve secp384r1; # Requires nginx >= 1.1.0
+ssl_session_timeout  10m;
+ssl_session_cache shared:SSL:10m;
+ssl_session_tickets off; # Requires nginx >= 1.5.9
+# ssl_stapling on; # Requires nginx >= 1.3.7
+# ssl_stapling_verify on; # Requires nginx => 1.3.7
+resolver 8.8.8.8 8.8.4.4 valid=300s;
+resolver_timeout 5s;
+add_header X-Frame-Options DENY;
+add_header X-Content-Type-Options nosniff;
+add_header X-XSS-Protection "1; mode=block";
+```
 Next, generate the file dhparam.pem with openssl:\
 `sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048`\
 Great! Now:\
@@ -108,29 +112,33 @@ Great! Now:\
 Edit the load balancer config file that you are using:\
 `sudo vi nginx.conf` or `sudo vi goFish.conf`\
 Change the `server block` to the following:\
-`  server {`\
-    #Set the nginx server to run on the port exposed for https traffic\
-`    listen 443 ssl;`\
-`    listen [::]:443 ssl;`\
-    #Create a secure connection using the certificate, key, and parameters you set up\
-`    include snippets/self-signed.conf;`\
-`    include snippets/ssl-params.conf;`\
-    #All request to the nginx server...\
-`    location / {`\
-      #...will be passed to the upstream application servers\
-`      proxy_pass http://goFish;`\
-`    }`\
-`  }`\
+```
+  server {
+    #Set the nginx server to run on the port exposed for https traffic
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    #Create a secure connection using the certificate, key, and parameters you set up
+    include snippets/self-signed.conf;
+    include snippets/ssl-params.conf;
+    #All request to the nginx server...
+    location / {
+      #...will be passed to the upstream application servers
+      proxy_pass http://goFish;
+    }
+  }
+```
 Great! Now restart the load balancer with this updated config file.\
 The browser will yell at you and tell you that this is not a trusted/secure connection. But its ok, you signed the certificate yourself! When you get this message from the browser, click on Advanced and Proceed to your application.\
-***Option 2. 3rd party signed SSL certificate***\
+### Option 2. 3rd party signed SSL certificate ###
 From what I can tell, SSL certificates go with domains, not ip addresses, so the first thing to do is register a domain name, or just make me an offer for `gofishmovies.com`.\
 In the account you create with whomever for managing your domain, go to the `DNS` settings and add or edit the following rules:\
 *Type A is ipv4, this value should be the EC2 instance where the nginx load balancer runs*\
 | TYPE | HOST NAME | VALUE |
-| ---- | ------ | --------------------- |
+| ---- | ---- | ---- |
 | A | @ | 3.136.112.63 |
 | A | www | 3.136.112.63 |
+| ---- | ---- | ---- |
+
 Great, now your domain is connected to the ip address where the app receives incoming traffic!\
 Next, back to the app server. ssh into the EC2 where the nginx load balancer runs. You can find instruction for generating keys and a certificate signing request at [Enabling HTTPS on Your Servers](https://developers.google.com/web/fundamentals/security/encrypt-in-transit/enable-https), or follow these steps:\
 Generate the public/private key pair with openssl:\
@@ -184,50 +192,54 @@ Then just include the legit certificate in the nginx config file:\
 `cd /etc/nginx`\
 `sudo vi goFish.conf`\
 The `server` block should now look like:\
-`  server {`\
-`    listen 443 ssl;`\
-`    listen [::]:443 ssl;`\
-    #Point to the snippet that includes directions to the legit certificate and key\
-`    include snippets/gofishmovies.com.conf;`\
-`    include snippets/ssl-params.conf;`\
+```
+  server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    #Point to the snippet that includes directions to the legit certificate and key
+    include snippets/gofishmovies.com.conf;
+    include snippets/ssl-params.conf;
 
-`    location / {`\
-`      proxy_pass http://goFish;`\
-`    }`\
-`  }`\
+    location / {
+      proxy_pass http://goFish;
+    }
+  }
+```
 That's it!\
-***Alternative***\
+### Alternative ###
 Try [**certbot**](https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx). Once you have your domain connected to the correct ip address, see if certbot really does streamline the above process.\
-***Final notes***\
+### Final notes ###
 The final step in setting up HTTPS is to redirect HTTP (port 80) traffic to HTTPS (port 443). As of this writing I have not been able to make this work. In theory, and based on my research, it should be as simple as editing your nginx config file by adding another server block like so:\
-`http {`\
-`  upstream goFish {`\
-     #your app express server(s)\
-`    server 3.136.112.63:3005;`\
-`  }`\
+```
+http {
+  upstream goFish {
+     #your app express server(s)
+    server 3.136.112.63:3005;`
+  }
 
-`  server {`\
-`    listen 443 ssl;`\
-`    listen [::]:443 ssl;`\
-     #your domain name\
-`    server_name gofishmovies.com;`\
-    #your ssl certificate and parameters\
-`    include snippets/self-signed.conf;`\
-`    include snippets/ssl-params.conf;`\
+  server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+     #your domain name
+    server_name gofishmovies.com;
+    #your ssl certificate and parameters
+    include snippets/self-signed.conf;
+    include snippets/ssl-params.conf;
 
-`    location / {`\
-`      proxy_pass http://goFish;`\
-`    }`\
-`  }`\
-  #run another nginx server\
-`  server {`\
-    #listen on port exposed for http traffic\
-`    listen 80;`\
-`    listen [::]:80;`\
-    #your domain name\
-`    server_name gofishmovies.com;`\
-    #redirect with code 301 - permanent redirect - to https://your_domain\
-`    return 301 https://$server_name$request_uri;`\
-` }`\
-`}`\
+    location / {
+      proxy_pass http://goFish;
+    }
+  }
+  #run another nginx server
+  server {
+    #listen on port exposed for http traffic
+    listen 80;
+    listen [::]:80;
+    #your domain name
+    server_name gofishmovies.com;
+    #redirect with code 301 - permanent redirect - to https://your_domain
+    return 301 https://$server_name$request_uri;
+ }
+}
+```
 If anyone figures out what I am doing wrong and can successfully redirect http traffic to https, please let me know!
