@@ -61,8 +61,8 @@ To reload the config file without shutting down:\
 `sudo nginx -s reload`\
 
 ## HTTPS ##
-***Requirements***\
-- A proxy server or load balancer, in this case nginx\
+***Requirements***
+- A proxy server or load balancer, in this case nginx
 - An SSL certificate and private key
 
 ***Option 1: self-signed SSL certificate***\
@@ -109,15 +109,15 @@ Edit the load balancer config file that you are using:\
 `sudo vi nginx.conf` or `sudo vi goFish.conf`\
 Change the `server block` to the following:\
 `  server {`\
-`    #Set the nginx server to run on the port exposed for https traffic\
+    #Set the nginx server to run on the port exposed for https traffic\
 `    listen 443 ssl;`\
 `    listen [::]:443 ssl;`\
-`    #Create a secure connection using the certificate, key, and parameters you set up\
+    #Create a secure connection using the certificate, key, and parameters you set up\
 `    include snippets/self-signed.conf;`\
 `    include snippets/ssl-params.conf;`\
-`    #All request to the nginx server...\
+    #All request to the nginx server...\
 `    location / {`\
-`      #...will be passed to the upstream application servers\
+      #...will be passed to the upstream application servers\
 `      proxy_pass http://goFish;`\
 `    }`\
 `  }`\
