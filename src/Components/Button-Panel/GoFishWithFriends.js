@@ -1,49 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import GoFishDescription from './GoFishDescription'
+import GoFishDescription from './GoFishDescription';
 import Button from 'react-bootstrap/Button';
 
+/**This component takes in a users movie list and the userID of the friend selected by the checkbox.
+ * When "Go Fish!" is pressed, a request is made to the DB to return the friend's movie list. Then
+ * both movie lists are compared and a matching movie is passed to GoFishDescription to be displayed*/
 const GoFishWithFriends = ({ userID, selected, myMovies }) => {
   const [friendMovies, setFriendMovies] = useState([]);
   const [match, setMatch] = useState({});
   const [modal, setModal] = useState(true);
 
-  const findMatches = () => {
-    let myIds = [];
-    for (var i = 0; i < myMovies.length; i ++) {
-      myIds.push(myMovies[i].movieid);
-    }
-    let friendIds = [];
-    for (var j = 0; j < friendMovies.length; j ++) {
-      friendIds.push(friendMovies[j].movieid)
-    }
-    console.log('my:', myIds);
-    console.log('friend:', friendIds);
-    let matchedMovies = [];
-    for (var k = 0; k < friendIds.length; k ++) {
-      if (myIds.includes(friendIds[k])) {
-        matchedMovies.push(friendMovies[k]);
-      }
-    }
-    console.log('matches:', matchedMovies)
-    var random = matchedMovies[Math.floor(Math.random() * matchedMovies.length)];
-    console.log(random)
-    setMatch(random);
-
-    // let matchedMovie = {};
-    // for (var k = 0; k < myIds.length; k ++) {
-    //   if (friendIds.includes(myIds[k])) {
-    //     matchedMovie = myMovies[k];
-    //     setMatch(matchedMovie);
-    //     return;
-    //   }
-    // }
-  }
-
-  const toggleModal = () => {
-    setModal(!modal);
-  };
-
+  /**Triggered by Go Fish button. Queries DB for friend's movie list. Sets response as friendMovies */
   const getFriendMovies = async() => {
     try {
       const response = await axios.get(`https://gofishmovies.com/movies/${selected}`);
@@ -53,10 +21,36 @@ const GoFishWithFriends = ({ userID, selected, myMovies }) => {
     }
   };
 
+  /**After friendMovies is populated, triggers findMatches and toggleModal */
   useEffect(() => {
     findMatches();
     toggleModal();
   },[friendMovies]);
+
+  /**Compares two movie lists. Finds a random movie common to both lists. Sets that movie as "match" */
+  const findMatches = () => {
+    let myIds = [];
+    for (var i = 0; i < myMovies.length; i ++) {
+      myIds.push(myMovies[i].movieid);
+    }
+    let friendIds = [];
+    for (var j = 0; j < friendMovies.length; j ++) {
+      friendIds.push(friendMovies[j].movieid)
+    }
+    let matchedMovies = [];
+    for (var k = 0; k < friendIds.length; k ++) {
+      if (myIds.includes(friendIds[k])) {
+        matchedMovies.push(friendMovies[k]);
+      }
+    }
+    var random = matchedMovies[Math.floor(Math.random() * matchedMovies.length)];
+    setMatch(random);
+  }
+
+  /**Toggles modal off/on*/
+  const toggleModal = () => {
+    setModal(!modal);
+  };
 
   return (
     <div className="go-fish">

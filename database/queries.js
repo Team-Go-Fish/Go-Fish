@@ -43,6 +43,7 @@ module.exports.getMyFriends = (userID) => {
     INNER JOIN friendships f
       ON u.id = f.friendID
     WHERE f.userID = ${userID}
+    ORDER BY u.firstname ASC
   ;`
 };
 
@@ -65,8 +66,8 @@ module.exports.getUsers = () => {
 module.exports.addUserAge = (email, adult) => {
   console.log(email, adult, 'queries')
   return `
-    UPDATE users SET adult=${adult}
-    WHERE email=${email}
+    UPDATE users SET adult = '${adult}'
+    WHERE email = '${email}'
   ;`
 };
 
@@ -74,15 +75,25 @@ module.exports.getUserNotifications = (userID) => {
   return `
     SELECT *
     FROM notifications
-    WHERE userid = ${userID}
+    WHERE userid = ${userID} AND notification_status = 'open'
+    ORDER BY notification_time ASC
   ;`
 };
 
-module.exports.addUserNotification = (userID, friendID, movieID, type, message) => {
+module.exports.addUserNotification = (userID, friendID, movieID, type, message, status) => {
   return ( `
-    INSERT INTO notifications (userid, friendid, movieid, notification_type, notification_message)
-    VALUES (${userID}, ${friendID}, ${movieID}, ${type}, ${message})
+    INSERT INTO notifications (userid, friendid, movieid, notification_type, notification_time, notification_message, notification_status)
+    VALUES (${userID}, ${friendID}, ${movieID}, '${type}', NOW(), '${message}', '${status}')
     RETURNING *
   ;`
   )
+};
+
+module.exports.updateUserNotification = (notificationID, status) => {
+  return `
+    UPDATE notifications
+    SET notification_status = '${status}'
+    WHERE id = ${notificationID}
+    RETURNING *
+  ;`
 };
