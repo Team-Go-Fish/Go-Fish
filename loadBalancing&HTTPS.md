@@ -187,6 +187,8 @@ add_header X-Content-Type-Options nosniff;
 add_header X-XSS-Protection "1; mode=block";
 ```
 *Note that the `#` has been removed from `ssl_stapling on;` and `ssl_stapling_verify on;`*\
+Generate the file dhparam.pem with openssl:\
+`sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048`\
 Then just include the legit certificate in the nginx config file:\
 `cd /etc/nginx`\
 `sudo vi goFish.conf`\
@@ -242,5 +244,11 @@ http {
 }
 ```
 If anyone figures out what I am doing wrong and can successfully redirect http traffic to https, please let me know!
+### PS ###
+If typing `sudo` for every command when working with files and directories that only the system admin has access to, you can set the root password:\
+`sudo passwd rood`\
+and then log in as the superuser:\
+`su -`\
+Just be careful not to alter any files that you don't know what they do!
 
 ***Kevin Pierce - April 2021***
