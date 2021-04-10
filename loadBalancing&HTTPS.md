@@ -1,5 +1,5 @@
-## A basic load balancer with nginx ##
-A load balancer is a server that runs in front of the application server(s). It runs on the EC2 instance and on the port that all incoming traffic will hit, and then passes that traffic to the actual application server(s). This allows us to run multiple instances of our application server and handle more traffic. It also allows us to set up a secure (https) connection.
+## Basic load balancer with nginx ##
+A load balancer is a server that runs in front of the application server(s). It runs on the EC2 instance and on the port that all incoming traffic will hit, and then passes that traffic to the actual application server(s). This allows you to run multiple instances of your application server and handle more traffic. It also allows you to set up a secure (https) connection.
 ### Installation ###
 To install nginx, ssh into your EC2 instance and follow the installation instructions for Ubuntu at [nginx.org](https://nginx.org/en/linux_packages.html#Ubuntu), or use the following commands:\
 Install the prerequisites:\
@@ -111,7 +111,7 @@ Great! Now:\
 `cd /etc/nginx`\
 Edit the load balancer config file that you are using:\
 `sudo vi nginx.conf` or `sudo vi goFish.conf`\
-Change the `server block` to the following:
+Change the `server` block to the following:
 ```
   server {
     #Set the nginx server to run on the port exposed for https traffic
@@ -210,7 +210,7 @@ That's it!
 ### Alternative ###
 Try [**certbot**](https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx). Once you have your domain connected to the correct ip address, see if **certbot** really does streamline the above process like it claims.
 ### Final notes ###
-With the steps followed up to this point, visiting https://gofishmovies.com or https://www.gofishmovies.com will take you to the app. The final step in setting up HTTPS is to redirect HTTP (port 80) traffic to HTTPS (port 443). As of this writing I have not been able to make this work. In theory, and based on my research, it should be as simple as editing your nginx config file by adding another server block like so:
+With the steps followed up to this point, visiting https://gofishmovies.com or https://www.gofishmovies.com will take you to the app. The final step in setting up HTTPS is to redirect HTTP (port 80) traffic to HTTPS (port 443). As of this writing I have not been able to make this work. In theory, and based on my research, it should be as simple as editing your nginx config file by adding another `server` block like so:
 ```
 http {
   upstream goFish {
@@ -231,7 +231,7 @@ http {
       proxy_pass http://goFish;
     }
   }
-  #run another nginx server
+  #Run another nginx server
   server {
     #Listen on port exposed for http traffic
     listen 80;
