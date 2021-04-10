@@ -4,14 +4,14 @@ Go Fish! is a social networking site designed around a common love for movies. F
 ![Demo](https://user-images.githubusercontent.com/70677845/114280132-c6b4c780-99ec-11eb-9ade-d8dca60d7063.gif)
 
 ## Contributors
-* [Malcolm Marshall] (https://github.com/Malcolm-Marshall)
-* [Nick Papadakis] (https://github.com/spacerumsfeld-code)
-* [Dorien Pine] (https://github.com/Initial-D-cmd)
-* [Jake Gray] (https://github.com/jakegray1717)
-* [Jack Verploeg] (https://github.com/jverploeg)
-* [Kevin Pierce] (https://github.com/piercekg)
-* [Ryne Schroder] (https://github.com/ryne2010)
-* [Mason Hoffman] (https://github.com/mhoffman39)
+* [Malcolm Marshall](https://github.com/Malcolm-Marshall)
+* [Nick Papadakis](https://github.com/spacerumsfeld-code)
+* [Dorien Pine](https://github.com/Initial-D-cmd)
+* [Jake Gray](https://github.com/jakegray1717)
+* [Jack Verploeg](https://github.com/jverploeg)
+* [Kevin Pierce](https://github.com/piercekg)
+* [Ryne Schroder](https://github.com/ryne2010)
+* [Mason Hoffman](https://github.com/mhoffman39)
 
 
 //  Getting Started
