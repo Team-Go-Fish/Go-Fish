@@ -6,7 +6,6 @@ import { Row, Col, Container } from 'react-bootstrap';
 const ButtonPanel = ({ userID, user, friends, myMovies, getFriends }) => {
 
   return (
-    //Notifications
     <>
       <Container>
         <Row>

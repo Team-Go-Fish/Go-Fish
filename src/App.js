@@ -92,9 +92,7 @@ const App = () => {
     >
       <div className="App">
         <Container fluid>
-        <Row>
-          {/* <Col style={rowStyleRight}>
-            <div className="login-container" style={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between'}}> */}
+          <Row>
             <Col>
               <Profile setUser={setUser} />
             </Col>
@@ -111,10 +109,10 @@ const App = () => {
             <Col>
               <About />
             </Col>
-        </Row>
+          </Row>
         </Container>
 
-        <h1><strong>GOFISH</strong></h1>
+        <h1><strong>GO FISH</strong></h1>
         <Row>
           {/* <Col>
             <div className="button-panel">

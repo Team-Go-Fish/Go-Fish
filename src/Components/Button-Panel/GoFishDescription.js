@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
+/*This component takes in props (movie, onHide, show) and displays a modal showing a shared movie */
 function GoFishDescription(props) {
   return (
     <>
