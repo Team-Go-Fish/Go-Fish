@@ -28,7 +28,7 @@ $ npm run start
 ```
 Start server on localhost:3005
 ```
-npm run server
+$ npm run server
 ```
 Client will dynamically reload with changes to component code (react-app dev)
 
