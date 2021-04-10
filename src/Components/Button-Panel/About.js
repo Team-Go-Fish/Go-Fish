@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import AboutModal from './AboutModal.js';
 
 const About = () => {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   return (
     <>

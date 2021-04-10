@@ -21,9 +21,13 @@ const queries = require('./queries.js');
 module.exports.getUserID = async (email) => {
   try {
     const response = await pool.query(queries.getUserID, [email]);
-    const userID = response.rows[0].id;
-    console.log(userID)
-    return userID;
+    if (response.rows[0]) {
+      const userID = response.rows[0].id;
+      console.log(userID)
+      return userID;
+    } else {
+      return null;
+    }
   }
   catch (error) {
     console.log(error);
@@ -109,15 +113,18 @@ module.exports.getUserNotifications = async (userID) => {
   }
 };
 
-//TODO -- not working
-module.exports.addUserNotification = async (userID, friendID, movieID, type, message) => {
+module.exports.addUserNotification = async (userID, friendID, movieID, type, message, status) => {
   try {
-    // console.log('before')
-    // const query = queries.addUserNotification();
-    // console.log({query})
-    let result = await pool.query(queries.addUserNotification(userID, friendID, movieID, type, message));
-    // console.log('after')
-    // console.log('result:', result)
+    let result = await pool.query(queries.addUserNotification(userID, friendID, movieID, type, message, status));
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+module.exports.updateUserNotification = async (notificationID, status) => {
+  try {
+    let result = await pool.query(queries.updateUserNotification(notificationID, status))
     return result;
   } catch (error) {
     return error;

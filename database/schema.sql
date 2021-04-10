@@ -56,9 +56,9 @@ DROP TABLE IF EXISTS notifications;
 CREATE TABLE notifications
 (
   id serial NOT NULL,
-  userID integer,
-  friendID integer,
-  movieID integer,
+  userid integer,
+  friendid integer,
+  movieid integer,
   notification_type text,
   notification_time timestamp,
   notification_message text,
@@ -114,6 +114,32 @@ VALUES
   (1, 3),
   (2, 3)
 ;
+<<<<<<< HEAD
+=======
+INSERT INTO notifications (userid, friendid, movieid, notification_type, notification_time, notification_message, notification_status)
+VALUES
+  (1, 2, NULL, 'newFriend', '2016-06-22 19:10:25-07', 'Jack wants to be friends!', 'open'),
+  (1, 3, NULL, 'newFriend', '2016-06-22 19:10:25-07', 'Dorien wants to be friends!', 'open'),
+  (1, 4, 3, 'matchedMovie', '2016-06-22 19:10:25-07', 'You and Nick have a matched movie!', 'open'),
+  (1, 5, NULL, 'newFriend', '2016-06-22 19:10:25-07', 'Jake wants to be friends!', 'open'),
+  (1, 6, 4, 'matchedMovie', '2016-06-22 19:10:25-07', 'You and Mason have a matched movie!', 'open'),
+  (1, 7, NULL, 'newFriend', '2016-06-22 19:10:25-07', 'Malcolm wants to be friends!', 'open'),
+  (1, 8, NULL, 'newFriend', '2016-06-22 19:10:25-07', 'Kevin wants to be friends!', 'open'),
+  (1, 9, 5, 'matchedMovie', '2016-06-22 19:10:25-07', 'You and Ryne have a matched movie!', 'open'),
+  (11, 10, NULL, 'newFriend', '2021-04-04 10:10:25-07', 'Nick wants to be friends!', 'open'),
+  (11, 12, NULL, 'newFriend', '2021-04-04 10:10:25-07', 'Ryne wants to be friends!', 'open'),
+  (11, 13, NULL, 'newFriend', '2021-04-04 10:10:25-07', 'Mason wants to be friends!', 'open'),
+  (11, 15, NULL, 'newFriend', '2021-04-04 10:10:25-07', 'Jack wants to be friends!', 'open'),
+  (11, 16, NULL, 'newFriend', '2021-04-04 10:10:25-07', 'Dorien wants to be friends!', 'open'),
+  (11, 17, NULL, 'newFriend', '2021-04-04 10:10:25-07', 'Kevin wants to be friends!', 'open'),
+  (11, 10, 4, 'matchedMovie', '2021-04-04 10:10:25-07', 'You and Nick have a matched movie!', 'open'),
+  (11, 12, 6, 'matchedMovie', '2021-04-04 10:10:25-07', 'You and Ryne have a matched movie!', 'open'),
+  (11, 13, 9, 'matchedMovie', '2021-04-04 10:10:25-07', 'You and Mason have a matched movie!', 'open'),
+  (11, 15, 22, 'matchedMovie', '2021-04-04 10:10:25-07', 'You and Jack have a matched movie!', 'open'),
+  (11, 16, 5, 'matchedMovie', '2021-04-04 10:10:25-07', 'You and Dorien have a matched movie!', 'open'),
+  (11, 17, 21, 'matchedMovie', '2021-04-04 10:10:25-07', 'You and Kevin have a matched movie!', 'open')
+;
+>>>>>>> 5cc8c814014e8f80049ce61300c96fe65b58d088
 
 INSERT INTO notifications (userID, friendID, movieID, notification_type, notification_time, notification_message, notification_status)
 VALUES

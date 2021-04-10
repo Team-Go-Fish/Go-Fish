@@ -25,7 +25,7 @@ To set up a simple load balancer, see the example at [nginx.com](https://www.ngi
 Open up the vim editor:\
 `sudo vi goFish.conf`\
 For a basic, round-robin style load balancer, in which the nginx server just takes turns passing each incoming request to the next application server in the rotation, all your `goFish.conf` needs to contain is:\
-#Note: I don't actually undertand this first few settings. They are required, and the load balancer should work fine with these numbers, which are just the defaults
+*Note: I don't actually undertand this first few settings. They are required, and the load balancer should work fine with these numbers, which are just the defaults*
 ```
 worker_processes 5;
 worker_rlimit_nofile 8192;

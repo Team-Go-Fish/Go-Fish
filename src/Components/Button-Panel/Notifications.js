@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import NotificationsModal from './NotificationsModal';
 
-const Notifications = ({ userID, user, friends, myMovies }) => {
+const Notifications = ({ userID, user, friends, myMovies, notifications }) => {
   const [modalShow, setModalShow] = React.useState(false);
 
   return (
@@ -16,6 +16,7 @@ const Notifications = ({ userID, user, friends, myMovies }) => {
         onHide={() => setModalShow(false)}
         user={user}
         userID={userID}
+        notifications={notifications}
         friends={friends}
         myMovies={myMovies}
       />
