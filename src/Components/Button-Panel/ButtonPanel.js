@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Friends from './Friends.js';
-// import users from '../../exampleData.js';
 import Notifications from './Notifications.js';
 import { Row, Col, Container } from 'react-bootstrap';
 
