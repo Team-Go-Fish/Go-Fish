@@ -25,8 +25,8 @@ To set up a simple load balancer, see the example at [nginx.com](https://www.ngi
 Open up the vim editor:\
 `sudo vi goFish.conf`\
 For a basic, round-robin style load balancer, in which the nginx server just takes turns passing each incoming request to the next application server in the rotation, all your `goFish.conf` needs to contain is:\
-*Note: I don't actually undertand this first few settings. They are required, and the load balancer should work fine with these numbers, which are just the defaults*
 ```
+#Note: I don't actually undertand these first few settings. They are required, and the load balancer should work fine with these numbers, which are just the defaults
 worker_processes 5;
 worker_rlimit_nofile 8192;
 events {
@@ -42,17 +42,17 @@ http {
   server {
     #Set the nginx server to run on the port exposed for incoming traffic
     listen 80;
-    #All request to the nginx server...
+    #All requests to the nginx server...
     location / {
       #...will be passed to the upstream application servers
-      proxy_pass http://qaAPI;
+      proxy_pass http://goFish;
     }
   }
 }
 ```
 ### Running ###
 Make sure the application server(s) is/are running at the ips and on the ports listed in the config file. To run the nginx load balancer:\
-If you edited `nginx.conf` nginx runs with that file by default:\
+If you edited `nginx.conf`, nginx runs with that file by default:\
 `sudo nginx`\
 If you created a new `goFish.conf`, run nginx with that file:\
 `sudo nginx -c goFish.conf`\
@@ -87,7 +87,6 @@ Next, create a second configuration snippet:\
 `sudo touch ssl-params.conf`\
 `sudo vi ssl-params.conf`\
 and add these contents:\
-*Note: I don't know what all of these settings are, but this worked for me so I'm passing it along. The two lines to pay attention to are the ones commented out with #. For using a self-signed certificate leave those commented out. For a legit certificate, remove the # from those two lines*
 ```
 ssl_protocols TLSv1.2;
 ssl_prefer_server_ciphers on;
@@ -105,6 +104,7 @@ add_header X-Frame-Options DENY;
 add_header X-Content-Type-Options nosniff;
 add_header X-XSS-Protection "1; mode=block";
 ```
+*Note: I don't know what all of these settings are, but this worked for me so I'm passing it along. The two lines to pay attention to are the ones commented out with #. For using a self-signed certificate leave those commented out. For a legit certificate, remove the # from those two lines*\
 Next, generate the file dhparam.pem with openssl:\
 `sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048`\
 Great! Now:\
@@ -120,7 +120,7 @@ Change the `server block` to the following:
     #Create a secure connection using the certificate, key, and parameters you set up
     include snippets/self-signed.conf;
     include snippets/ssl-params.conf;
-    #All request to the nginx server...
+    #All requests to the nginx server...
     location / {
       #...will be passed to the upstream application servers
       proxy_pass http://goFish;
@@ -132,12 +132,12 @@ The browser will yell at you and tell you that this is not a trusted/secure conn
 ### Option 2: 3rd party signed SSL certificate ###
 From what I can tell, SSL certificates go with domains, not ip addresses, so the first thing to do is register a domain name, or just make me an offer for `gofishmovies.com`.\
 In the account you create with whomever for managing your domain, go to the `DNS` settings and add or edit the following rules:\
-*Type A is ipv4, this value should be the EC2 instance where the nginx load balancer runs*
 | TYPE | HOST NAME | VALUE |
 | ---- | ---- | ---- |
 | A | @ | 3.136.112.63 |
 | A | www | 3.136.112.63 |
 
+*Type A is ipv4, this value should be the EC2 instance where the nginx load balancer runs*\
 Great, now your domain is connected to the ip address where the app receives incoming traffic!\
 Next, back to the app server. ssh into the EC2 where the nginx load balancer runs. You can find instruction for generating keys and a certificate signing request at [Enabling HTTPS on Your Servers](https://developers.google.com/web/fundamentals/security/encrypt-in-transit/enable-https), or follow these steps:\
 Generate the public/private key pair with openssl:\
