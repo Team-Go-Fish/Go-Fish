@@ -1,5 +1,18 @@
-Compelling Title
-Your favorite app for when you simply cannot choose which movie to watch!
+#Go Fish!
+Go Fish! is a social networking site designed around a common love for movies. Find your favorite movies. Find your friends. Now here's the best part: when you don't know what to watch, just select a friend and the Go Fish! The app will automatically find a movie you and your friend can watch together!
+
+![Demo](https://user-images.githubusercontent.com/70677845/114280132-c6b4c780-99ec-11eb-9ade-d8dca60d7063.gif)
+
+#Contributors
+Malcolm Marshall (Malcolm-Marshall)
+Nick Papadakis (spacerumsfeld-code)
+Dorien Pine (Initial-D-cmd)
+Jake Gray (jakegray1717)
+Jack Verploeg (jverploeg)
+Kevin Pierce (piercekg)
+Ryne Schroder (ryne2010)
+Mason Hoffman(mhoffman39)
+
 
 //  Getting Started
 1. 'npm 'install'
