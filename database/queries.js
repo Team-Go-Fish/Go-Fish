@@ -31,7 +31,7 @@ module.exports.addMovieToUser = `INSERT INTO users_movies (userID, movieID) VALU
 module.exports.deleteUserMovie = `DELETE FROM users_movies WHERE userID = $1 AND movieID = $2 RETURNING users_movies.id`;
 
 //add new user after signing up
-module.exports.addNewUser = `INSERT INTO users ( username, firstName, lastName, email, picture, adult) VALUES ($1, $2, $3, $4, $5 $6) RETURNING id`;
+module.exports.addNewUser = `INSERT INTO users ( username, firstName, lastName, email, picture, adult) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`;
 //find a userID by email
 module.exports.getUserID = `SELECT id FROM users WHERE email = $1`;
 
@@ -43,6 +43,7 @@ module.exports.getMyFriends = (userID) => {
     INNER JOIN friendships f
       ON u.id = f.friendID
     WHERE f.userID = ${userID}
+    ORDER BY u.firstname ASC
   ;`
 };
 
@@ -53,18 +54,46 @@ module.exports.addNewFriend = (userID, friendID) => {
   ;`
 };
 
-module.exports.getUsers = `
-    SELECT *
-    FROM users
+module.exports.getUsers = () => {
+  return (
+    `
+      SELECT *
+      FROM users
+    ;`
+  )
+};
+
+module.exports.addUserAge = (email, adult) => {
+  console.log(email, adult, 'queries')
+  return `
+    UPDATE users SET adult = '${adult}'
+    WHERE email = '${email}'
   ;`
-;
+};
 
 module.exports.getUserNotifications = (userID) => {
   return `
     SELECT *
     FROM notifications
-    WHERE userID = ${userID}
+    WHERE userid = ${userID} AND notification_status = 'open'
+    ORDER BY notification_time ASC
   ;`
 };
 
+module.exports.addUserNotification = (userID, friendID, movieID, type, message, status) => {
+  return ( `
+    INSERT INTO notifications (userid, friendid, movieid, notification_type, notification_time, notification_message, notification_status)
+    VALUES (${userID}, ${friendID}, ${movieID}, '${type}', NOW(), '${message}', '${status}')
+    RETURNING *
+  ;`
+  )
+};
 
+module.exports.updateUserNotification = (notificationID, status) => {
+  return `
+    UPDATE notifications
+    SET notification_status = '${status}'
+    WHERE id = ${notificationID}
+    RETURNING *
+  ;`
+};

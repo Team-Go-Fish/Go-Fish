@@ -1,41 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-//import Description from '../ListsAndSearch/Description';
-import GoFishDescription from './GoFishDescription'
-import gofish from '../GoFish/goFishBro.png';
+import GoFishDescription from './GoFishDescription';
+import Button from 'react-bootstrap/Button';
 
-const GoFishWithFriends = ({ selected, myMovies }) => {
+/**This component takes in a users movie list and the userID of the friend selected by the checkbox.
+ * When "Go Fish!" is pressed, a request is made to the DB to return the friend's movie list. Then
+ * both movie lists are compared and a matching movie is passed to GoFishDescription to be displayed*/
+const GoFishWithFriends = ({ userID, selected, myMovies }) => {
   const [friendMovies, setFriendMovies] = useState([]);
   const [match, setMatch] = useState({});
   const [modal, setModal] = useState(true);
 
-  let matchedMovie = {};
-  const findMatches = () => {
-    console.log(myMovies);
-    console.log(friendMovies)
-    let myIds = [];
-    for (var i = 0; i < myMovies.length; i ++) {
-      myIds.push(myMovies[i].moviedbid);
-    }
-    let friendIds = [];
-    for (var j = 0; j < friendMovies.length; j ++) {
-      friendIds.push(friendMovies[j].moviedbid)
-    }
-    console.log(myIds)
-    console.log(friendIds)
-    for (var k = 0; k < myIds.length; k ++) {
-      if (friendIds.includes(myIds[k])) {
-        matchedMovie = myMovies[k];
-        setMatch(matchedMovie);
-        return;
-      }
-    }
-  }
-
-  const toggleModal = () => {
-    setModal(!modal);
-  };
-
+  /**Triggered by Go Fish button. Queries DB for friend's movie list. Sets response as friendMovies */
   const getFriendMovies = async() => {
     try {
       const response = await axios.get(`http://localhost:3005/movies/${selected}`);
@@ -43,25 +19,45 @@ const GoFishWithFriends = ({ selected, myMovies }) => {
     } catch (err) {
         console.log(err);
     }
-  }
+  };
 
+  /**After friendMovies is populated, triggers findMatches and toggleModal */
   useEffect(() => {
     findMatches();
     toggleModal();
   },[friendMovies]);
 
+  /**Compares two movie lists. Finds a random movie common to both lists. Sets that movie as "match" */
+  const findMatches = () => {
+    let myIds = [];
+    for (var i = 0; i < myMovies.length; i ++) {
+      myIds.push(myMovies[i].movieid);
+    }
+    let friendIds = [];
+    for (var j = 0; j < friendMovies.length; j ++) {
+      friendIds.push(friendMovies[j].movieid)
+    }
+    let matchedMovies = [];
+    for (var k = 0; k < friendIds.length; k ++) {
+      if (myIds.includes(friendIds[k])) {
+        matchedMovies.push(friendMovies[k]);
+      }
+    }
+    var random = matchedMovies[Math.floor(Math.random() * matchedMovies.length)];
+    setMatch(random);
+  }
+
+  /**Toggles modal off/on*/
+  const toggleModal = () => {
+    setModal(!modal);
+  };
 
   return (
     <div className="go-fish">
-      <img
-        src={gofish}
-        alt=""
-        onClick={() => getFriendMovies()}
-      ></img>
+      <Button onClick={getFriendMovies}>Go Fish!</Button>
       {modal && (<GoFishDescription show={modal} onHide={toggleModal} movie={match} id="goFish"/>)}
     </div>
   )
 };
 
 export default GoFishWithFriends;
-

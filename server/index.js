@@ -32,6 +32,12 @@ app.get('/users', controller.getUsers);
 // return user's notifications
 app.get('/notifications/:userID', controller.getUserNotifications);
 
+// add new notification
+app.post('/notifications/add', controller.addUserNotification);
+
+// update notification
+app.put('/notifications/:notificationID', controller.updateUserNotification);
+
 // get a user's friend list
 app.get('/friends/:userId', controller.getMyFriends);
 
@@ -45,6 +51,9 @@ app.delete('/movies/:userId', controller.removeMovieFromUser);
 
 // add a new user
 app.post('/users/add/user', controller.addNewUser);
+
+// update age of user
+app.put('/users/age/:email', controller.updateUserAge);
 
 // get user ID
 app.get('/user/:email', controller.getUserID);

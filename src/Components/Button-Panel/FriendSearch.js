@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Row, Col, Button, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import SearchField from 'react-search-field';
 
-const FriendSearch = ( {friends, user} ) => {
+const FriendSearch = ({ friends, user, userID, getFriends, addUserNotification, getNotifications }) => {
   // state
   const [users, setUsers] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [friendToSearch, setFriendToSearch] = useState('');
   const [friendToAdd, setFriendToAdd] = useState('');
+  const [friendNameToAdd, setFriendNameToAdd] = useState('');
+  const [wasFriendAdded, setWasFriendAdded] = useState(false);
 
   // methods
   const handleChange = (e) => {
@@ -19,20 +21,24 @@ const FriendSearch = ( {friends, user} ) => {
       setSearchList(users);
     }
     if (tName === 'friendToSearch') {
+      setWasFriendAdded(false);
       setFriendToSearch(tValue);
       handleSearch(friendToSearch);
     } else if (tName === 'friendToAdd') {
+      setWasFriendAdded(false);
       let friend = users.filter((user) => {
         return user.username === tValue;
       });
       let friendID = friend[0].id;
+      setFriendNameToAdd(friend[0].username);
       setFriendToAdd(friendID);
     }
   };
   const handleSearch = () => {
     const q = friendToSearch.toLowerCase();
     if (q.length === 0) {
-      setSearchList(users);
+      let set = new Set(users);
+      setSearchList(set);
     } else {
       let result = users.filter(friend =>
         friend.username.toLowerCase().includes(q)
@@ -42,18 +48,32 @@ const FriendSearch = ( {friends, user} ) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userID = user;
-    const url = `http://localhost:3005/friends/add/${userID}`;
+    let alreadyFriend = friends.filter((friend) => {
+      return friend.username === friendNameToAdd;
+    });
+    if (alreadyFriend.length > 0) {
+      return;
+    };
     const body = {
       friendID: friendToAdd
     };
-    axios.post(url, body)
+    axios.post(`http://localhost:3005/friends/add/${userID}`, body)
       .then((doc) => {
         console.log(doc);
+        getFriends(userID);
+        setWasFriendAdded(true);
       })
       .catch((err) => {
         console.error(err);
       });
+    addUserNotification(
+      friendToAdd,
+      userID,
+      'NULL',
+      'newFriend',
+      `${user.name} wants to be friends!`,
+    );
+    getNotifications(userID);
   };
 
   useEffect(() => {
@@ -62,11 +82,6 @@ const FriendSearch = ( {friends, user} ) => {
         const url = `http://localhost:3005/users`;
         const response = await axios.get(url);
         await setUsers(response.data);
-        // const getID = (obj) => obj.id;
-        // const filterBySet = set => obj => !set.has(getID(obj));
-        // const idSet = new Set([...users.map(getID), ...friends.map(getID)]);
-        // const unique = [...users.filter(filterBySet(idSet)), ...friends.filter(filterBySet(idSet))];
-        // console.log({unique})
         setSearchList(response.data);
       } catch (error) {
         console.error(error);
@@ -83,12 +98,6 @@ const FriendSearch = ( {friends, user} ) => {
       <Container>
         <Row className="justify-content-md-center">
           <Col md="auto">
-          {/* <form className="form">
-            <label className="form">
-              Search User
-              <input className="form" type="text" name="friendToSearch" value={friendToSearch} onChange={handleChange}></input>
-            </label>
-          </form> */}
           <SearchField
             className="friend-search"
             placeholder="Search for username"
@@ -97,7 +106,7 @@ const FriendSearch = ( {friends, user} ) => {
             onClick={() => setFriendToSearch()}
             />
           </Col>
-          <Col md="auto">
+          <Col md="auto" className="flex-column">
 
             <select onChange={handleChange} name="friendToAdd">
               {searchList.length ?
@@ -111,24 +120,11 @@ const FriendSearch = ( {friends, user} ) => {
               }
             </select>
 
-            {/* <DropdownButton
-              alignRight
-              id="friendToAdd"
-              title="Add Friend"
-              onSelect={setFriendToAdd}
-              >
-              {searchList.length ?
-                searchList.map(friend => {
-                  return (
-                    <Dropdown.Item eventKey={friend.username}> {friend.username} </Dropdown.Item>
-                  )
-                })
-                :
-                <Dropdown.Item>none</Dropdown.Item>
-              }
-            </DropdownButton> */}
-
-
+          {wasFriendAdded ?
+            <p className="friend-added">{friendNameToAdd} was added successfully!</p>
+          :
+            null
+          }
 
           </Col>
           <Col md="auto">

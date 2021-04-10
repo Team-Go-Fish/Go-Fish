@@ -108,7 +108,32 @@ module.exports.getUserNotifications = (req, res) => {
     });
 };
 
+module.exports.addUserNotification = (req, res) => {
+  const { userID, friendID, movieID, notification_type, notification_message, notification_status } = req.body;
+  db.addUserNotification(userID, friendID, movieID, notification_type, notification_message, notification_status)
+    .then(result => {
+      console.log(result.rows)
+      res.status(200).send(result.rows);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    })
+};
+
+module.exports.updateUserNotification = (req, res) => {
+  const notificationID = req.params.notificationID;
+  const { notification_status } = req.body;
+  db.updateUserNotification(notificationID, notification_status)
+    .then(result => {
+      res.status(200).send(result.rows);
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+};
+
 module.exports.addNewUser = (req, res) => {
+  console.log('model:', req.body);
   const username = req.body.nickname;
   const firstName = req.body.given_name;
   const lastName = req.body.family_name;
@@ -133,4 +158,17 @@ module.exports.getUserID = (req, res) => {
     res.status(500).send(err);
   });
 };
+
+module.exports.updateUserAge = (req, res) => {
+  const email = req.params.email;
+  const adult = req.body.adult;
+  db.addUserAge(email, adult)
+  .then(result => {
+    res.send(result)
+  })
+  .catch(err => {
+    res.status(500).send(err);
+  })
+}
+
 

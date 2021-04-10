@@ -22,7 +22,7 @@ export default function LogoutButton() {
 
     return (
         isAuthenticated && (
-            <Button variant="outline-info" onClick={() => logout()}>
+            <Button style={{height: '40px', marginTop: '5px', fontSize: '11px', fontWeight: 500}} variant="outline-info" onClick={() => logout()}>
                 Log Out
             </Button>
         )

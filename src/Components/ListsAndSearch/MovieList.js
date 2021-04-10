@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useState, useEffect } from 'react';
 import { Card, Button, Container, Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Description from './Description';
@@ -7,12 +8,14 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ReactTooltip from "react-tooltip";
+import StarRatings from "react-star-ratings";
 
 const MovieList = ({ movies, user, getMyMovies }) => {
 
   const [modalShow, setModalShow] = useState(false);
   const [movieInfo, setMovieInfo] = useState({});
   const [toolTip, setToolTip] = useState(false);
+  // const [rating, setRating] = useState(newRating);
 
   const getInfo = (e) => {
     axios.get(`http://www.omdbapi.com/?apikey=4bcf0035&t=${e.target.value}`)
@@ -22,8 +25,6 @@ const MovieList = ({ movies, user, getMyMovies }) => {
   }
 
   const addMovie = async (movie) => {
-    console.log('I am in the addMovie function on the Front-end!')
-    console.log(user)
     try {
       const response = await axios.get(`http://localhost:3005/user/${user.email}`);
       const userID = response.data;
@@ -46,9 +47,8 @@ const MovieList = ({ movies, user, getMyMovies }) => {
     }
   }
 
-
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
@@ -63,7 +63,7 @@ const MovieList = ({ movies, user, getMyMovies }) => {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
-          dots: true
+          dots: false
         }
       },
       {
@@ -78,7 +78,9 @@ const MovieList = ({ movies, user, getMyMovies }) => {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+          vertical: true,
+          verticalSwiping: true,
         }
       }
     ]
@@ -86,9 +88,14 @@ const MovieList = ({ movies, user, getMyMovies }) => {
 
   setTimeout(() => setToolTip(true), 5000);
 
+  useEffect(() => {
+    setToolTip(true);
+  }, [])
+
   return (
     <>
       <Container>
+      <br></br>
         <h4><strong>Popular Movies</strong></h4>
         <Row>
           <Col size="xs">
@@ -104,13 +111,22 @@ const MovieList = ({ movies, user, getMyMovies }) => {
                           data-tip data-for={movie.title}
                         >
                           {movie.title}
-                          {toolTip && <ReactTooltip id={movie.title} place="bottom" effect="solid">
-                          {document.getElementById(`${movie.title}`).id}
-                          </ReactTooltip>}
+                          {/* {toolTip && <ReactTooltip id={movie.title} place="bottom" effect="solid">
+                            {document.getElementById(`${movie.title}`).id}
+                          </ReactTooltip>} */}
 
                         </Card.Header>
                         <Card.Text>
-                          {movie.vote_average}
+                          {/* {movie.vote_average} */}
+                          <StarRatings
+                            rating={movie.vote_average / 2}
+                            starRatedColor="blue"
+                            // changeRating={this.changeRating}
+                            numberOfStars={5}
+                            name='rating'
+                            starDimension="15px"
+                            starSpacing="3px"
+                          />
                         </Card.Text>
                         <Button variant="outline-info"
                           value={movie.title}
@@ -123,7 +139,6 @@ const MovieList = ({ movies, user, getMyMovies }) => {
                           movie={movieInfo}
                         /> {' '}
                         <Button variant="outline-info" onClick={() => addMovie(movie)}>Add</Button>
-                        {/* <Button variant="primary">Add to my list</Button> */}
                       </Card.Body>
                     </Card>
                   )

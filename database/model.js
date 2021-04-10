@@ -21,8 +21,13 @@ const queries = require('./queries.js');
 module.exports.getUserID = async (email) => {
   try {
     const response = await pool.query(queries.getUserID, [email]);
-    const userID = response.rows[0].id;
-    return userID;
+    if (response.rows[0]) {
+      const userID = response.rows[0].id;
+      console.log(userID)
+      return userID;
+    } else {
+      return null;
+    }
   }
   catch (error) {
     console.log(error);
@@ -80,7 +85,6 @@ module.exports.addNewFriend = async (userId, friendID) => {
   }
 };
 
-
 module.exports.removeMovieFromUserList = async (userId, movieId) => {
   try {
     let result = await pool.query(queries.deleteUserMovie, [userId, movieId]);
@@ -93,7 +97,7 @@ module.exports.removeMovieFromUserList = async (userId, movieId) => {
 
 module.exports.getUsers = async () => {
   try {
-    let result = await pool.query(queries.getUsers);
+    let result = await pool.query(queries.getUsers());
     return result;
   } catch (err) {
     return err;
@@ -109,11 +113,29 @@ module.exports.getUserNotifications = async (userID) => {
   }
 };
 
+module.exports.addUserNotification = async (userID, friendID, movieID, type, message, status) => {
+  try {
+    let result = await pool.query(queries.addUserNotification(userID, friendID, movieID, type, message, status));
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+module.exports.updateUserNotification = async (notificationID, status) => {
+  try {
+    let result = await pool.query(queries.updateUserNotification(notificationID, status))
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports.addNewUser = async (username, firstName, lastName, email, picture, adult = false) => {
   try {
     let response = await pool.query(queries.addNewUser, [username, firstName, lastName, email, picture, adult]);
-  }
-  catch (error) {
+    return response;
+  } catch (error) {
     return error;
   }
-}
+};

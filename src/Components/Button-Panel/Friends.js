@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import FriendList from './FriendList.js';
 import GoFishWithFriends from './GoFishWithFriends.js';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import FriendSearch from './FriendSearch.js';
 
-const Friends = ({ user, friends, myMovies }) => {
+const Friends = ({ userID, user, friends, myMovies, getFriends, addUserNotification, getNotifications }) => {
   const [lgShow, setLgShow] = useState(false);
   const [selected, setSelected] = useState('');
-  // const [friendList, setFriendList] = useState([]);
 
   return (
     <>
+
       <Button variant="outline-info" onClick={() => setLgShow(true)}>Friends</Button>
       <Modal
         size="lg"
@@ -22,13 +21,13 @@ const Friends = ({ user, friends, myMovies }) => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="Friends List">
-            Friends List
+            My Pond
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FriendSearch friends={friends} user={user} />
-          <FriendList friends={friends} setSelected={setSelected}/>
-          <GoFishWithFriends selected={selected} myMovies={myMovies}/>
+          <FriendSearch friends={friends} user={user} userID={userID} getFriends={getFriends} addUserNotification={addUserNotification} getNotifications={getNotifications}/>
+          <FriendList friends={friends} userID={userID} setSelected={setSelected}/>
+          <GoFishWithFriends selected={selected} userID={userID} myMovies={myMovies}/>
         </Modal.Body>
       </Modal>
     </>
