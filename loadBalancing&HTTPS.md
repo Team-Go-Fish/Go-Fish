@@ -1,8 +1,7 @@
 ## A basic load balancer with nginx ##
-A load balancer is a server that runs in front of the application server(s). It runs on the EC2 instance and on the port that all incoming traffic will hit, and then passes that traffic to the actual application server(s). This allows us to run multiple instances of our application server and handle more traffic. It also allows us to set up a secure (https) connection.\
+A load balancer is a server that runs in front of the application server(s). It runs on the EC2 instance and on the port that all incoming traffic will hit, and then passes that traffic to the actual application server(s). This allows us to run multiple instances of our application server and handle more traffic. It also allows us to set up a secure (https) connection.
 ### Installation ###
 To install nginx, ssh into your EC2 instance and follow the installation instructions for Ubuntu at [nginx.org](https://nginx.org/en/linux_packages.html#Ubuntu), or use the following commands:\
-*Ubuntu*\
 Install the prerequisites:\
 `sudo apt install curl gnupg2 ca-certificates lsb-release`\
 To set up the apt repository for stable nginx packages, run the following command:\
@@ -69,7 +68,7 @@ To reload the config file without shutting down:\
 - An SSL certificate and private key
 
 ### Option 1: self-signed SSL certificate ###
-To be legit, SSL certificates need to by signed by a verified 3rd party. However, for development and testing purposes, you may want to just have the load balancer serve up a self-signed certificate. The post I used is [How to enable SSL on NGINX](https://www.techrepublic.com/article/how-to-enable-ssl-on-nginx/), or follow these steps:\
+To be legit, SSL certificates need to by signed by a verified 3rd party. However, for development and testing purposes you may want to just have the load balancer serve up a self-signed certificate. The post I used is [How to enable SSL on NGINX](https://www.techrepublic.com/article/how-to-enable-ssl-on-nginx/), or follow these steps:\
 The first step is to generate a self-signed certificate using openssl. To do this, ssh into the EC2 where the nginx load balancer runs and run the following command:\
 `sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt`\
 You will be asked a few questions (such as country name, state, locality, etc.). The most important answer is the Common Name. For this question, answer with the server's IP Address:\
@@ -87,7 +86,7 @@ Open that file...\
 Next, create a second configuration snippet:\
 `sudo touch ssl-params.conf`\
 `sudo vi ssl-params.conf`\
-and add these contents:\
+and add these contents:
 ```
 ssl_protocols TLSv1.2;
 ssl_prefer_server_ciphers on;
@@ -148,7 +147,7 @@ Then generate a certificate signing request:\
 Follow the prompts as with the self-signed version, but note that Common Name should NOT be an ip address but should be your domain name:\
 `Common Name (e.g. server FQDN or YOUR name) []:gofishmovies.com`\
 This is what will be submitted to the certificate authority to recieve a legitimate SSL certificate.\
-Based on a search for `free ssl certificate`, I ended up at [https://www.ssl.com/certificates/free/](https://www.ssl.com/certificates/free/). Purchase the free 90 certificate, and create an account. Follow the steps to submit your csr. For this site, just\
+Based on a search for `free ssl certificate`, I ended up at [https://www.ssl.com/certificates/free/](https://www.ssl.com/certificates/free/). Purchase the free 90 day certificate, and create an account. Follow the steps to submit your csr. For this site, just\
 `vi gofishmovies.com.csr`\
 and copy and paste the contents into the submission field.\
 Upon success, download the Nginx version of the certificate (using nginx requires a couple pieces of information to be bundled in the same file, by downloading this version of the certificate that bundling has already been done).\
