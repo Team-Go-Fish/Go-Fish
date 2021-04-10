@@ -24,9 +24,10 @@ Or you can just create a new config:\
 To set up a simple load balancer, see the example at [nginx.com](https://www.nginx.com/resources/wiki/start/topics/examples/loadbalanceexample/), or follow this example:\
 Open up the vim editor:\
 `sudo vi goFish.conf`\
-For a basic, round-robin style load balancer, in which the nginx server just takes turns passing each incoming request to the next application server in the rotation, all your `goFish.conf` needs to contain is:\
+For a basic, round-robin style load balancer, in which the nginx server just takes turns passing each incoming request to the next application server in the rotation, all your `goFish.conf` needs to contain is:
 ```
 #Note: I don't actually undertand these first few settings. They are required, and the load balancer should work fine with these numbers, which are just the defaults
+
 worker_processes 5;
 worker_rlimit_nofile 8192;
 events {
@@ -131,7 +132,7 @@ Great! Now restart the load balancer with this updated config file.\
 The browser will yell at you and tell you that this is not a trusted/secure connection. But its ok, you signed the certificate yourself! When you get this message from the browser, click on Advanced and Proceed to your application.
 ### Option 2: 3rd party signed SSL certificate ###
 From what I can tell, SSL certificates go with domains, not ip addresses, so the first thing to do is register a domain name, or just make me an offer for `gofishmovies.com`.\
-In the account you create with whomever for managing your domain, go to the `DNS` settings and add or edit the following rules:\
+In the account you create with whomever for managing your domain, go to the `DNS` settings and add or edit the following rules:
 | TYPE | HOST NAME | VALUE |
 | ---- | ---- | ---- |
 | A | @ | 3.136.112.63 |
@@ -210,21 +211,21 @@ That's it!
 ### Alternative ###
 Try [**certbot**](https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx). Once you have your domain connected to the correct ip address, see if **certbot** really does streamline the above process like it claims.
 ### Final notes ###
-The final step in setting up HTTPS is to redirect HTTP (port 80) traffic to HTTPS (port 443). As of this writing I have not been able to make this work. In theory, and based on my research, it should be as simple as editing your nginx config file by adding another server block like so:
+With the steps followed up to this point, visiting https://gofishmovies.com or https://www.gofishmovies.com will take you to the app. The final step in setting up HTTPS is to redirect HTTP (port 80) traffic to HTTPS (port 443). As of this writing I have not been able to make this work. In theory, and based on my research, it should be as simple as editing your nginx config file by adding another server block like so:
 ```
 http {
   upstream goFish {
-     #your app express server(s)
+    #Your application server(s)
     server 3.136.112.63:3005;`
   }
 
   server {
     listen 443 ssl;
     listen [::]:443 ssl;
-     #your domain name
+    #Your domain name
     server_name gofishmovies.com;
-    #your ssl certificate and parameters
-    include snippets/self-signed.conf;
+    #Your ssl certificate and parameters
+    include snippets/gofishmovies.com.conf;
     include snippets/ssl-params.conf;
 
     location / {
@@ -233,20 +234,20 @@ http {
   }
   #run another nginx server
   server {
-    #listen on port exposed for http traffic
+    #Listen on port exposed for http traffic
     listen 80;
     listen [::]:80;
-    #your domain name
+    #Your domain name
     server_name gofishmovies.com;
-    #redirect with code 301 - permanent redirect - to https://your_domain
+    #Redirect with code 301 - permanent redirect - to https://your_domain
     return 301 https://$server_name$request_uri;
  }
 }
 ```
 If anyone figures out what I am doing wrong and can successfully redirect http traffic to https, please let me know!
 ### PS ###
-If typing `sudo` for every command when working with files and directories that only the system admin has access to, you can set the root password:\
-`sudo passwd rood`\
+If typing `sudo` for every command when working with files and directories that only the system admin has access to gets old, you can set the root password:\
+`sudo passwd root`\
 and then log in as the superuser:\
 `su -`\
 Just be careful not to alter any files that you don't know what they do!
