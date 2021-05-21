@@ -3,6 +3,10 @@ Go Fish! is a social networking site designed around a common love for movies. F
 
 ![Demo](https://user-images.githubusercontent.com/70677845/114280132-c6b4c780-99ec-11eb-9ade-d8dca60d7063.gif)
 
+[
+<img width="406" alt="Screen Shot 2021-05-21 at 11 51 06 AM" src="https://user-images.githubusercontent.com/73361300/119179467-2d85c180-ba2c-11eb-859f-00d68d63d4ae.png">
+](url)
+
 ## Contributors
 * [Malcolm Marshall](https://github.com/Malcolm-Marshall)
 * [Nick Papadakis](https://github.com/spacerumsfeld-code)
