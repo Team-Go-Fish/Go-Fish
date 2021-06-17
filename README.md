@@ -1,5 +1,5 @@
 # Go Fish!
-Go Fish! is a social networking site designed around a common love for movies. Find your favorite movies. Find your friends. Now here's the best part: when you don't know what to watch, just select a friend and the Go Fish! The app will automatically find a movie you and your friend can watch together!
+Go Fish! is a social networking site designed around a common love for movies. Find your favorite movies. Find your friends. Now here's the best part: when you don't know what to watch, just select a friend and then Go Fish! The app will automatically find a movie you and your friend can watch together!
 
 ![Demo](https://user-images.githubusercontent.com/70677845/114280132-c6b4c780-99ec-11eb-9ade-d8dca60d7063.gif)
 
